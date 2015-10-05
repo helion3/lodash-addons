@@ -1,0 +1,16 @@
+{
+  "name": "lodash-addons",
+  "version": "0.0.1",
+  "homepage": "https://github.com/helion3/lodash-addons",
+  "authors": [
+    "Mike Botsko <botsko@gmail.com>"
+  ],
+  "description": "Community mixins for lodash",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "main": "dist/lodash-addons.min.js",
+  "ignore": ["test"],
+  "devDependencies": [],
+  "private": false
+}

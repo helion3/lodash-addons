@@ -1,0 +1,20 @@
+{
+  "name": "lodash-addons",
+  "version": "0.0.1",
+  "description": "Community mixins for lodash",
+  "repository": "https://github.com/helion3/lodash-addons",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "lodash": "^3.10.1",
+    "mocha": "^2.3.3"
+  },
+  "scripts": {
+    "test": "mocha test"
+  }
+}
