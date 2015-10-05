@@ -11,6 +11,7 @@
     "gulp-eslint": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.4.1",
+    "gulp-umd": "^0.2.0",
     "lodash": "^3.10.1",
     "mocha": "^2.3.3"
   },
