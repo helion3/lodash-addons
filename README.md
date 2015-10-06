@@ -14,6 +14,7 @@ A collection of utility mixins for lodash.
 - *slugify* - Converts a string into a "slug", a web-safe string avoiding ugly encoding.
 
 #### Objects
+- *hasOfType* - If has() returns true, run a validator on value.
 - *isCollection* - Is value an array or object.
 - *omitDeep* - Run `omit` recursively down a collection.
 - *validatedAssign* - See explanation in `docs/`
