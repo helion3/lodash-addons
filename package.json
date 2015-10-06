@@ -17,5 +17,6 @@
   },
   "scripts": {
     "test": "mocha test"
-  }
+  },
+  "main": "dist/lodash-addons.js"
 }
