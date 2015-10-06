@@ -14,4 +14,6 @@ A collection of utility mixins for lodash.
 - *slugify* - Converts a string into a "slug", a web-safe string avoiding ugly encoding.
 
 #### Objects
+- *isCollection* - Is value an array or object.
+- *omitDeep* - Run `omit` recursively down a collection.
 - *validatedAssign* - See explanation in `docs/`

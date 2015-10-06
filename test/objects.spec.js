@@ -43,6 +43,14 @@ describe('Objects', function() {
             expect(_.omitDeep).to.throw.TypeError;
         });
 
+        it('rejects invalid keys array', function() {
+            var wrapped = function() {
+                _.omitDeep({});
+            };
+
+            expect(wrapped).to.throw.TypeError;
+        });
+
         var parsed = _.omitDeep(obj, ['invalid']);
 
         it('removes root level key', function() {

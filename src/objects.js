@@ -22,6 +22,10 @@ _.mixin({
             throw new TypeError('"obj" must be a collection.');
         }
 
+        if (!_.isCollection(keys)) {
+            throw new TypeError('"keys" must be an array.');
+        }
+
         // Root level
         obj = _.omit(obj, keys);
 
