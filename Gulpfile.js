@@ -3,6 +3,7 @@ var gulp = require('gulp');
 
 // Plugins
 var concat = require('gulp-concat');
+var del = require('del');
 var eslint = require('gulp-eslint');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
@@ -19,6 +20,12 @@ gulp.task('lint-js', function() {
     return gulp.src(jsPaths)
     .pipe(eslint())
     .pipe(eslint.format());
+});
+
+gulp.task('clean:build', function(callback) {
+    del(['build'], function() {
+        callback();
+    });
 });
 
 gulp.task('concat', function() {
@@ -68,5 +75,5 @@ gulp.task('setup', ['copy:hooks']);
 gulp.task('pre-commit', ['default', 'deploy']);
 
 gulp.task('deploy', function(callback) {
-    runSequence('concat', 'umd', 'compress', callback);
+    runSequence('concat', 'umd', 'compress', 'clean:build', callback);
 });
