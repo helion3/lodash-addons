@@ -3,6 +3,64 @@ var expect = chai.expect;
 var _ = require('../dist/lodash-addons');
 
 describe('Objects', function() {
+    describe('isCollection', function() {
+        it('exists', function() {
+            expect(_.isCollection).to.be.a('function');
+        });
+
+        it('rejects invalid collections', function() {
+            expect(_.isCollection()).to.be.false;
+            expect(_.isCollection(5)).to.be.false;
+            expect(_.isCollection('')).to.be.false;
+            expect(_.isCollection(null)).to.be.false;
+        });
+
+        it('accepts valid collections', function() {
+            expect(_.isCollection([])).to.be.true;
+            expect(_.isCollection({})).to.be.true;
+        });
+    });
+
+    describe('omitDeep', function() {
+        var obj = {
+            valid: '',
+            invalid: '',
+            child: {
+                valid: '',
+                invalid: '',
+                child: {
+                    valid: '',
+                    invalid: ''
+                }
+            }
+        };
+
+        it('exists', function() {
+            expect(_.omitDeep).to.be.a('function');
+        });
+
+        it('rejects invalid collection', function() {
+            expect(_.omitDeep).to.throw.TypeError;
+        });
+
+        var parsed = _.omitDeep(obj, ['invalid']);
+
+        it('removes root level key', function() {
+            expect(_.has(parsed, 'valid')).to.be.true;
+            expect(_.has(parsed, 'invalid')).to.be.false;
+        });
+
+        it('removes second tier key', function() {
+            expect(_.has(parsed.child, 'valid')).to.be.true;
+            expect(_.has(parsed.child, 'invalid')).to.be.false;
+        });
+
+        it('removes third tier key', function() {
+            expect(_.has(parsed.child.child, 'valid')).to.be.true;
+            expect(_.has(parsed.child.child, 'invalid')).to.be.false;
+        });
+    });
+
     describe('validatedAssign', function() {
         it('exists', function() {
             expect(_.validatedAssign).to.be.a('function');

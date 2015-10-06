@@ -1,6 +1,41 @@
 _.mixin({
 
     /**
+     * Determines if a value is a collection - either an array or an object.
+     *
+     * @param {mixed} value Value to check
+     * @return {boolean} Whether value is an array or object
+     */
+    isCollection: function(value) {
+        return (_.isArray(value) || _.isPlainObject(value));
+    },
+
+    /**
+     * Run _.omit recursively down a collection.
+     *
+     * @param {array|object} obj Collection
+     * @param {array} keys Array of property/key names to omit
+     * @return {array|object} Modified collection.
+     */
+    omitDeep: function(obj, keys) {
+        if (!_.isCollection(obj)) {
+            throw new TypeError('"obj" must be a collection.');
+        }
+
+        // Root level
+        obj = _.omit(obj, keys);
+
+        // Recursive
+        _.each(obj, function(value, key) {
+            if (_.isCollection(value)) {
+                obj[key] = _.omitDeep(value, keys);
+            }
+        });
+
+        return obj;
+    },
+
+    /**
      * Validates a source object's properties against a defined model.
      * If the validation passes, the property is accepted, otherwise
      * a default value will be used.
