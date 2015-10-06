@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
 var rename = require('gulp-rename');
+var runSequence = require('run-sequence');
 var uglify = require('gulp-uglify');
 var umd = require('gulp-umd');
 
@@ -65,3 +66,7 @@ gulp.task('default', ['lint-js']);
 gulp.task('deploy', ['concat', 'umd', 'compress']);
 gulp.task('setup', ['copy:hooks']);
 gulp.task('pre-commit', ['default', 'deploy']);
+
+gulp.task('deploy', function(callback) {
+    runSequence('concat', 'umd', 'compress', callback);
+});
