@@ -32,7 +32,14 @@ describe('Objects', function() {
                     valid: '',
                     invalid: ''
                 }
-            }
+            },
+            children: [{
+                valid: '',
+                invalid: ''
+            }, {
+                valid: '',
+                invalid: ''
+            }]
         };
 
         it('exists', function() {
@@ -66,6 +73,13 @@ describe('Objects', function() {
         it('removes third tier key', function() {
             expect(_.has(parsed.child.child, 'valid')).to.be.true;
             expect(_.has(parsed.child.child, 'invalid')).to.be.false;
+        });
+
+        it('removes keys in array objects', function() {
+            expect(_.has(parsed.children[0], 'valid')).to.be.true;
+            expect(_.has(parsed.children[0], 'invalid')).to.be.false;
+            expect(_.has(parsed.children[1], 'valid')).to.be.true;
+            expect(_.has(parsed.children[1], 'invalid')).to.be.false;
         });
     });
 
