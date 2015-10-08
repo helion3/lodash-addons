@@ -1,7 +1,8 @@
 module.exports = function(_) {
     // Inject internal deps
     _ = require('./isCollection')(_);
-    _ = require('./onEach')(_);
+    _ = require('./mapFiltered')(_);
+    _ = require('../validators')(_);
 
     _.mixin({
 
@@ -13,13 +14,8 @@ module.exports = function(_) {
          * @return {array|object} Modified collection.
          */
         omitDeep: function(obj, keys) {
-            if (!_.isCollection(obj)) {
-                throw new TypeError('"obj" must be a collection.');
-            }
-
-            if (!_.isCollection(keys)) {
-                throw new TypeError('"keys" must be an array.');
-            }
+            _.checkCollection(obj);
+            _.checkArray(keys);
 
             // Root level
             if (_.isPlainObject(obj)) {
@@ -29,7 +25,7 @@ module.exports = function(_) {
             // Recursive
             _.each(obj, function(value, key) {
                 if (_.isArray(value)) {
-                    _.onEach(value, _.partialRight(_.omit, keys), _.isPlainObject);
+                    obj[key] = _.mapFiltered(value, _.isPlainObject, _.partialRight(_.omit, keys));
                 } else if (_.isPlainObject(value)) {
                     obj[key] = _.omitDeep(value, keys);
                 }

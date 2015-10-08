@@ -8,5 +8,17 @@ module.exports = function() {
         it('exists', function() {
             expect(_.slugify).to.be.a('function');
         });
+
+        it('removes illegal characters', function() {
+            expect(_.slugify('test?ing')).to.equal('testing');
+        });
+
+        it('removes consecutive illegal characters', function() {
+            expect(_.slugify('test??ing')).to.equal('testing');
+        });
+
+        it('replaces whitespace', function() {
+            expect(_.slugify('test ing')).to.equal('test-ing');
+        });
     });
 };

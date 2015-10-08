@@ -1,4 +1,6 @@
 module.exports = function(_) {
+    _ = require('../validators')(_);
+
     _.mixin({
 
         /**
@@ -10,23 +12,14 @@ module.exports = function(_) {
          * @return {int} Resulting number.
          */
         clamp: function(value, a, b) {
-            if (!_.isNumber(value)) {
-                throw new TypeError('Value must be a number.');
-            }
+            _.checkNumber(value);
+            _.checkNumber(a);
 
             // Treat second argument as a max if no min defined
             var max = (_.isNumber(b) ? b : a);
             var min;
             if (_.isNumber(b)) {
                 min = a;
-            }
-
-            if (!_.isNumber(max)) {
-                throw new TypeError('Maximum boundary value must be a number.');
-            }
-
-            if (min && !_.isNumber(min)) {
-                throw new TypeError('Minimum boundary value must be a number.');
             }
 
             if (value > max) {

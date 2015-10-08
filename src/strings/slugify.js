@@ -1,4 +1,6 @@
 module.exports = function(_) {
+    _ = require('../validators')(_);
+
     _.mixin({
 
         /**
@@ -8,9 +10,7 @@ module.exports = function(_) {
          * @return {string} URL-safe form of a string.
          */
         slugify: function(str) {
-            if (!_.isString(str)) {
-                throw new TypeError('"str" must be a non-empty string.');
-            }
+            _.checkString(str);
 
             return str.trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
         }

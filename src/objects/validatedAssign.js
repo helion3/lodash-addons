@@ -1,4 +1,6 @@
 module.exports = function(_) {
+    _ = require('../validators')(_);
+
     _.mixin({
 
         /**
@@ -12,13 +14,8 @@ module.exports = function(_) {
          * @return {Object} A new object
          */
         validatedAssign: function(models, source, strict) {
-            if (!_.isPlainObject(models)) {
-                throw new Error('"models" must be an object.');
-            }
-
-            if (!_.isPlainObject(source)) {
-                throw new Error('"source" must be an object.');
-            }
+            _.checkPlainObject(models);
+            _.checkPlainObject(source);
 
             strict = _.isBoolean(strict) ? strict : true;
 

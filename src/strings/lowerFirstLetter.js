@@ -1,4 +1,6 @@
 module.exports = function(_) {
+    _ = require('../validators')(_);
+
     _.mixin({
 
         /**
@@ -8,9 +10,7 @@ module.exports = function(_) {
          * @return {string} Resulting string.
          */
         lowerFirstLetter: function(str) {
-            if (!_.isNonEmptyString(str)) {
-                throw new TypeError('"str" must be a non-empty string.');
-            }
+            _.checkString(str);
 
             return str.charAt(0).toLowerCase() + str.slice(1);
         }

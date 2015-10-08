@@ -1,4 +1,6 @@
 module.exports = function(_) {
+    _ = require('../validators')(_);
+
     _.mixin({
 
         /**
@@ -10,17 +12,9 @@ module.exports = function(_) {
          * @return {boolean} Whether collection has prop, and it passes validation
          */
         hasOfType: function(obj, prop, validator) {
-            if (!_.isCollection(obj)) {
-                throw new TypeError('"obj" must be a collection.');
-            }
-
-            if (!_.isString(prop) && !_.isNumber(prop)) {
-                throw new TypeError('"prop" must be a string or number.');
-            }
-
-            if (!_.isFunction(validator)) {
-                throw new TypeError('"validator" must be a function which returns a boolean.');
-            }
+            _.checkCollection(obj);
+            _.checkKey(prop);
+            _.checkFunction(validator);
 
             var result = false;
 
