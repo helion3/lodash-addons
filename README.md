@@ -24,6 +24,7 @@ A collection of utility mixins for lodash.
 - *isCollection* - Is value an array or object.
 - *mapFiltered* - Map a function to filtered array elements.
 - *omitDeep* - Run `omit` recursively down a collection.
+- *recurse* - Invoke a function recursively on every element in a collection.
 - *validatedAssign* - See explanation in `docs/`
 
 #### Preconditions
