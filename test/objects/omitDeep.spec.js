@@ -22,7 +22,10 @@ module.exports = function() {
             }, {
                 valid: '',
                 invalid: ''
-            }]
+            }],
+            strings: [
+                'test'
+            ]
         };
 
         it('exists', function() {
@@ -64,6 +67,10 @@ module.exports = function() {
             expect(_.has(parsed.children[0], 'invalid')).to.be.false;
             expect(_.has(parsed.children[1], 'valid')).to.be.true;
             expect(_.has(parsed.children[1], 'invalid')).to.be.false;
+        });
+
+        it('retains valid, non-object keys', function() {
+            expect(parsed.strings[0]).to.equal('test');
         });
     });
 };

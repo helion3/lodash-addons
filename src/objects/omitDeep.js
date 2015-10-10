@@ -24,9 +24,7 @@ module.exports = function(_) {
 
             // Recursive
             _.each(obj, function(value, key) {
-                if (_.isArray(value)) {
-                    obj[key] = _.mapFiltered(value, _.isPlainObject, _.partialRight(_.omit, keys));
-                } else if (_.isPlainObject(value)) {
+                if (_.isArray(value) || _.isPlainObject(value)) {
                     obj[key] = _.omitDeep(value, keys);
                 }
             });
