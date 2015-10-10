@@ -74,6 +74,18 @@ module.exports = function(_) {
         },
 
         /**
+         * Throw a TypeError if value isn't an object.
+         *
+         * @param {mixed} obj Value
+         * @return {void}
+         */
+        checkObject: function(obj) {
+            if (!_.isObject(obj)) {
+                throw new TypeError('Argument must be an object.');
+            }
+        },
+
+        /**
          * Throw a TypeError if value isn't a plain object.
          *
          * @param {mixed} obj Value
@@ -81,7 +93,7 @@ module.exports = function(_) {
          */
         checkPlainObject: function(obj) {
             if (!_.isPlainObject(obj)) {
-                throw new TypeError('Argument must be an object.');
+                throw new TypeError('Argument must be a plain object.');
             }
         },
 
