@@ -25,6 +25,7 @@ A collection of utility mixins for lodash.
 - *mapFiltered* - Map a function to filtered array elements.
 - *omitDeep* - Run `omit` recursively down a collection.
 - *recurse* - Invoke a function recursively on every element in a collection.
+- *toObject* - Recursively invokes "toObject" on custom objects which support the method.
 - *validatedAssign* - See explanation in `docs/`
 
 #### Preconditions
