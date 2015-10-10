@@ -83,6 +83,18 @@
         },
 
         /**
+         * Throw a TypeError if value isn't an object.
+         *
+         * @param {mixed} obj Value
+         * @return {void}
+         */
+        checkObject: function(obj) {
+            if (!_.isObject(obj)) {
+                throw new TypeError('Argument must be an object.');
+            }
+        },
+
+        /**
          * Throw a TypeError if value isn't a plain object.
          *
          * @param {mixed} obj Value
@@ -90,7 +102,7 @@
          */
         checkPlainObject: function(obj) {
             if (!_.isPlainObject(obj)) {
-                throw new TypeError('Argument must be an object.');
+                throw new TypeError('Argument must be a plain object.');
             }
         },
 
@@ -190,6 +202,36 @@
             }
 
             return value;
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Creates an immutable property on an object.
+         *
+         * @param {object} obj Target object
+         * @param {string} name Property name.
+         * @param {mixed} value Property value.
+         * @return {object} Target object with immutable property.
+         */
+        constant: function(obj, name, value) {
+            _.checkObject(obj);
+            _.checkString(name);
+
+            Object.defineProperty(obj, name, {
+                value: value,
+                enumerable: false,
+                configurable: false,
+                writable: false
+            });
+
+            return obj;
         }
     });
 
@@ -319,14 +361,102 @@
 
             // Recursive
             _.each(obj, function(value, key) {
-                if (_.isArray(value)) {
-                    obj[key] = _.mapFiltered(value, _.isPlainObject, _.partialRight(_.omit, keys));
-                } else if (_.isPlainObject(value)) {
+                if (_.isArray(value) || _.isPlainObject(value)) {
                     obj[key] = _.omitDeep(value, keys);
                 }
             });
 
             return obj;
+        }
+    });
+
+    
+
+
+    
+    
+
+    _.mixin({
+
+        /**
+         * Invoke a function recursively on every element in a collection.
+         *
+         * @param {object|array} col Collection
+         * @param {function} func Function to invoke
+         * @return {object|array} Modified collection
+         */
+        recurse: function(col, func) {
+            _.checkCollection(col);
+            _.checkFunction(func);
+
+            col = func(col);
+
+            _.each(col, function(item, key) {
+                if (_.isCollection(item)) {
+                    col[key] = _.recurse(item, func);
+                } else {
+                    col[key] = func(item);
+                }
+            });
+
+            return col;
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Recursively invokes "toObject" on objects which support the method.
+         *
+         * Many complex objects from libraries like Collections.js, Mongoose,
+         * support to a toObject method for converting to plain objects.
+         *
+         * @param {object} obj Original object.
+         * @return {object} Plain object.
+         */
+        toObject: function(obj) {
+            if (_.isFunction(obj.toObject)) {
+                obj = obj.toObject();
+            }
+
+            _.each(obj, function(value, key) {
+                if (_.isObject(value) || _.isArray(value)) {
+                    obj[key] = _.toObject(value);
+                }
+            });
+
+            return obj;
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Converts an object's key/values to a query string.
+         *
+         * @param {object} obj Source key/value collection
+         * @return {string} Query string
+         */
+        toQueryString: function(obj) {
+            _.checkPlainObject(obj);
+
+            var segments = [];
+
+            _.each(obj, function(value, key) {
+                segments.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+            });
+
+            return segments.join('&');
         }
     });
 
