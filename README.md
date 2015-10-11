@@ -28,6 +28,7 @@ A collection of utility mixins for lodash.
 - *toQueryString* - Converts an object's key/values to a query string.
 - *toObject* - Recursively invokes "toObject" on custom objects which support the method.
 - *validatedAssign* - See explanation in `docs/`
+- *with* - Shorthand object creation when sole property is a variable.
 
 #### Preconditions
 - *checkArray* - Throw a TypeError if value isn't an array.
