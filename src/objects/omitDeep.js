@@ -1,7 +1,6 @@
 module.exports = function(_) {
     // Inject internal deps
-    _ = require('./isCollection')(_);
-    _ = require('./mapFiltered')(_);
+    _ = require('./recurse')(_);
     _ = require('../validators')(_);
 
     _.mixin({
@@ -17,19 +16,13 @@ module.exports = function(_) {
             _.checkCollection(obj);
             _.checkArray(keys);
 
-            // Root level
-            if (_.isPlainObject(obj)) {
-                obj = _.omit(obj, keys);
-            }
-
-            // Recursive
-            _.each(obj, function(value, key) {
-                if (_.isArray(value) || _.isPlainObject(value)) {
-                    obj[key] = _.omitDeep(value, keys);
+            return _.recurse(obj, function(item) {
+                if (_.isPlainObject(item)) {
+                    item = _.omit(item, keys);
                 }
-            });
 
-            return obj;
+                return item;
+            });
         }
     });
 

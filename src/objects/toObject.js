@@ -1,4 +1,5 @@
 module.exports = function(_) {
+    _ = require('./recurse')(_);
     _ = require('../validators')(_);
 
     _.mixin({
@@ -13,17 +14,13 @@ module.exports = function(_) {
          * @return {object} Plain object.
          */
         toObject: function(obj) {
-            if (_.isFunction(obj.toObject)) {
-                obj = obj.toObject();
-            }
-
-            _.each(obj, function(value, key) {
-                if (_.isObject(value) || _.isArray(value)) {
-                    obj[key] = _.toObject(value);
+            return _.recurse(obj, function(item) {
+                if (_.isFunction(item.toObject)) {
+                    item = item.toObject();
                 }
-            });
 
-            return obj;
+                return item;
+            });
         }
     });
 
