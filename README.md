@@ -8,6 +8,7 @@ A collection of utility mixins for lodash. Supports both CommonJS and AMD module
 ### Installation
 
 Node: `npm install -save lodash-addons`
+
 Bower `bower install --save lodash-addons`
 
 #### Colors

@@ -6,8 +6,10 @@ To develop:
 
 1. Clone the repository.
 2. Run `npm install`.
-3. Develop!
-4. Test with `npm test`.
+3. Run `gulp setup` (installs git commit hooks)
+4. Develop!
+5. Test with `npm test`.
+6. Lint with `gulp`
 
 PRs should meet a few simple guidelines:
 
