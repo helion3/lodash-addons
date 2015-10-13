@@ -47,3 +47,6 @@ Bower `bower install --save lodash-addons`
 - *checkNumber* - Throw a TypeError if value isn't a number.
 - *checkPlainObject* - Throw a TypeError if value isn't a plain object.
 - *checkString* - Throw a TypeError if value isn't a string.
+
+#### Utils
+- *toBool* - Converts a value to a boolean to work properly within explicit comparisons.
