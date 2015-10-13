@@ -24,7 +24,7 @@ module.exports = function() {
 
             var desc = Object.getOwnPropertyDescriptor(obj, 'TEST');
             expect(desc.writable).to.be.false;
-            expect(desc.enumerable).to.be.false;
+            expect(desc.enumerable).to.be.true;
             expect(desc.configurable).to.be.false;
         });
     });

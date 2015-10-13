@@ -17,7 +17,7 @@ module.exports = function(_) {
 
             Object.defineProperty(obj, name, {
                 value: value,
-                enumerable: false,
+                enumerable: true,
                 configurable: false,
                 writable: false
             });
