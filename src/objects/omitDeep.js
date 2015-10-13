@@ -1,7 +1,7 @@
 module.exports = function(_) {
     // Inject internal deps
     _ = require('./recurse')(_);
-    _ = require('../validators')(_);
+    _ = require('../utils/preconditions')(_);
 
     _.mixin({
 

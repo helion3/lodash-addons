@@ -1,5 +1,5 @@
 module.exports = function(_) {
-    _ = require('../validators')(_);
+    _ = require('../utils/preconditions')(_);
 
     _.mixin({
 
