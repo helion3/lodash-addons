@@ -1,5 +1,4 @@
 module.exports = function(_) {
-    _ = require('./isCollection')(_);
     _ = require('../utils/preconditions')(_);
 
     _.mixin({
@@ -12,13 +11,13 @@ module.exports = function(_) {
          * @return {object|array} Modified collection
          */
         recurse: function(col, func) {
-            _.checkCollection(col);
+            _.checkObject(col);
             _.checkFunction(func);
 
             col = func(col);
 
             _.each(col, function(item, key) {
-                if (_.isCollection(item)) {
+                if (_.isObject(item)) {
                     col[key] = _.recurse(item, func);
                 } else {
                     col[key] = func(item);

@@ -39,6 +39,7 @@ Bower `bower install --save lodash-addons`
 - *with* - Shorthand object creation when sole property is a variable.
 
 #### Preconditions
+- *check* - Throw a TypeError if value doesn't match one of any provided validation methods.
 - *checkArray* - Throw a TypeError if value isn't an array.
 - *checkBoolean* - Throw a TypeError if value isn't a boolean.
 - *checkCollection* - Throw a TypeError if value isn't an array or object.

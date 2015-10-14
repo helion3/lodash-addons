@@ -2,6 +2,34 @@ module.exports = function(_) {
     _.mixin({
 
         /**
+         * Throw a TypeError if value doesn't match one of any provided validation methods.
+         *
+         * @param {mixed} value Value
+         * @return {void}
+         */
+        check: function(value) {
+            var validators = _.filter(arguments.slice(1), _.isFunction);
+            if (_.isEmpty(validators)) {
+                throw new TypeError('You must provide at least one validation method.');
+            }
+
+            var valid = false;
+
+            _.each(validators, function(validator) {
+                if (validator(value)) {
+                    valid = true;
+
+                    // Exit each
+                    return false;
+                }
+            });
+
+            if (!valid) {
+                throw new TypeError('Argument is not any of the accepted types.');
+            }
+        },
+
+        /**
          * Throw a TypeError if value isn't an array.
          *
          * @param {mixed} arr Value
