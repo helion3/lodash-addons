@@ -8,7 +8,7 @@ module.exports = function(_) {
          * @return {void}
          */
         check: function(value) {
-            var validators = _.filter(arguments.slice(1), _.isFunction);
+            var validators = _.filter(Array.prototype.slice.call(arguments, 1), _.isFunction);
             if (_.isEmpty(validators)) {
                 throw new TypeError('You must provide at least one validation method.');
             }
