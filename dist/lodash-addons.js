@@ -206,14 +206,14 @@
          * @return {boolean} Whether collection has prop, and it passes validation
          */
         hasOfType: function(obj, prop, validator) {
-            _.checkCollection(obj);
+            _.checkObject(obj);
             _.checkKey(prop);
             _.checkFunction(validator);
 
             var result = false;
 
             if (_.has(obj, prop)) {
-                result = validator(obj[prop]);
+                result = validator(_.get(obj, prop));
             }
 
             return result;
@@ -294,7 +294,6 @@
 
 
     
-    
 
     _.mixin({
 
@@ -306,13 +305,13 @@
          * @return {object|array} Modified collection
          */
         recurse: function(col, func) {
-            _.checkCollection(col);
+            _.checkObject(col);
             _.checkFunction(func);
 
             col = func(col);
 
             _.each(col, function(item, key) {
-                if (_.isCollection(item)) {
+                if (_.isObject(item)) {
                     col[key] = _.recurse(item, func);
                 } else {
                     col[key] = func(item);
@@ -545,6 +544,34 @@
 
 
     _.mixin({
+
+        /**
+         * Throw a TypeError if value doesn't match one of any provided validation methods.
+         *
+         * @param {mixed} value Value
+         * @return {void}
+         */
+        check: function(value) {
+            var validators = _.filter(Array.prototype.slice.call(arguments, 1), _.isFunction);
+            if (_.isEmpty(validators)) {
+                throw new TypeError('You must provide at least one validation method.');
+            }
+
+            var valid = false;
+
+            _.each(validators, function(validator) {
+                if (validator(value)) {
+                    valid = true;
+
+                    // Exit each
+                    return false;
+                }
+            });
+
+            if (!valid) {
+                throw new TypeError('Argument is not any of the accepted types.');
+            }
+        },
 
         /**
          * Throw a TypeError if value isn't an array.
