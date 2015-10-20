@@ -44,5 +44,9 @@ module.exports = function() {
         it('returns true due to valid array key', function() {
             expect(_.hasOfType([''], 0, _.isString)).to.be.true;
         });
+
+        it('returns true for path syntax', function() {
+            expect(_.hasOfType({ a: { b: '' } }, 'a.b', _.isString)).to.be.true;
+        });
     });
 };

@@ -12,14 +12,14 @@ module.exports = function(_) {
          * @return {boolean} Whether collection has prop, and it passes validation
          */
         hasOfType: function(obj, prop, validator) {
-            _.checkCollection(obj);
+            _.checkObject(obj);
             _.checkKey(prop);
             _.checkFunction(validator);
 
             var result = false;
 
             if (_.has(obj, prop)) {
-                result = validator(obj[prop]);
+                result = validator(_.get(obj, prop));
             }
 
             return result;
