@@ -21,7 +21,6 @@ Bower `bower install --save lodash-addons`
 #### Strings
 - *isNonEmptyString* - Returns true if val is a string, and is not empty.
 - *generateKey* - Generates a random string of characters.
-- *lowerFirstLetter* - Lower-cases the first letter.
 - *slugify* - Converts a string into a "slug", a web-safe string avoiding ugly encoding.
 
 #### Objects
