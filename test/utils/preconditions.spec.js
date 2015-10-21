@@ -42,4 +42,42 @@ module.exports = function() {
             expect(wrapped).to.not.throw.TypeError;
         });
     });
+
+    describe('checkNonEmpty', function() {
+        it('exists', function() {
+            expect(_.checkNonEmpty).to.be.a('function');
+        });
+
+        it('rejects zero', function() {
+            var wrapper = function() {
+                _.checkNonEmpty(0);
+            };
+
+            expect(wrapper).to.throw.TypeError;
+        });
+
+        it('rejects empty string', function() {
+            var wrapper = function() {
+                _.checkNonEmpty('');
+            };
+
+            expect(wrapper).to.throw.TypeError;
+        });
+
+        it('rejects empty array', function() {
+            var wrapper = function() {
+                _.checkNonEmpty([]);
+            };
+
+            expect(wrapper).to.throw.TypeError;
+        });
+
+        it('accepts non-empty string', function() {
+            var wrapper = function() {
+                _.checkNonEmpty('test');
+            };
+
+            expect(wrapper).to.not.throw.TypeError;
+        });
+    });
 };

@@ -90,6 +90,18 @@ module.exports = function(_) {
         },
 
         /**
+         * Throw a TypeError if value _.isEmpty
+         *
+         * @param {mixed} val Value
+         * @return {void}
+         */
+        checkNonEmpty: function(val) {
+            if (_.isEmpty(val)) {
+                throw new TypeError('Argument may not be empty.');
+            }
+        },
+
+        /**
          * Throw a TypeError if value isn't a number.
          *
          * @param {mixed} num Value

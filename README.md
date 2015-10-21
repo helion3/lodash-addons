@@ -45,6 +45,7 @@ Bower `bower install --save lodash-addons`
 - *checkCollection* - Throw a TypeError if value isn't an array or object.
 - *checkFunction* - Throw a TypeError if value isn't a function.
 - *checkKey* - Throw a TypeError if value isn't a number/string.
+- *checkNonEmpty* - Throw a TypeError if value isEmpty
 - *checkNumber* - Throw a TypeError if value isn't a number.
 - *checkPlainObject* - Throw a TypeError if value isn't a plain object.
 - *checkString* - Throw a TypeError if value isn't a string.
