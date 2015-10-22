@@ -508,26 +508,6 @@
     _.mixin({
 
         /**
-         * Converts the first letter in a string to lower-case.
-         *
-         * @param {string} str String
-         * @return {string} Resulting string.
-         */
-        lowerFirstLetter: function(str) {
-            _.checkString(str);
-
-            return str.charAt(0).toLowerCase() + str.slice(1);
-        }
-    });
-
-    
-
-
-    
-
-    _.mixin({
-
-        /**
          * Returns a url-safe "slug" form of a string.
          *
          * @param {string} str String value.
@@ -630,6 +610,18 @@
         checkKey: function(val) {
             if (!_.isString(val) && !_.isNumber(val)) {
                 throw new TypeError('Argument must be a string or number.');
+            }
+        },
+
+        /**
+         * Throw a TypeError if value _.isEmpty
+         *
+         * @param {mixed} val Value
+         * @return {void}
+         */
+        checkNonEmpty: function(val) {
+            if (_.isEmpty(val)) {
+                throw new TypeError('Argument may not be empty.');
             }
         },
 
