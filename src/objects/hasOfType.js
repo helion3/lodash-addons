@@ -6,13 +6,12 @@ module.exports = function(_) {
         /**
          * If _.has returns true, run a validator on value.
          *
-         * @param {array|object} obj Collection for _.has
+         * @param {mixed} obj Collection for _.has
          * @param {string|number} prop Propert/key name.
          * @param {function} validator Function to validate value.
          * @return {boolean} Whether collection has prop, and it passes validation
          */
         hasOfType: function(obj, prop, validator) {
-            _.checkObject(obj);
             _.checkKey(prop);
             _.checkFunction(validator);
 

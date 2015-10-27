@@ -9,10 +9,6 @@ module.exports = function() {
             expect(_.hasOfType).to.be.a('function');
         });
 
-        it('rejects invalid collection', function() {
-            expect(_.hasOfType).to.throw.TypeError;
-        });
-
         it('rejects invalid prop', function() {
             var wrapped = function() {
                 _.hasOfType({});
@@ -27,6 +23,14 @@ module.exports = function() {
             };
 
             expect(wrapped).to.throw.TypeError;
+        });
+
+        it('returns false for any non-object', function() {
+            expect(_.hasOfType(1, 'test', _.isString)).to.be.false;
+            expect(_.hasOfType(null, 'test', _.isString)).to.be.false;
+            expect(_.hasOfType(undefined, 'test', _.isString)).to.be.false;
+            expect(_.hasOfType('', 'test', _.isString)).to.be.false;
+            expect(_.hasOfType([], 'test', _.isString)).to.be.false;
         });
 
         it('returns false due to missing property', function() {
