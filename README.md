@@ -35,7 +35,7 @@ Bower `bower install --save lodash-addons`
 - *toQueryString* - Converts an object's key/values to a query string.
 - *toObject* - Recursively invokes "toObject" on custom objects which support the method.
 - *validatedAssign* - See explanation in `docs/`
-- *with* - Shorthand object creation when sole property is a variable.
+- *with* - Shorthand object creation when sole property is a variable, or a path.
 
 #### Preconditions
 - *check* - Throw a TypeError if value doesn't match one of any provided validation methods.

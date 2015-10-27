@@ -4,17 +4,29 @@ module.exports = function(_) {
     _.mixin({
 
         /**
-         * Shorthand object creation when sole property is a variable.
+         * Shorthand object creation when sole property is a variable, or a path.
          *
-         * @param {string|number} key Property
+         * @param {string|number} path Property
          * @param {mixed} value Value
          * @return {object} Resulting object
          */
-        with: function(key, value) {
-            _.checkKey(key);
+        with: function(path, value) {
+            _.checkKey(path);
 
             var obj = {};
-            obj[key] = value;
+            var paths = path.split('.');
+            var l = paths.length;
+            var pointer = obj;
+
+            _.each(paths, function(path, index) {
+                if (index === l - 1) {
+                    pointer[path] = value;
+                } else {
+                    pointer[path] = {};
+                }
+
+                pointer = pointer[path];
+            });
 
             return obj;
         }
