@@ -13,7 +13,8 @@ module.exports = function() {
 
         var test = {
             parent: new Complex(),
-            children: [new Complex(), new Complex()]
+            children: [new Complex(), new Complex()],
+            invalid: undefined
         };
 
         it('exists', function() {

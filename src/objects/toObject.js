@@ -1,4 +1,5 @@
 module.exports = function(_) {
+    _ = require('./hasOfType')(_);
     _ = require('./recurse')(_);
     _ = require('../utils/preconditions')(_);
 
@@ -15,7 +16,7 @@ module.exports = function(_) {
          */
         toObject: function(obj) {
             return _.recurse(obj, function(item) {
-                if (_.isFunction(item.toObject)) {
+                if (_.hasOfType(item, 'toObject', _.isFunction)) {
                     item = item.toObject();
                 }
 
