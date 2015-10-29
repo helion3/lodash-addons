@@ -17,4 +17,8 @@ PRs should meet a few simple guidelines:
 - Please do not adjust version numbers. I'll do that when I publish/tag.
 - New features or bug fixes should include tests to ensure we never regress.
 
+To run code coverage checks, use:
+
+`node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha`
+
 Thanks!
