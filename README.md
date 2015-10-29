@@ -32,6 +32,7 @@ Bower `bower install --save lodash-addons`
 - *mapFiltered* - Map a function to filtered array elements.
 - *omitDeep* - Run `omit` recursively down a collection.
 - *recurse* - Invoke a function recursively on every element in a collection.
+- *requestSetter* - Gives a setter for `prop` only to the first requesting caller.
 - *toQueryString* - Converts an object's key/values to a query string.
 - *toObject* - Recursively invokes "toObject" on custom objects which support the method.
 - *validatedAssign* - See explanation in `docs/`
