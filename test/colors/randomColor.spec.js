@@ -19,9 +19,9 @@ module.exports = function() {
             expect(color.g).to.be.below(256);
             expect(color.b).to.be.below(256);
 
-            expect(color.r).to.be.above(0);
-            expect(color.g).to.be.above(0);
-            expect(color.b).to.be.above(0);
+            expect(color.r).to.be.above(-1);
+            expect(color.g).to.be.above(-1);
+            expect(color.b).to.be.above(-1);
         });
     });
 };
