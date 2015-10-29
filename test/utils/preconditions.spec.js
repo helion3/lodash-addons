@@ -43,6 +43,112 @@ module.exports = function() {
         });
     });
 
+    describe('checkArray', function() {
+        it('exists', function() {
+            expect(_.checkArray).to.be.a('function');
+        });
+
+        it('rejects invalid array', function() {
+            expect(_.checkArray).to.throw.TypeError;
+        });
+
+        it('accepts array', function() {
+            var wrapped = function() {
+                _.checkArray([]);
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkBoolean', function() {
+        it('exists', function() {
+            expect(_.checkBoolean).to.be.a('function');
+        });
+
+        it('rejects invalid boolean', function() {
+            expect(_.checkBoolean).to.throw.TypeError;
+        });
+
+        it('accepts boolean', function() {
+            var wrapped = function() {
+                _.checkBoolean(false);
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkCollection', function() {
+        it('exists', function() {
+            expect(_.checkCollection).to.be.a('function');
+        });
+
+        it('rejects invalid collection', function() {
+            expect(_.checkCollection).to.throw.TypeError;
+        });
+
+        it('accepts array', function() {
+            var wrapped = function() {
+                _.checkCollection([]);
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+
+        it('accepts object', function() {
+            var wrapped = function() {
+                _.checkCollection({});
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkFunction', function() {
+        it('exists', function() {
+            expect(_.checkFunction).to.be.a('function');
+        });
+
+        it('rejects invalid function', function() {
+            expect(_.checkFunction).to.throw.TypeError;
+        });
+
+        it('accepts function', function() {
+            var wrapped = function() {
+                _.checkFunction(function() {});
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkKey', function() {
+        it('exists', function() {
+            expect(_.checkKey).to.be.a('function');
+        });
+
+        it('rejects invalid key', function() {
+            expect(_.checkKey).to.throw.TypeError;
+        });
+
+        it('accepts string key', function() {
+            var wrapped = function() {
+                _.checkKey('test');
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+
+        it('accepts numeric key', function() {
+            var wrapped = function() {
+                _.checkKey(0);
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
     describe('checkNonEmpty', function() {
         it('exists', function() {
             expect(_.checkNonEmpty).to.be.a('function');
@@ -78,6 +184,78 @@ module.exports = function() {
             };
 
             expect(wrapper).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkNumber', function() {
+        it('exists', function() {
+            expect(_.checkNumber).to.be.a('function');
+        });
+
+        it('rejects invalid number', function() {
+            expect(_.checkNumber).to.throw.TypeError;
+        });
+
+        it('accepts number', function() {
+            var wrapped = function() {
+                _.checkNumber(5);
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkObject', function() {
+        it('exists', function() {
+            expect(_.checkObject).to.be.a('function');
+        });
+
+        it('rejects invalid object', function() {
+            expect(_.checkObject).to.throw.TypeError;
+        });
+
+        it('accepts object', function() {
+            var wrapped = function() {
+                _.checkObject(new Array(1));
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkPlainObject', function() {
+        it('exists', function() {
+            expect(_.checkPlainObject).to.be.a('function');
+        });
+
+        it('rejects invalid object', function() {
+            expect(_.checkPlainObject).to.throw.TypeError;
+        });
+
+        it('accepts plain object', function() {
+            var wrapped = function() {
+                _.checkPlainObject({});
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
+        });
+    });
+
+    describe('checkString', function() {
+        it('exists', function() {
+            expect(_.checkString).to.be.a('function');
+        });
+
+        it('rejects invalid string', function() {
+            expect(_.checkString).to.throw.TypeError;
+        });
+
+        it('accepts string', function() {
+            var wrapped = function() {
+                _.checkString('');
+            };
+
+            expect(wrapped).to.not.throw.TypeError;
         });
     });
 };
