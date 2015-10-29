@@ -200,13 +200,12 @@
         /**
          * If _.has returns true, run a validator on value.
          *
-         * @param {array|object} obj Collection for _.has
+         * @param {mixed} obj Collection for _.has
          * @param {string|number} prop Propert/key name.
          * @param {function} validator Function to validate value.
          * @return {boolean} Whether collection has prop, and it passes validation
          */
         hasOfType: function(obj, prop, validator) {
-            _.checkObject(obj);
             _.checkKey(prop);
             _.checkFunction(validator);
 
@@ -326,6 +325,59 @@
 
 
     
+
+    _.mixin({
+
+        /**
+         * Gives a setter for `prop` only to the first requesting caller.
+         *
+         * Creates request[Prop]Setter and get[Prop] methods
+         * on the source object. The first caller to request[Prop]Setter
+         * gets it and therefore is the only one allowed to invoke it.
+         *
+         * Any caller may use the getter.
+         *
+         * @param {object} obj Target object.
+         * @param {string} prop Property name.
+         * @return {obj} Modified object.
+         */
+        requestSetter: function(obj, prop) {
+            _.checkObject(obj);
+            _.checkString(prop);
+
+            var capped = _.capitalize(prop);
+
+            return (function() {
+                var setter;
+                var value = obj[prop];
+                delete obj[prop];
+
+                obj['request' + capped + 'Setter'] = function() {
+                    if (setter) {
+                        throw new Error('Setter has already been given.');
+                    }
+
+                    setter = function(newValue) {
+                        value = newValue;
+                    };
+
+                    return setter;
+                };
+
+                obj['get' + capped] = function() {
+                    return value;
+                };
+
+                return obj;
+            }());
+        }
+    });
+
+    
+
+
+    
+    
     
 
     _.mixin({
@@ -341,7 +393,7 @@
          */
         toObject: function(obj) {
             return _.recurse(obj, function(item) {
-                if (_.isFunction(item.toObject)) {
+                if (_.hasOfType(item, 'toObject', _.isFunction)) {
                     item = item.toObject();
                 }
 
@@ -446,17 +498,29 @@
     _.mixin({
 
         /**
-         * Shorthand object creation when sole property is a variable.
+         * Shorthand object creation when sole property is a variable, or a path.
          *
-         * @param {string|number} key Property
+         * @param {string|number} path Property
          * @param {mixed} value Value
          * @return {object} Resulting object
          */
-        with: function(key, value) {
-            _.checkKey(key);
+        with: function(path, value) {
+            _.checkKey(path);
 
             var obj = {};
-            obj[key] = value;
+            var paths = path.split('.');
+            var l = paths.length;
+            var pointer = obj;
+
+            _.each(paths, function(path, index) {
+                if (index === l - 1) {
+                    pointer[path] = value;
+                } else {
+                    pointer[path] = {};
+                }
+
+                pointer = pointer[path];
+            });
 
             return obj;
         }
