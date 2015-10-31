@@ -1,6 +1,7 @@
 {
   "name": "lodash-addons",
   "version": "0.0.7",
+  "license": "MIT",
   "description": "Community mixins for lodash",
   "repository": "https://github.com/helion3/lodash-addons",
   "dependencies": {},

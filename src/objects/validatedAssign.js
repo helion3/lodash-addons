@@ -26,7 +26,6 @@ module.exports = function(_) {
                 if (_.has(source, key)) {
                     // Use the given validator
                     if (_.has(model, 'validator')) {
-                        console.log(model.validator);
                         // Ensure callable
                         if (!_.isFunction(model.validator)) {
                             throw new TypeError('Invalid validator function for ' + key + '.');
