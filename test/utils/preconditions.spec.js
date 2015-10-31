@@ -14,8 +14,8 @@ module.exports = function() {
                 _.check(0, 0);
             };
 
-            expect(_.check).to.throw.TypeError;
-            expect(wrapped).to.throw.TypeError;
+            expect(_.check).to.throw(TypeError);
+            expect(wrapped).to.throw(TypeError);
         });
 
         it('throws error using a single validator', function() {
@@ -23,7 +23,7 @@ module.exports = function() {
                 _.check(0, _.isBoolean);
             };
 
-            expect(wrapped).to.throw.TypeError;
+            expect(wrapped).to.throw(TypeError);
         });
 
         it('validates using a single validator', function() {
@@ -31,7 +31,7 @@ module.exports = function() {
                 _.check(0, _.isNumber);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
 
         it('validates using multiple validators', function() {
@@ -39,7 +39,7 @@ module.exports = function() {
                 _.check({}, _.isArray, _.isObject);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -49,7 +49,7 @@ module.exports = function() {
         });
 
         it('rejects invalid array', function() {
-            expect(_.checkArray).to.throw.TypeError;
+            expect(_.checkArray).to.throw(TypeError);
         });
 
         it('accepts array', function() {
@@ -57,7 +57,7 @@ module.exports = function() {
                 _.checkArray([]);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -67,7 +67,7 @@ module.exports = function() {
         });
 
         it('rejects invalid boolean', function() {
-            expect(_.checkBoolean).to.throw.TypeError;
+            expect(_.checkBoolean).to.throw(TypeError);
         });
 
         it('accepts boolean', function() {
@@ -75,7 +75,7 @@ module.exports = function() {
                 _.checkBoolean(false);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -85,7 +85,7 @@ module.exports = function() {
         });
 
         it('rejects invalid collection', function() {
-            expect(_.checkCollection).to.throw.TypeError;
+            expect(_.checkCollection).to.throw(TypeError);
         });
 
         it('accepts array', function() {
@@ -93,7 +93,7 @@ module.exports = function() {
                 _.checkCollection([]);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
 
         it('accepts object', function() {
@@ -101,7 +101,7 @@ module.exports = function() {
                 _.checkCollection({});
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -111,7 +111,7 @@ module.exports = function() {
         });
 
         it('rejects invalid function', function() {
-            expect(_.checkFunction).to.throw.TypeError;
+            expect(_.checkFunction).to.throw(TypeError);
         });
 
         it('accepts function', function() {
@@ -119,7 +119,7 @@ module.exports = function() {
                 _.checkFunction(function() {});
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -129,7 +129,7 @@ module.exports = function() {
         });
 
         it('rejects invalid key', function() {
-            expect(_.checkKey).to.throw.TypeError;
+            expect(_.checkKey).to.throw(TypeError);
         });
 
         it('accepts string key', function() {
@@ -137,7 +137,7 @@ module.exports = function() {
                 _.checkKey('test');
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
 
         it('accepts numeric key', function() {
@@ -145,7 +145,7 @@ module.exports = function() {
                 _.checkKey(0);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -159,7 +159,7 @@ module.exports = function() {
                 _.checkNonEmpty(0);
             };
 
-            expect(wrapper).to.throw.TypeError;
+            expect(wrapper).to.throw(TypeError);
         });
 
         it('rejects empty string', function() {
@@ -167,7 +167,7 @@ module.exports = function() {
                 _.checkNonEmpty('');
             };
 
-            expect(wrapper).to.throw.TypeError;
+            expect(wrapper).to.throw(TypeError);
         });
 
         it('rejects empty array', function() {
@@ -175,7 +175,7 @@ module.exports = function() {
                 _.checkNonEmpty([]);
             };
 
-            expect(wrapper).to.throw.TypeError;
+            expect(wrapper).to.throw(TypeError);
         });
 
         it('accepts non-empty string', function() {
@@ -183,7 +183,7 @@ module.exports = function() {
                 _.checkNonEmpty('test');
             };
 
-            expect(wrapper).to.not.throw.TypeError;
+            expect(wrapper).to.not.throw(TypeError);
         });
     });
 
@@ -193,7 +193,7 @@ module.exports = function() {
         });
 
         it('rejects invalid number', function() {
-            expect(_.checkNumber).to.throw.TypeError;
+            expect(_.checkNumber).to.throw(TypeError);
         });
 
         it('accepts number', function() {
@@ -201,7 +201,7 @@ module.exports = function() {
                 _.checkNumber(5);
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -211,7 +211,7 @@ module.exports = function() {
         });
 
         it('rejects invalid object', function() {
-            expect(_.checkObject).to.throw.TypeError;
+            expect(_.checkObject).to.throw(TypeError);
         });
 
         it('accepts object', function() {
@@ -219,7 +219,7 @@ module.exports = function() {
                 _.checkObject(new Array(1));
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -229,7 +229,7 @@ module.exports = function() {
         });
 
         it('rejects invalid object', function() {
-            expect(_.checkPlainObject).to.throw.TypeError;
+            expect(_.checkPlainObject).to.throw(TypeError);
         });
 
         it('accepts plain object', function() {
@@ -237,7 +237,7 @@ module.exports = function() {
                 _.checkPlainObject({});
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 
@@ -247,7 +247,7 @@ module.exports = function() {
         });
 
         it('rejects invalid string', function() {
-            expect(_.checkString).to.throw.TypeError;
+            expect(_.checkString).to.throw(TypeError);
         });
 
         it('accepts string', function() {
@@ -255,7 +255,7 @@ module.exports = function() {
                 _.checkString('');
             };
 
-            expect(wrapped).to.not.throw.TypeError;
+            expect(wrapped).to.not.throw(TypeError);
         });
     });
 };

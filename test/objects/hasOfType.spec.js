@@ -14,7 +14,7 @@ module.exports = function() {
                 _.hasOfType({});
             };
 
-            expect(wrapped).to.throw.TypeError;
+            expect(wrapped).to.throw(TypeError);
         });
 
         it('rejects invalid validator', function() {
@@ -22,7 +22,7 @@ module.exports = function() {
                 _.hasOfType({}, 'test');
             };
 
-            expect(wrapped).to.throw.TypeError;
+            expect(wrapped).to.throw(TypeError);
         });
 
         it('returns false for any non-object', function() {

@@ -10,11 +10,11 @@ module.exports = function() {
         });
 
         it('rejects invalid model', function() {
-            expect(_.validatedAssign).to.throw.Error;
+            expect(_.validatedAssign).to.throw(Error);
         });
 
         it('rejects invalid source', function() {
-            expect(_.validatedAssign).to.throw.Error;
+            expect(_.validatedAssign).to.throw(Error);
         });
 
         it('rejects invalid array', function() {
@@ -32,6 +32,21 @@ module.exports = function() {
             var result = _.validatedAssign(model, source);
 
             expect(result.test).to.equal(false);
+        });
+
+        it('rejects invalid validator function', function() {
+            var model = {
+                test: {
+                    validator: 'invalid',
+                    default: false
+                }
+            };
+
+            var wrapped = function() {
+                _.validatedAssign(model, { test: '' });
+            };
+
+            expect(wrapped).to.throw(TypeError);
         });
 
         it('accepts valid array', function() {

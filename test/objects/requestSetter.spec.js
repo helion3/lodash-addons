@@ -28,7 +28,7 @@ module.exports = function() {
                 obj.requestIdSetter();
             };
 
-            expect(wrapped).to.throw.Error;
+            expect(wrapped).to.throw(Error);
         });
 
         it('sets value', function() {
@@ -60,7 +60,7 @@ module.exports = function() {
                 obj.requestIdSetter();
             };
 
-            expect(wrapped).to.throw.Error;
+            expect(wrapped).to.throw(Error);
         });
 
         it('all values equal last set', function() {

@@ -10,7 +10,7 @@ module.exports = function() {
         });
 
         it('rejects invalid collection', function() {
-            expect(_.finalize).to.throw.TypeError;
+            expect(_.finalize).to.throw(TypeError);
         });
 
         var replacement = _.finalize({

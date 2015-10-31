@@ -25,7 +25,7 @@ module.exports = function() {
         });
 
         it('rejects invalid collection', function() {
-            expect(_.recurse).to.throw.TypeError;
+            expect(_.recurse).to.throw(TypeError);
         });
 
         it('rejects invalid collection', function() {

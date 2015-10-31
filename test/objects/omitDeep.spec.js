@@ -33,7 +33,7 @@ module.exports = function() {
         });
 
         it('rejects invalid collection', function() {
-            expect(_.omitDeep).to.throw.TypeError;
+            expect(_.omitDeep).to.throw(TypeError);
         });
 
         it('rejects invalid keys array', function() {
@@ -41,7 +41,7 @@ module.exports = function() {
                 _.omitDeep({});
             };
 
-            expect(wrapped).to.throw.TypeError;
+            expect(wrapped).to.throw(TypeError);
         });
 
         var parsed = _.omitDeep(obj, ['invalid']);
