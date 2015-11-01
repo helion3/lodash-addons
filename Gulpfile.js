@@ -80,7 +80,7 @@ gulp.task('copy:hooks', function() {
 // Task aliases
 gulp.task('default', ['lint-js']);
 gulp.task('setup', ['copy:hooks']);
-gulp.task('pre-commit', ['default', 'deploy']);
+gulp.task('pre-commit', ['default']);
 
 gulp.task('deploy', function(callback) {
     runSequence('concat', 'replace', 'umd', 'compress', 'clean:build', callback);

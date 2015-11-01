@@ -25,12 +25,16 @@ Bower `bower install --save lodash-addons`
 - *generateKey* - Generates a random string of characters.
 - *slugify* - Converts a string into a "slug", a web-safe string avoiding ugly encoding.
 
+#### Collections
+
+- *cage* - Clones source and wraps with `chain`. Destroys original.
+- *isCollection* - Is value an array or object.
+
 #### Objects
 - *constant* - Creates an immutable property on an object.
 - *finalize* - Creates a new object with constants for every property in a source object.
 - *fromQueryString* - Parses query string into key/value object.
 - *hasOfType* - If has() returns true, run a validator on value.
-- *isCollection* - Is value an array or object.
 - *mapFiltered* - Map a function to filtered array elements.
 - *omitDeep* - Run `omit` recursively down a collection.
 - *recurse* - Invoke a function recursively on every element in a collection.
@@ -51,6 +55,13 @@ Bower `bower install --save lodash-addons`
 - *checkNumber* - Throw a TypeError if value isn't a number.
 - *checkPlainObject* - Throw a TypeError if value isn't a plain object.
 - *checkString* - Throw a TypeError if value isn't a string.
+
+#### Cages
+
+- *getArray* - Returns value if a array, otherwise a default array.
+- *getBoolean* - Returns value if a boolean, otherwise a default boolean.
+- *getNumber* - Returns value if a number, otherwise a default number.
+- *getString* - Returns value if a string, otherwise a default string.
 
 #### Utils
 - *toBool* - Converts a value to a boolean to work properly within explicit comparisons.
