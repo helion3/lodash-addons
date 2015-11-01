@@ -5,7 +5,11 @@ var _ = require(testPath)(lodash);
 
 module.exports = function() {
     describe('lighten', function() {
-        var color = _.randomColor();
+        var color = {
+            r: 200,
+            g: 200,
+            b: 200
+        };
 
         it('exists', function() {
             expect(_.lighten).to.be.a('function');
@@ -14,8 +18,8 @@ module.exports = function() {
         it('lightens a color', function() {
             var lightened = _.lighten(color);
             expect(lightened.r).to.be.above(color.r);
-            expect(lightened.g).to.be.above(color.r);
-            expect(lightened.b).to.be.above(color.r);
+            expect(lightened.g).to.be.above(color.g);
+            expect(lightened.b).to.be.above(color.b);
         });
 
         it('lightens a color by a given value', function() {

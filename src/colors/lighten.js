@@ -1,6 +1,7 @@
 module.exports = function(_) {
     // Inject internal deps
     _ = require('./randomColor')(_);
+    _ = require('../numbers/clamp')(_);
 
     _.mixin({
 
