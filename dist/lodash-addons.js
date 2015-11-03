@@ -10,6 +10,7 @@
 
     // Inject internal deps
     
+    
 
     _.mixin({
 
@@ -88,6 +89,38 @@
             }
 
             return value;
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Clones source and wraps with _.chain. Destroys original.
+         *
+         * @param {object|array} source Source chainable.
+         * @return {object} Lodash chain.
+         */
+        cage: function(source) {
+            var clone = _.cloneDeep(source);
+
+            if (_.isObject(source)) {
+                _.each(source, function(val, key) {
+                    delete source[key];
+                });
+            }
+
+            if (_.isArray(source)) {
+                _.remove(source, function() {
+                    return true;
+                });
+            }
+
+            return _.chain(clone);
         }
     });
 
@@ -460,7 +493,7 @@
                     if (_.has(model, 'validator')) {
                         // Ensure callable
                         if (!_.isFunction(model.validator)) {
-                            throw new Error('Invalid validator function for ' + key + '.');
+                            throw new TypeError('Invalid validator function for ' + key + '.');
                         }
 
                         // Validate
@@ -587,6 +620,157 @@
     
 
 
+    var getType = function(validator, baseDefault, value, userDefault) {
+        var result;
+
+        if (validator(value)) {
+            result = value;
+        } else if (validator(userDefault)) {
+            result = userDefault;
+        } else {
+            result = baseDefault;
+        }
+
+        return result;
+    };
+
+    _.mixin({
+
+        /**
+         * Returns value if a array, otherwise a default array.
+         *
+         * @param {mixed} value Source value
+         * @param {number} userDefault Customd default if value is invalid type.
+         * @return {number} Final array.
+         */
+        getArray: function(value, userDefault) {
+            return getType(_.isArray, [], value, userDefault);
+        },
+
+        /**
+         * Returns value if a boolean, otherwise a default boolean.
+         *
+         * @param {mixed} value Source value
+         * @param {number} userDefault Customd default if value is invalid type.
+         * @return {number} Final boolean.
+         */
+        getBoolean: function(value, userDefault) {
+            return getType(_.isBoolean, false, value, userDefault);
+        },
+
+        /**
+         * Returns value if a number, otherwise a default number.
+         *
+         * @param {mixed} value Source value
+         * @param {number} userDefault Customd default if value is invalid type.
+         * @return {number} Final number.
+         */
+        getNumber: function(value, userDefault) {
+            return getType(_.isNumber, 0, value, userDefault);
+        },
+
+        /**
+         * Returns value if a string, otherwise a default string.
+         *
+         * @param {mixed} value Source value
+         * @param {number} userDefault Customd default if value is invalid type.
+         * @return {number} Final string.
+         */
+        getString: function(value, userDefault) {
+            return getType(_.isString, '', value, userDefault);
+        }
+    });
+
+    
+
+
+    _.mixin({
+
+        /**
+         * Returns the prototype for the given object.
+         *
+         * @param {object} obj Source object
+         * @return {object} Found prototype or null.
+         */
+        getPrototype: function(obj) {
+            var prototype;
+
+            if (!_.isUndefined(obj) && !_.isNull(obj)) {
+                if (!_.isObject(obj)) {
+                    prototype = obj.constructor.prototype;
+                } else {
+                    prototype = Object.getPrototypeOf(obj);
+                }
+            }
+
+            return prototype;
+        }
+    });
+
+    
+
+
+    
+    
+    
+
+    _.mixin({
+
+        /**
+         * Returns whether or not a prototype exists or a given property exists on the prototype.
+         *
+         * @param {object} obj Source object
+         * @param {string} prop Prototype property.
+         * @return {boolean} If prototype exists on the object.
+         */
+        hasPrototype: function(obj, prop) {
+            var result = _.getPrototype(obj);
+
+            if (_.isNonEmptyString(prop)) {
+                result = result[prop];
+            }
+
+            return _.toBool(result);
+        }
+    });
+
+    
+
+
+    
+    
+    
+
+    _.mixin({
+
+        /**
+         * Returns whether an object has a prototype property of the given type.
+         *
+         * @param {object} obj Source object
+         * @param {string} prop Prototype property.
+         * @param {function} validator Validation function.
+         * @return {boolean} If prototype property exists and is the correct type.
+         */
+        hasPrototypeOfType: function(obj, prop, validator) {
+            _.checkKey(prop);
+            _.checkFunction(validator);
+
+            var proto = _.getPrototype(obj);
+            var result = false;
+
+            if (proto) {
+                result = validator(proto[prop]);
+            }
+
+            return result;
+        }
+    });
+
+    
+
+
+    
+
     _.mixin({
 
         /**
@@ -672,7 +856,7 @@
          * @return {void}
          */
         checkKey: function(val) {
-            if (!_.isString(val) && !_.isNumber(val)) {
+            if (!_.isNonEmptyString(val) && !_.isNumber(val)) {
                 throw new TypeError('Argument must be a string or number.');
             }
         },
