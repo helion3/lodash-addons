@@ -64,4 +64,7 @@ Bower `bower install --save lodash-addons`
 - *getString* - Returns value if a string, otherwise a default string.
 
 #### Utils
+- *getPrototype* - Returns the prototype for the given object.
+- *hasPrototype* - Returns whether or not a prototype exists or a given property exists on the prototype.
+- *hasPrototypeOfType* - Returns whether an object has a prototype property of the given type.
 - *toBool* - Converts a value to a boolean to work properly within explicit comparisons.

@@ -134,6 +134,14 @@ module.exports = function() {
 
         it('accepts string key', function() {
             var wrapped = function() {
+                _.checkKey('');
+            };
+
+            expect(wrapped).to.throw(TypeError);
+        });
+
+        it('accepts string key', function() {
+            var wrapped = function() {
                 _.checkKey('test');
             };
 

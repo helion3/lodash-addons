@@ -1,4 +1,6 @@
 module.exports = function(_) {
+    _ = require('../strings/isNonEmptyString')(_);
+
     _.mixin({
 
         /**
@@ -84,7 +86,7 @@ module.exports = function(_) {
          * @return {void}
          */
         checkKey: function(val) {
-            if (!_.isString(val) && !_.isNumber(val)) {
+            if (!_.isNonEmptyString(val) && !_.isNumber(val)) {
                 throw new TypeError('Argument must be a string or number.');
             }
         },
