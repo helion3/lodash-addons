@@ -17,6 +17,7 @@ Bower `bower install --save lodash-addons`
 #### Arrays
 
 - *changed* - Returns indexes for elements which do not match between two arrays.
+- *exceptKeys* - Iterate elements in an array skipping any at given keys.
 - *indexesOf* - Returns an array of indexes where elements pass the validator.
 
 #### Colors
