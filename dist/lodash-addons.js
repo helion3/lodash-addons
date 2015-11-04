@@ -8,6 +8,128 @@
   }
 }(this, function(_) {
 
+    
+    
+
+    _.mixin({
+
+        /**
+         * Returns indexes for elements which do not match between two arrays.
+         *
+         * @param {array} arr1 Source array
+         * @param {array} arr2 Target array
+         * @return {array} Array of indexes for changed elements.
+         */
+        changed: function(arr1, arr2) {
+            _.checkArray(arr1);
+            _.checkArray(arr2);
+
+            return _.indexesOf(arr1, function(val, key) {
+                return val !== arr2[key];
+            });
+        }
+    });
+
+    
+
+
+    
+    
+
+    _.mixin({
+
+        /**
+         * Iterate elements in an array skipping any at given keys.
+         *
+         * @param {array} arr Source array
+         * @param {array} keys Keys array
+         * @param {function} func Function called on allowed elements.
+         * @return {array} Source array.
+         */
+        exceptKeys: function(arr, keys, func) {
+            _.checkArray(arr);
+            _.checkArray(keys);
+            _.checkFunction(func);
+
+            _.each(arr, function(value, key) {
+                if (!_.includes(keys, key)) {
+                    func(value, key);
+                }
+            });
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Returns an array of indexes where elements pass the validator.
+         *
+         * @param {array} arr Target array
+         * @param {function} validator Validation method.
+         * @return {array} Array of indexes where element matched.
+         */
+        indexesOf: function(arr, validator) {
+            _.checkArray(arr);
+            _.checkFunction(validator);
+
+            var keys = [];
+
+            _.each(arr, function(value, key) {
+                if (validator(value, key)) {
+                    keys.push(key);
+                }
+            });
+
+            return keys;
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Clamps a number to a given maximum, or minimum/maximum range.
+         *
+         * @param {int} value Numeric value
+         * @param {int} a Maximum value. Minimum value if "b" defined.
+         * @param {int} b Maximum value, if "a" defined.
+         * @return {int} Resulting number.
+         */
+        clamp: function(value, a, b) {
+            _.checkNumber(value);
+            _.checkNumber(a);
+
+            // Treat second argument as a max if no min defined
+            var max = (_.isNumber(b) ? b : a);
+            var min;
+            if (_.isNumber(b)) {
+                min = a;
+            }
+
+            if (value > max) {
+                value = max;
+            }
+
+            if (_.isNumber(min) && value < min) {
+                value = min;
+            }
+
+            return value;
+        }
+    });
+
+    
+
+
     // Inject internal deps
     
     
@@ -62,44 +184,6 @@
     _.mixin({
 
         /**
-         * Clamps a number to a given maximum, or minimum/maximum range.
-         *
-         * @param {int} value Numeric value
-         * @param {int} a Maximum value. Minimum value if "b" defined.
-         * @param {int} b Maximum value, if "a" defined.
-         * @return {int} Resulting number.
-         */
-        clamp: function(value, a, b) {
-            _.checkNumber(value);
-            _.checkNumber(a);
-
-            // Treat second argument as a max if no min defined
-            var max = (_.isNumber(b) ? b : a);
-            var min;
-            if (_.isNumber(b)) {
-                min = a;
-            }
-
-            if (value > max) {
-                value = max;
-            }
-
-            if (_.isNumber(min) && value < min) {
-                value = min;
-            }
-
-            return value;
-        }
-    });
-
-    
-
-
-    
-
-    _.mixin({
-
-        /**
          * Clones source and wraps with _.chain. Destroys original.
          *
          * @param {object|array} source Source chainable.
@@ -139,7 +223,7 @@
          * @param {mixed} value Property value.
          * @return {object} Target object with immutable property.
          */
-        constant: function(obj, name, value) {
+        const: function(obj, name, value) {
             _.checkObject(obj);
             _.checkString(name);
 
@@ -157,6 +241,7 @@
     
 
 
+    
     
     
 
@@ -188,7 +273,7 @@
                     });
                 }
 
-                _.constant(replacement, key, value);
+                _.const(replacement, key, value);
             });
 
             return replacement;
@@ -289,6 +374,33 @@
             _.checkFunction(validator);
 
             return _.map(_.filter(arr, validator), func);
+        }
+    });
+
+    
+
+
+    
+    
+
+    _.mixin({
+
+        /**
+         * Merge prototype properties from source to target.
+         *
+         * @param {object|function} target Target object.
+         * @param {object|function} source Object/function to mixin.
+         * @return {array} Modified array
+         */
+        mixInto: function(target, source) {
+            _.check(target, _.hasPrototype);
+            _.check(source, _.hasPrototype);
+
+            if (!_.isPlainObject(target)) {
+                target = _.getPrototype(target);
+            }
+
+            return _.assign(target, _.getPrototype(source));
         }
     });
 
@@ -698,6 +810,8 @@
             if (!_.isUndefined(obj) && !_.isNull(obj)) {
                 if (!_.isObject(obj)) {
                     prototype = obj.constructor.prototype;
+                } else if (_.isFunction(obj)) {
+                    prototype = obj.prototype;
                 } else {
                     prototype = Object.getPrototypeOf(obj);
                 }
