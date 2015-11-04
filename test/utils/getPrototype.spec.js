@@ -33,5 +33,14 @@ module.exports = function() {
             expect(_.getPrototype(null)).to.be.undefined;
             expect(_.getPrototype(undefined)).to.be.undefined;
         });
+
+        it('returns prototype for functions', function() {
+            var Test = function Test() {};
+            Test.prototype.on = function() {};
+
+            var proto = _.getPrototype(Test);
+
+            expect(proto.on).to.be.a('function');
+        });
     });
 };

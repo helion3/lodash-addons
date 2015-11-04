@@ -13,6 +13,8 @@ module.exports = function(_) {
             if (!_.isUndefined(obj) && !_.isNull(obj)) {
                 if (!_.isObject(obj)) {
                     prototype = obj.constructor.prototype;
+                } else if (_.isFunction(obj)) {
+                    prototype = obj.prototype;
                 } else {
                     prototype = Object.getPrototypeOf(obj);
                 }

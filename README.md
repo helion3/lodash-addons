@@ -43,6 +43,7 @@ Bower `bower install --save lodash-addons`
 - *fromQueryString* - Parses query string into key/value object.
 - *hasOfType* - If has() returns true, run a validator on value.
 - *mapFiltered* - Map a function to filtered array elements.
+- *mixInto* - Merge prototype properties from source to target.
 - *omitDeep* - Run `omit` recursively down a collection.
 - *recurse* - Invoke a function recursively on every element in a collection.
 - *requestSetter* - Gives a setter for `prop` only to the first requesting caller.
