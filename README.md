@@ -37,7 +37,7 @@ Bower `bower install --save lodash-addons`
 - *isCollection* - Is value an array or object.
 
 #### Objects
-- *constant* - Creates an immutable property on an object.
+- *const* - Creates an immutable property on an object.
 - *finalize* - Creates a new object with constants for every property in a source object.
 - *fromQueryString* - Parses query string into key/value object.
 - *hasOfType* - If has() returns true, run a validator on value.

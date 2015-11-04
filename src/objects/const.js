@@ -11,7 +11,7 @@ module.exports = function(_) {
          * @param {mixed} value Property value.
          * @return {object} Target object with immutable property.
          */
-        constant: function(obj, name, value) {
+        const: function(obj, name, value) {
             _.checkObject(obj);
             _.checkString(name);
 

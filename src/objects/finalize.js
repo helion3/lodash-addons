@@ -1,4 +1,5 @@
 module.exports = function(_) {
+    _ = require('./const')(_);
     _ = require('./isCollection')(_);
     _ = require('../utils/preconditions')(_);
 
@@ -30,7 +31,7 @@ module.exports = function(_) {
                     });
                 }
 
-                _.constant(replacement, key, value);
+                _.const(replacement, key, value);
             });
 
             return replacement;
