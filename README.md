@@ -13,6 +13,12 @@ Node: `npm install -save lodash-addons`
 
 Bower `bower install --save lodash-addons`
 
+
+#### Arrays
+
+- *changed* - Returns indexes for elements which do not match between two arrays.
+- *indexesOf* - Returns an array of indexes where elements pass the validator.
+
 #### Colors
 - *lighten* - Lightens an RGB color.
 - *randomColor* - Generates a color via random RGB values.
