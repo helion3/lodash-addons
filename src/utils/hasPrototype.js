@@ -15,7 +15,7 @@ module.exports = function(_) {
         hasPrototype: function(obj, prop) {
             var result = _.getPrototype(obj);
 
-            if (_.isNonEmptyString(prop)) {
+            if (result && _.isNonEmptyString(prop)) {
                 result = result[prop];
             }
 

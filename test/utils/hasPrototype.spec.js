@@ -17,6 +17,7 @@ module.exports = function() {
         it('returns false for values without a prototype', function() {
             expect(_.hasPrototype(null)).to.be.false;
             expect(_.hasPrototype(undefined)).to.be.false;
+            expect(_.hasPrototype(undefined, 'fake')).to.be.false;
         });
 
         it('returns true for values with a specific prototype method', function() {
