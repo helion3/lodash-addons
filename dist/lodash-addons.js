@@ -92,44 +92,6 @@
     
 
 
-    
-
-    _.mixin({
-
-        /**
-         * Clamps a number to a given maximum, or minimum/maximum range.
-         *
-         * @param {int} value Numeric value
-         * @param {int} a Maximum value. Minimum value if "b" defined.
-         * @param {int} b Maximum value, if "a" defined.
-         * @return {int} Resulting number.
-         */
-        clamp: function(value, a, b) {
-            _.checkNumber(value);
-            _.checkNumber(a);
-
-            // Treat second argument as a max if no min defined
-            var max = (_.isNumber(b) ? b : a);
-            var min;
-            if (_.isNumber(b)) {
-                min = a;
-            }
-
-            if (value > max) {
-                value = max;
-            }
-
-            if (_.isNumber(min) && value < min) {
-                value = min;
-            }
-
-            return value;
-        }
-    });
-
-    
-
-
     // Inject internal deps
     
     
@@ -173,6 +135,44 @@
                 g: _.random(0, 255),
                 b: _.random(0, 255)
             };
+        }
+    });
+
+    
+
+
+    
+
+    _.mixin({
+
+        /**
+         * Clamps a number to a given maximum, or minimum/maximum range.
+         *
+         * @param {int} value Numeric value
+         * @param {int} a Maximum value. Minimum value if "b" defined.
+         * @param {int} b Maximum value, if "a" defined.
+         * @return {int} Resulting number.
+         */
+        clamp: function(value, a, b) {
+            _.checkNumber(value);
+            _.checkNumber(a);
+
+            // Treat second argument as a max if no min defined
+            var max = (_.isNumber(b) ? b : a);
+            var min;
+            if (_.isNumber(b)) {
+                min = a;
+            }
+
+            if (value > max) {
+                value = max;
+            }
+
+            if (_.isNumber(min) && value < min) {
+                value = min;
+            }
+
+            return value;
         }
     });
 
@@ -840,7 +840,7 @@
         hasPrototype: function(obj, prop) {
             var result = _.getPrototype(obj);
 
-            if (_.isNonEmptyString(prop)) {
+            if (result && _.isNonEmptyString(prop)) {
                 result = result[prop];
             }
 
