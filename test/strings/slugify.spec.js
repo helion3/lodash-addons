@@ -1,12 +1,14 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/strings/slugify');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('slugify', function() {
         it('exists', function() {
             expect(_.slugify).to.be.a('function');
+        });
+
+        it('converts invalid types to strings', function() {
+            expect(_.slugify(5)).to.equal('5');
+            expect(_.slugify(undefined)).to.equal('undefined');
         });
 
         it('removes illegal characters', function() {

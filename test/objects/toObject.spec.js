@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/objects/toObject');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('toObject', function() {
         var Complex = function() {
             this.toObject = function() {

@@ -1,20 +1,17 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/objects/validatedAssign');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('validatedAssign', function() {
         it('exists', function() {
             expect(_.validatedAssign).to.be.a('function');
         });
 
         it('rejects invalid model', function() {
-            expect(_.validatedAssign).to.throw(Error);
+            expect(_.validatedAssign()).to.be.an('object');
         });
 
         it('rejects invalid source', function() {
-            expect(_.validatedAssign).to.throw(Error);
+            expect(_.validatedAssign({})).to.be.an('object');
         });
 
         it('rejects invalid array', function() {

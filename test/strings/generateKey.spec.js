@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/strings/generateKey');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('generateKey', function() {
         it('exists', function() {
             expect(_.generateKey).to.be.a('function');

@@ -19,6 +19,6 @@ PRs should meet a few simple guidelines:
 
 To run code coverage checks, use:
 
-`node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha`
+`npm run coverage`
 
 Thanks!

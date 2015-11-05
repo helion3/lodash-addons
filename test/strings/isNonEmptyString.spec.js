@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/strings/isNonEmptyString');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('isNonEmptyString', function() {
         it('exists', function() {
             expect(_.isNonEmptyString).to.be.a('function');

@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/objects/omitDeep');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('omitDeep', function() {
         var obj = {
             valid: '',
@@ -30,18 +27,6 @@ module.exports = function() {
 
         it('exists', function() {
             expect(_.omitDeep).to.be.a('function');
-        });
-
-        it('rejects invalid collection', function() {
-            expect(_.omitDeep).to.throw(TypeError);
-        });
-
-        it('rejects invalid keys array', function() {
-            var wrapped = function() {
-                _.omitDeep({});
-            };
-
-            expect(wrapped).to.throw(TypeError);
         });
 
         var parsed = _.omitDeep(obj, ['invalid']);

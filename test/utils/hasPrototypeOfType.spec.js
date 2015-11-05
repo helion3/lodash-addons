@@ -1,28 +1,13 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/utils/hasPrototypeOfType');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('hasPrototypeOfType', function() {
         it('exists', function() {
             expect(_.hasPrototypeOfType).to.be.a('function');
         });
 
-        it('throws error for invalid property', function() {
-            var wrapped = function() {
-                _.hasPrototypeOfType(1, '', _.isFunction);
-            };
-
-            expect(wrapped).to.throw(TypeError);
-        });
-
-        it('throws error for invalid validator', function() {
-            var wrapped = function() {
-                _.hasPrototypeOfType(1, 'test');
-            };
-
-            expect(wrapped).to.throw(TypeError);
+        it('returns false for invalid prototype', function() {
+            expect(_.hasPrototypeOfType(undefined, 'toFixed', _.isFunction)).to.be.false;
         });
 
         it('returns true for valid function', function() {

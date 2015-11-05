@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/objects/mixInto');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('mixInto', function() {
         it('exists', function() {
             expect(_.mixInto).to.be.a('function');
@@ -43,6 +40,14 @@ module.exports = function() {
 
             expect(Base.on).to.be.a('function');
             expect(Base.test).to.be.a('function');
+        });
+
+        it('handles invalid arguments', function() {
+            var wrapped = function() {
+                _.mixInto(Base);
+            };
+
+            expect(wrapped).to.not.throw(Error);
         });
     });
 };

@@ -10,7 +10,12 @@
   "dependencies": {
   },
   "main": "dist/lodash-addons.min.js",
-  "ignore": ["test"],
+  "ignore": [
+      "test",
+      "lib",
+      "hooks",
+      ".*"
+  ],
   "devDependencies": [],
   "private": false
 }

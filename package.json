@@ -7,24 +7,20 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.3.0",
-    "del": "^2.0.2",
+    "docdown": "^0.3.0",
     "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
     "gulp-eslint": "^1.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
     "gulp-uglify": "^1.4.1",
-    "gulp-umd": "^0.2.0",
     "istanbul": "^0.4.0",
-    "lodash": "^3.10.1",
-    "mocha": "^2.3.3",
-    "run-sequence": "^1.1.4"
+    "mocha": "^2.3.3"
   },
   "peerDependencies": {
     "lodash": "^3.10.1"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "coverage": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
   },
   "main": "dist/lodash-addons.js"
 }

@@ -1,18 +1,15 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/objects/const');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
-    describe('const', function() {
+module.exports = function(_) {
+    describe('immutable', function() {
         it('exists', function() {
-            expect(_.const).to.be.a('function');
+            expect(_.immutable).to.be.a('function');
         });
 
         var obj;
 
         it('returns object with desired property', function() {
-            obj = _.const({}, 'TEST', true);
+            obj = _.immutable({}, 'TEST', true);
 
             expect(obj).to.be.an('object');
             expect(obj.TEST).to.be.true;
