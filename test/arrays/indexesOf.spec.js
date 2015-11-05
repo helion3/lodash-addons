@@ -1,32 +1,30 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/arrays/indexesOf');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('indexesOf', function() {
         it('exists', function() {
             expect(_.indexesOf).to.be.a('function');
         });
 
+        it('returns empty array when given invalid arguments', function() {
+            var indices = _.indexesOf();
+
+            expect(indices).to.be.an('array');
+            expect(indices).to.have.length(0);
+        });
+
         var source = [true, false, true];
 
-        it('rejects invalid array', function() {
-            expect(_.indexesOf).to.throw(TypeError);
+        it('returns indices for elements matching predicate function', function() {
+            var keysOfTrue = _.indexesOf(source, _.identity);
+
+            expect(keysOfTrue).to.have.length(2);
+            expect(keysOfTrue[0]).to.equal(0);
+            expect(keysOfTrue[1]).to.equal(2);
         });
 
-        it('rejects invalid validator', function() {
-            var wrapped = function() {
-                _.indexesOf([]);
-            };
-
-            expect(wrapped).to.throw(TypeError);
-        });
-
-        it('returns keys for each true element', function() {
-            var keysOfTrue = _.indexesOf(source, function(val) {
-                return val;
-            });
+        it('returns indices for elements matching predicate value', function() {
+            var keysOfTrue = _.indexesOf(source, true);
 
             expect(keysOfTrue).to.have.length(2);
             expect(keysOfTrue[0]).to.equal(0);

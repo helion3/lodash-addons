@@ -1,35 +1,16 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/arrays/exceptKeys');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('exceptKeys', function() {
         it('exists', function() {
             expect(_.exceptKeys).to.be.a('function');
         });
 
+        it('accepts invalid arguments', function() {
+            expect(_.exceptKeys()).to.be.an('array');
+        });
+
         var arr = [1, 2, 3];
-
-        it('rejects invalid source array', function() {
-            expect(_.exceptKeys).to.throw(TypeError);
-        });
-
-        it('rejects invalid keys array', function() {
-            var wrapped = function() {
-                _.exceptKeys([]);
-            };
-
-            expect(wrapped).to.throw(TypeError);
-        });
-
-        it('rejects invalid function', function() {
-            var wrapped = function() {
-                _.exceptKeys([], []);
-            };
-
-            expect(wrapped).to.throw(TypeError);
-        });
 
         it('iterates array except given keys', function() {
             var iteratedKeys = [];

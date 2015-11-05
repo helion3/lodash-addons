@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/utils/getPrototype');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('getPrototype', function() {
         it('exists', function() {
             expect(_.getPrototype).to.be.a('function');

@@ -1,21 +1,18 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/utils/preconditions');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('check', function() {
         it('exists', function() {
             expect(_.check).to.be.a('function');
         });
 
-        it('rejects invalid and missing validator func', function() {
+        it('does not throw error when missing validator', function() {
             var wrapped = function() {
                 _.check(0, 0);
             };
 
-            expect(_.check).to.throw(TypeError);
-            expect(wrapped).to.throw(TypeError);
+            expect(_.check).to.not.throw(TypeError);
+            expect(wrapped).to.not.throw(TypeError);
         });
 
         it('throws error using a single validator', function() {

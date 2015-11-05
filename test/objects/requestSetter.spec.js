@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/objects/requestSetter');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('requestSetter', function() {
         it('exists', function() {
             expect(_.requestSetter).to.be.a('function');

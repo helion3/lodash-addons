@@ -1,9 +1,6 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/utils/cages');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('getArray', function() {
         it('exists', function() {
             expect(_.getArray).to.be.a('function');
@@ -46,6 +43,24 @@ module.exports = function() {
         });
     });
 
+    describe('getFunction', function() {
+        it('exists', function() {
+            expect(_.getFunction).to.be.a('function');
+        });
+
+        it('returns valid getFunction', function() {
+            var test = function test() {};
+            expect(_.getFunction(test).name).to.equal('test');
+        });
+
+        it('returns default for invalid function', function() {
+            expect(_.getFunction('')).to.be.a('function');
+            expect(_.getFunction(1)).to.be.a('function');
+            expect(_.getFunction()).to.be.a('function');
+            expect(_.getFunction(null)).to.be.a('function');
+        });
+    });
+
     describe('getNumber', function() {
         it('exists', function() {
             expect(_.getNumber).to.be.a('function');
@@ -64,6 +79,24 @@ module.exports = function() {
 
         it('returns custom default for invalid number', function() {
             expect(_.getNumber('', -1)).to.equal(-1);
+        });
+    });
+
+    describe('getObject', function() {
+        it('exists', function() {
+            expect(_.getObject).to.be.a('function');
+        });
+
+        it('returns valid getFunction', function() {
+            var obj = { test: 1 };
+            expect(_.getObject(obj)).to.equal(obj);
+        });
+
+        it('returns default for invalid function', function() {
+            expect(_.getObject('')).to.be.an('object');
+            expect(_.getObject(1)).to.be.an('object');
+            expect(_.getObject()).to.be.an('object');
+            expect(_.getObject(null)).to.be.an('object');
         });
     });
 

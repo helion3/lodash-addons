@@ -2,14 +2,9 @@
 var gulp = require('gulp');
 
 // Plugins
-var concat = require('gulp-concat');
-var del = require('del');
 var eslint = require('gulp-eslint');
 var rename = require('gulp-rename');
-var replace = require('gulp-replace');
-var runSequence = require('run-sequence');
 var uglify = require('gulp-uglify');
-var umd = require('gulp-umd');
 
 var jsPaths = [
     'src/**/*.js',
@@ -23,50 +18,13 @@ gulp.task('lint-js', function() {
     .pipe(eslint.format());
 });
 
-gulp.task('clean:build', function(callback) {
-    del(['build'], function() {
-        callback();
-    });
-});
-
-gulp.task('concat', function() {
-    return gulp.src('src/**/*.js')
-    .pipe(concat('lodash-addons.js'))
-    .pipe(gulp.dest('build'));
-});
-
-gulp.task('replace', function() {
-    return gulp.src(['build/lodash-addons.js'])
-    .pipe(replace(/module.exports = function\(_\) {/g, ''))
-    .pipe(replace(/return _;\n};/g, ''))
-    .pipe(replace(/_ = require\(['.\/a-zA-Z]+\)\(_\);/g, ''))
-    .pipe(gulp.dest('build'));
-});
-
-gulp.task('umd', function() {
-    return gulp.src('build/lodash-addons.js')
-    .pipe(umd({
-        dependencies: function() {
-            return [{
-                name: 'lodash',
-                amd: 'lodash',
-                cjs: 'lodash',
-                global: '_',
-                param: '_'
-            }];
-        },
-        exports: function() {
-            return '_';
-        },
-        namespace: function() {
-            return '_';
-        }
-    }))
+gulp.task('copy', function() {
+    return gulp.src('src/lodash-addons.js')
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('compress', function() {
-    return gulp.src('dist/lodash-addons.js')
+    return gulp.src('src/lodash-addons.js')
     .pipe(uglify())
     .pipe(rename('lodash-addons.min.js'))
     .pipe(gulp.dest('dist'));
@@ -82,6 +40,4 @@ gulp.task('default', ['lint-js']);
 gulp.task('setup', ['copy:hooks']);
 gulp.task('pre-commit', ['default']);
 
-gulp.task('deploy', function(callback) {
-    runSequence('concat', 'replace', 'umd', 'compress', 'clean:build', callback);
-});
+gulp.task('deploy', ['copy', 'compress']);

@@ -1,24 +1,17 @@
-var lodash = require('lodash');
 var expect = require('chai').expect;
-var testPath = require('path').join(__dirname, '../../src/numbers/clamp');
-var _ = require(testPath)(lodash);
 
-module.exports = function() {
+module.exports = function(_) {
     describe('clamp', function() {
         it('exists', function() {
             expect(_.clamp).to.be.a('function');
         });
 
-        it('throws error for an invalid value object', function() {
-            expect(_.clamp).to.throw(TypeError);
+        it('returns 0 for invalid arguments', function() {
+            expect(_.clamp()).to.equal(0);
         });
 
-        it('throws error for an invalid maximum value object', function() {
-            var wrappedFunction = function() {
-                _.clamp(1);
-            };
-
-            expect(wrappedFunction).to.throw(TypeError);
+        it('returns custom minimum for invalid number', function() {
+            expect(_.clamp(false, 1, 5)).to.equal(1);
         });
 
         it('clamps to a max value', function() {
