@@ -64,5 +64,12 @@ module.exports = function(_) {
             expect(obj.getId()).to.equal(1);
             expect(obj.getName()).to.equal('Kermit');
         });
+
+        it('relinquishes setter', function() {
+            expect(obj.relinquishNameSetter).to.be.a('function');
+
+            obj.relinquishNameSetter();
+            expect(obj.requestNameSetter()).to.be.a('function');
+        });
     });
 };

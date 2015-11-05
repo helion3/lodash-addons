@@ -822,6 +822,10 @@
                 return setter;
             };
 
+            object['relinquish' + capped + 'Setter'] = function() {
+                setter = null;
+            };
+
             object['get' + capped] = function() {
                 return value;
             };
