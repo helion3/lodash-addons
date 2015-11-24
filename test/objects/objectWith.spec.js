@@ -19,5 +19,12 @@ module.exports = function(_) {
             expect(obj).to.be.an('object');
             expect(obj.parent.child.grandchild).to.be.true;
         });
+
+        it('adds property to existing object', function() {
+            var obj = _.objectWith({ test: true }, 'deep.key', true);
+
+            expect(obj.test).to.be.true;
+            expect(obj.deep.key).to.be.true;
+        });
     });
 };
