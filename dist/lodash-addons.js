@@ -708,10 +708,13 @@
      * @static
      * @memberOf _
      * @category Object
+     * @param {[object]} object Existing object (optional)
      * @param {string|number} path Property
      * @param {mixed} value Value
      * @return {object} Resulting object
      * @example
+     *
+     * // To create a new object:
      *
      * _.objectWith('key', 'value')
      * // => { key: 'value' }
@@ -724,12 +727,28 @@
      *     }
      *   }
      * }
+     *
+     * // Using existing:
+     * _.objectWith({ a: 1 }, 'b', 2)
+     * // => { a: 1, b: 2 }
      */
-    function objectWith(path, value) {
+    function objectWith() {
+        var obj = {};
+        var path;
+        var value;
+
+        if (arguments.length === 3) {
+            obj = arguments[0];
+            path = arguments[1];
+            value = arguments[2];
+        } else {
+            path = arguments[0];
+            value = arguments[1];
+        }
+
         var paths = _.getString(path).split('.');
         var l = paths.length;
 
-        var obj = {};
         var pointer = obj;
         _.each(paths, function(path, index) {
             pointer[path] = (index === l - 1 ? value : {});
