@@ -8,7 +8,7 @@ module.exports = function(_) {
 
         it('converts invalid types to strings', function() {
             expect(_.slugify(5)).to.equal('5');
-            expect(_.slugify(undefined)).to.equal('undefined');
+            expect(_.slugify(undefined)).to.equal('');
         });
 
         it('removes illegal characters', function() {
