@@ -30,5 +30,16 @@ module.exports = function(_) {
             expect(_.isPlainObject(plain.children[0])).to.be.true;
             expect(_.isPlainObject(plain.children[1])).to.be.true;
         });
+
+        var Test = function() {};
+        Test.prototype.toObject = function() {
+            return {};
+        };
+
+        it('allows toObject methods on a prototype', function() {
+            var protoTest = new Test();
+            expect(_.isPlainObject(protoTest)).to.be.false;
+            expect(_.isPlainObject(_.toObject(protoTest))).to.be.true;
+        });
     });
 };

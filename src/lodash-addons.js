@@ -74,7 +74,7 @@
      * @return {void}
      */
     function check(value) {
-        var validators = _(arguments).rest().filter(_.isFunction).value();
+        var validators = _(arguments).tail().filter(_.isFunction).value();
         if (_.isEmpty(validators)) {
             return;
         }
@@ -923,7 +923,7 @@
      */
     function toObject(object) {
         return _.recurse(object, function(item) {
-            if (_.hasOfType(item, 'toObject', _.isFunction)) {
+            if (_.hasOfType(item, 'toObject', _.isFunction) || _.hasPrototype(item, 'toObject', _.isFunction)) {
                 item = item.toObject();
             }
 
