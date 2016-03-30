@@ -991,7 +991,6 @@
         checkObject: checkObject,
         checkPlainObject: checkPlainObject,
         checkString: checkString,
-        clamp: clamp,
         exceptKeys: exceptKeys,
         fromQueryString: fromQueryString,
         generateKey: generateKey,
