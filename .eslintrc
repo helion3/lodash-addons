@@ -27,11 +27,15 @@
         "eqeqeq": 2,
         "guard-for-in": 2,
         "handle-callback-err": 2,
-        "indent": 2,
+        "indent": [2, 4, {"SwitchCase": 1}],
         "jsx-quotes": [ 1, "prefer-single" ],
         "key-spacing": [2, {
             "beforeColon": false,
             "afterColon": true
+        }],
+        "keyword-spacing": [2, {
+            "before": true,
+            "after": true
         }],
         "lines-around-comment": [2, {
             "beforeBlockComment": true,
@@ -44,6 +48,7 @@
         "no-alert": 2,
         "no-array-constructor": 2,
         "no-cond-assign": 2,
+        "no-console": 2,
         "no-dupe-args": 2,
         "no-dupe-keys": 2,
         "no-empty": 2,
@@ -81,6 +86,7 @@
         "no-sequences": 2,
         "no-sparse-arrays": 2,
         "no-trailing-spaces": 2,
+        "no-undefined": 2,
         "no-unexpected-multiline": 2,
         "no-unneeded-ternary": 2,
         "no-unreachable": 2,
@@ -96,13 +102,10 @@
         "quotes": [2, "single"],
         "radix": 2,
         "semi": [2, "always"],
-        "space-after-keywords": 2,
         "space-before-blocks": [2, "always"],
         "space-before-function-paren": [2, "never"],
-        "space-before-keywords": [2, "always"],
         "space-in-parens": [2, "never"],
         "space-infix-ops": 2,
-        "space-return-throw-case": 2,
         "space-unary-ops": 2,
         "spaced-comment": 2,
         "use-isnan": 2,
