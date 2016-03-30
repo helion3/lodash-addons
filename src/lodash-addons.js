@@ -783,7 +783,7 @@
         _.checkObject(object);
         _.checkString(property);
 
-        var capped = _.capitalize(property);
+        var capped = _.upperFirst(property);
 
         return (function() {
             var setter;

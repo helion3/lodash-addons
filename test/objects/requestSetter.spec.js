@@ -71,5 +71,10 @@ module.exports = function(_) {
             obj.relinquishNameSetter();
             expect(obj.requestNameSetter()).to.be.a('function');
         });
+
+        it('properly camel-cases names', function() {
+            obj = _.requestSetter(obj, 'selectedRow');
+            expect(obj.requestSelectedRowSetter).to.be.a('function');
+        });
     });
 };
