@@ -246,45 +246,6 @@
     }
 
     /**
-     * Clamps number to a given maximum, or minimum and maximum boundaries.
-     *
-     * @static
-     * @memberOf _
-     * @category Number
-     * @param {int} number Numeric value
-     * @param {int} a Maximum value. Minimum value if "b" defined.
-     * @param {int} b Maximum value, if "a" defined.
-     * @return {int} Resulting number.
-     * @example
-     *
-     * _.clamp(102, 100)
-     * // => 100
-     *
-     * _.clamp(-1, 0, 10)
-     * // => 0
-     */
-    function clamp(number, a, b) {
-        // Treat second argument as a max if no min defined
-        var max = (_.isNumber(b) ? b : a);
-        var min;
-        if (_.isNumber(b)) {
-            min = a;
-        }
-
-        if (!_.isNumber(number)) {
-            return min || 0;
-        }
-
-        if (number > max) {
-            number = max;
-        } else if (_.isNumber(min) && number < min) {
-            number = min;
-        }
-
-        return number;
-    }
-
-    /**
      * Iterate array skipping given indices.
      *
      * @static
@@ -822,7 +783,7 @@
         _.checkObject(object);
         _.checkString(property);
 
-        var capped = _.capitalize(property);
+        var capped = _.upperFirst(property);
 
         return (function() {
             var setter;
