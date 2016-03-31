@@ -497,33 +497,6 @@
     }
 
     /**
-     * Checks if a prototype exists, or `property` exists on the prototype.
-     *
-     * @static
-     * @memberOf _
-     * @category Util
-     * @param {*} value Source value
-     * @param {string} property Prototype property.
-     * @return {boolean} If prototype exists on the object.
-     * @example
-     *
-     * _.hasPrototype(null)
-     * // => false
-     *
-     * _.hasPrototype(5)
-     * // => true
-     */
-    function hasPrototype(value, property) {
-        var result = _.getPrototype(value);
-
-        if (result && _.isNonEmptyString(property)) {
-            result = result[property];
-        }
-
-        return _.toBool(result);
-    }
-
-    /**
      * Returns whether an object has a prototype property of the given type.
      *
      * @static
@@ -884,7 +857,7 @@
      */
     function toObject(object) {
         return _.recurse(object, function(item) {
-            if (_.hasOfType(item, 'toObject', _.isFunction) || _.hasPrototype(item, 'toObject', _.isFunction)) {
+            if (_.hasOfType(item, 'toObject', _.isFunction) || _.hasPrototypeOfType(item, 'toObject', _.isFunction)) {
                 item = item.toObject();
             }
 
@@ -1002,7 +975,6 @@
         getString: getString,
         getPrototype: getPrototype,
         hasOfType: hasOfType,
-        hasPrototype: hasPrototype,
         hasPrototypeOfType: hasPrototypeOfType,
         immutable: immutable,
         indexesOf: indexesOf,
