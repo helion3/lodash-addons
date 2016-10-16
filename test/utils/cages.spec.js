@@ -43,6 +43,24 @@ module.exports = function(_) {
         });
     });
 
+    describe('getFinite', function() {
+        it('exists', function() {
+            expect(_.getFinite).to.be.a('function');
+        });
+
+        it('returns valid number', function() {
+            expect(_.getFinite(5)).to.equal(5);
+        });
+
+        it('returns default for invalid number', function() {
+            expect(_.getFinite('')).to.equal(0);
+            expect(_.getFinite(false)).to.equal(0);
+            expect(_.getFinite()).to.equal(0);
+            expect(_.getFinite(null)).to.equal(0);
+            expect(_.getFinite(NaN)).to.equal(0);
+        });
+    });
+
     describe('getFunction', function() {
         it('exists', function() {
             expect(_.getFunction).to.be.a('function');
