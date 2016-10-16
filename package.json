@@ -1,6 +1,6 @@
 {
   "name": "lodash-addons",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Community mixins for lodash",
   "repository": "https://github.com/helion3/lodash-addons",
@@ -21,7 +21,8 @@
   },
   "scripts": {
     "test": "mocha test",
-    "coverage": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
+    "coverage": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha",
+    "docs": "./lib/docs.js"
   },
   "main": "dist/lodash-addons.js"
 }

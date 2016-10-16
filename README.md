@@ -38,11 +38,24 @@ Bower `bower install --save lodash-addons`
 ## `Lang`
 * <a href="#getArray">`_.getArray`</a>
 * <a href="#getBoolean">`_.getBoolean`</a>
+* <a href="#getFinite">`_.getFinite`</a>
 * <a href="#getFunction">`_.getFunction`</a>
+* <a href="#getMap">`_.getMap`</a>
 * <a href="#getNumber">`_.getNumber`</a>
 * <a href="#getObject">`_.getObject`</a>
+* <a href="#getPlainObject">`_.getPlainObject`</a>
+* <a href="#getSet">`_.getSet`</a>
 * <a href="#getString">`_.getString`</a>
+* <a href="#getWeakMap">`_.getWeakMap`</a>
+* <a href="#getWeakSet">`_.getWeakSet`</a>
 * <a href="#toBool">`_.toBool`</a>
+
+<!-- /div -->
+
+<!-- div -->
+
+## `Math`
+* <a href="#sign">`_.sign`</a>
 
 <!-- /div -->
 
@@ -72,11 +85,15 @@ Bower `bower install --save lodash-addons`
 * <a href="#checkCollection">`_.checkCollection`</a>
 * <a href="#checkFunction">`_.checkFunction`</a>
 * <a href="#checkKey">`_.checkKey`</a>
+* <a href="#checkMap">`_.checkMap`</a>
 * <a href="#checkNonEmpty">`_.checkNonEmpty`</a>
 * <a href="#checkNumber">`_.checkNumber`</a>
 * <a href="#checkObject">`_.checkObject`</a>
 * <a href="#checkPlainObject">`_.checkPlainObject`</a>
+* <a href="#checkSet">`_.checkSet`</a>
 * <a href="#checkString">`_.checkString`</a>
+* <a href="#checkWeakMap">`_.checkWeakMap`</a>
+* <a href="#checkWeakSet">`_.checkWeakSet`</a>
 
 <!-- /div -->
 
@@ -93,7 +110,6 @@ Bower `bower install --save lodash-addons`
 
 ## `Util`
 * <a href="#getPrototype">`_.getPrototype`</a>
-* <a href="#hasPrototype">`_.hasPrototype`</a>
 
 <!-- /div -->
 
@@ -114,8 +130,8 @@ Bower `bower install --save lodash-addons`
 
 <!-- div -->
 
-### <a id="changes"></a>`_.changes(first, second)`
-<a href="#changes">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L57 "View in source") [&#x24C9;][1]
+<h3 id="changes"><a href="#changes">#</a>&nbsp;<code>_.changes(first, second)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L57 "View in source") [&#x24C9;][1]
 
 Gets indices for which elements differ between two arrays.
 
@@ -128,14 +144,14 @@ Gets indices for which elements differ between two arrays.
 _.changes([false, true], [false, false]);
 // => [1]
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="exceptKeys"></a>`_.exceptKeys(array, indices, iteratee)`
-<a href="#exceptKeys">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L264 "View in source") [&#x24C9;][1]
+<h3 id="exceptKeys"><a href="#exceptKeys">#</a>&nbsp;<code>_.exceptKeys(array, indices, iteratee)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L324 "View in source") [&#x24C9;][1]
 
 Iterate array skipping given indices.
 
@@ -150,14 +166,14 @@ _.exceptKeys(['a', 'b', 'c', 'd'], [1, 3], function(val) {
   // skips "b" and "d"
 });
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="indexesOf"></a>`_.indexesOf(array, predicate)`
-<a href="#indexesOf">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L588 "View in source") [&#x24C9;][1]
+<h3 id="indexesOf"><a href="#indexesOf">#</a>&nbsp;<code>_.indexesOf(array, predicate)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L731 "View in source") [&#x24C9;][1]
 
 Gets indices for elements which predicate returns truthy for.
 
@@ -173,7 +189,7 @@ _.indexesOf([3, false, 3], _.isNumber);
 _.indexesOf([3, false, 3], 3);
 // => [0, 2]
 ```
-* * *
+---
 
 <!-- /div -->
 
@@ -185,8 +201,8 @@ _.indexesOf([3, false, 3], 3);
 
 <!-- div -->
 
-### <a id="mapFiltered"></a>`_.mapFiltered(array, predicate, iteratee)`
-<a href="#mapFiltered">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L642 "View in source") [&#x24C9;][1]
+<h3 id="mapFiltered"><a href="#mapFiltered">#</a>&nbsp;<code>_.mapFiltered(array, predicate, iteratee)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L790 "View in source") [&#x24C9;][1]
 
 Map a function to filtered array elements.
 
@@ -195,22 +211,22 @@ Map a function to filtered array elements.
 2. `predicate` *(function)*: Validation method for each element.
 3. `iteratee` *(function)*: Function to call on each valid element.
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="recurse"></a>`_.recurse(collection, iteratee)`
-<a href="#recurse">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L752 "View in source") [&#x24C9;][1]
+<h3 id="recurse"><a href="#recurse">#</a>&nbsp;<code>_.recurse(collection, iteratee)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L900 "View in source") [&#x24C9;][1]
 
 Invoke a function recursively on every element in a collection.
 
 #### Arguments
-1. `collection` *(object|array)*: Collection
+1. `collection` *(array|object)*: Collection
 2. `iteratee` *(function)*: Function to invoke
 
-* * *
+---
 
 <!-- /div -->
 
@@ -222,8 +238,8 @@ Invoke a function recursively on every element in a collection.
 
 <!-- div -->
 
-### <a id="getArray"></a>`_.getArray(value, replacement)`
-<a href="#getArray">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L345 "View in source") [&#x24C9;][1]
+<h3 id="getArray"><a href="#getArray">#</a>&nbsp;<code>_.getArray(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L405 "View in source") [&#x24C9;][1]
 
 Returns value if an array, otherwise a default.
 
@@ -239,14 +255,14 @@ _.getArray(null)
 _.getArray(null, ['test'])
 // => ['test']
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="getBoolean"></a>`_.getBoolean(value, replacement)`
-<a href="#getBoolean">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L366 "View in source") [&#x24C9;][1]
+<h3 id="getBoolean"><a href="#getBoolean">#</a>&nbsp;<code>_.getBoolean(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L426 "View in source") [&#x24C9;][1]
 
 Returns value if a boolean, otherwise a default boolean.
 
@@ -262,14 +278,40 @@ _.getBoolean(null)
 _.getBoolean(null, true)
 // => true
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="getFunction"></a>`_.getFunction(value, replacement)`
-<a href="#getFunction">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L384 "View in source") [&#x24C9;][1]
+<h3 id="getFinite"><a href="#getFinite">#</a>&nbsp;<code>_.getFinite(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L450 "View in source") [&#x24C9;][1]
+
+Returns value if a finite number, otherwise a default number.
+
+#### Arguments
+1. `value` *(mixed)*: Source value
+2. `replacement` *(number)*: Custom default if value is invalid type.
+
+#### Example
+```js
+_.getFinite('')
+// => 0
+
+_.getFinite('', 100)
+// => 100
+
+_.getFinite(NaN, 25)
+// => 25
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="getFunction"><a href="#getFunction">#</a>&nbsp;<code>_.getFunction(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L468 "View in source") [&#x24C9;][1]
 
 Returns value if a function, otherwise a default function.
 
@@ -282,14 +324,29 @@ Returns value if a function, otherwise a default function.
 _.getFunction(null)
 // => function () {}
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="getNumber"></a>`_.getNumber(value, replacement)`
-<a href="#getNumber">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L423 "View in source") [&#x24C9;][1]
+<h3 id="getMap"><a href="#getMap">#</a>&nbsp;<code>_.getMap(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L482 "View in source") [&#x24C9;][1]
+
+Returns value if a Map, otherwise a default map.
+
+#### Arguments
+1. `value` *(mixed)*: Source value
+2. `replacement` *(number)*: Custom default if value is invalid type.
+
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="getNumber"><a href="#getNumber">#</a>&nbsp;<code>_.getNumber(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L521 "View in source") [&#x24C9;][1]
 
 Returns value if a number, otherwise a default number.
 
@@ -305,14 +362,14 @@ _.getNumber('')
 _.getNumber('', 100)
 // => 100
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="getObject"></a>`_.getObject(value, replacement)`
-<a href="#getObject">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L402 "View in source") [&#x24C9;][1]
+<h3 id="getObject"><a href="#getObject">#</a>&nbsp;<code>_.getObject(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L539 "View in source") [&#x24C9;][1]
 
 Returns value if a object, otherwise a default object.
 
@@ -325,14 +382,54 @@ Returns value if a object, otherwise a default object.
 _.getObject('')
 // => {}
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="getString"></a>`_.getString(value, replacement)`
-<a href="#getString">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L441 "View in source") [&#x24C9;][1]
+<h3 id="getPlainObject"><a href="#getPlainObject">#</a>&nbsp;<code>_.getPlainObject(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L500 "View in source") [&#x24C9;][1]
+
+Returns value if a plain object, otherwise a default object.
+
+#### Arguments
+1. `value` *(mixed)*: Source value
+2. `replacement` *(number)*: Custom default if value is invalid type.
+
+#### Example
+```js
+_.getPlainObject('')
+// => {}
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="getSet"><a href="#getSet">#</a>&nbsp;<code>_.getSet(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L557 "View in source") [&#x24C9;][1]
+
+Returns value if a Set, otherwise a default set.
+
+#### Arguments
+1. `value` *(mixed)*: Source value
+2. `replacement` *(set)*: Custom default if value is invalid type.
+
+#### Example
+```js
+_.getSet('')
+// => Set()
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="getString"><a href="#getString">#</a>&nbsp;<code>_.getString(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L575 "View in source") [&#x24C9;][1]
 
 Returns value if a string, otherwise a default string.
 
@@ -345,14 +442,54 @@ Returns value if a string, otherwise a default string.
 _.getString(false)
 // => ''
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="toBool"></a>`_.toBool(value)`
-<a href="#toBool">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L847 "View in source") [&#x24C9;][1]
+<h3 id="getWeakMap"><a href="#getWeakMap">#</a>&nbsp;<code>_.getWeakMap(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L593 "View in source") [&#x24C9;][1]
+
+Returns value if a WeakMap, otherwise a default WeakMap.
+
+#### Arguments
+1. `value` *(mixed)*: Source value
+2. `replacement` *(weakmap)*: Custom default if value is invalid type.
+
+#### Example
+```js
+_.getWeakMap(false)
+// => ''
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="getWeakSet"><a href="#getWeakSet">#</a>&nbsp;<code>_.getWeakSet(value, replacement)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L611 "View in source") [&#x24C9;][1]
+
+Returns value if a WeakSet, otherwise a default WeakSet.
+
+#### Arguments
+1. `value` *(mixed)*: Source value
+2. `replacement` *(weakset)*: Custom default if value is invalid type.
+
+#### Example
+```js
+_.getWeakSet(false)
+// => ''
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="toBool"><a href="#toBool">#</a>&nbsp;<code>_.toBool(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1015 "View in source") [&#x24C9;][1]
 
 Converts a value to a boolean.
 
@@ -364,7 +501,35 @@ Converts a value to a boolean.
 _.toBool(1)
 // => true
 ```
-* * *
+---
+
+<!-- /div -->
+
+<!-- /div -->
+
+<!-- div -->
+
+## `“Math” Methods`
+
+<!-- div -->
+
+<h3 id="sign"><a href="#sign">#</a>&nbsp;<code>_.sign(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L981 "View in source") [&#x24C9;][1]
+
+Indicates whether a numeric value is positive *(returns `1`) or negative (returns `-1`)*.
+
+#### Arguments
+1. `value` *(number)*: Numeric value.
+
+#### Example
+```js
+_.sign(40)
+// => 1
+
+_.sign(-40)
+// => -1
+```
+---
 
 <!-- /div -->
 
@@ -376,8 +541,8 @@ _.toBool(1)
 
 <!-- div -->
 
-### <a id="fromQueryString"></a>`_.fromQueryString(string)`
-<a href="#fromQueryString">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L292 "View in source") [&#x24C9;][1]
+<h3 id="fromQueryString"><a href="#fromQueryString">#</a>&nbsp;<code>_.fromQueryString(string)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L352 "View in source") [&#x24C9;][1]
 
 Parses query string into key/value object.
 
@@ -389,20 +554,20 @@ Parses query string into key/value object.
 _.fromQueryString('key=value');
 // => { key: 'value' }
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="hasOfType"></a>`_.hasOfType(value, property, validator)`
-<a href="#hasOfType">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L489 "View in source") [&#x24C9;][1]
+<h3 id="hasOfType"><a href="#hasOfType">#</a>&nbsp;<code>_.hasOfType(value, property, validator)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L659 "View in source") [&#x24C9;][1]
 
 If _.has returns true, run a validator on value.
 
 #### Arguments
 1. `value` *(mixed)*: Collection for _.has
-2. `property` *(string|number)*: Propert/key name.
+2. `property` *(number|string)*: Propert/key name.
 3. `validator` *(function)*: Function to validate value.
 
 #### Example
@@ -410,14 +575,14 @@ If _.has returns true, run a validator on value.
 _.hasOfType({ test: '' }, 'test', _.isString)
 // => true
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="hasPrototypeOfType"></a>`_.hasPrototypeOfType(value, property, predicate)`
-<a href="#hasPrototypeOfType">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L537 "View in source") [&#x24C9;][1]
+<h3 id="hasPrototypeOfType"><a href="#hasPrototypeOfType">#</a>&nbsp;<code>_.hasPrototypeOfType(value, property, predicate)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L680 "View in source") [&#x24C9;][1]
 
 Returns whether an object has a prototype property of the given type.
 
@@ -426,14 +591,14 @@ Returns whether an object has a prototype property of the given type.
 2. `property` *(string)*: Prototype property.
 3. `predicate` *(function)*: Validation function.
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="immutable"></a>`_.immutable(object, key, value)`
-<a href="#immutable">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L557 "View in source") [&#x24C9;][1]
+<h3 id="immutable"><a href="#immutable">#</a>&nbsp;<code>_.immutable(object, key, value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L700 "View in source") [&#x24C9;][1]
 
 Creates an immutable property on an object.
 
@@ -442,35 +607,35 @@ Creates an immutable property on an object.
 2. `key` *(string)*: Property.
 3. `value` *(mixed)*: Value.
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="mixInto"></a>`_.mixInto(target, source)`
-<a href="#mixInto">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L656 "View in source") [&#x24C9;][1]
+<h3 id="mixInto"><a href="#mixInto">#</a>&nbsp;<code>_.mixInto(target, source)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L804 "View in source") [&#x24C9;][1]
 
 Merge prototype properties from source to target.
 
 #### Arguments
-1. `target` *(object|function)*: Target object.
-2. `source` *(object|function)*: Object/function to mixin.
+1. `target` *(function|object)*: Target object.
+2. `source` *(function|object)*: Object/function to mixin.
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="objectWith"></a>`_.objectWith(object, path, value)`
-<a href="#objectWith">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L696 "View in source") [&#x24C9;][1]
+<h3 id="objectWith"><a href="#objectWith">#</a>&nbsp;<code>_.objectWith(object, path, value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L844 "View in source") [&#x24C9;][1]
 
 Shorthand object creation when sole property is a variable, or a path.
 
 #### Arguments
-1. `object` *(&#91;object&#93;)*: Existing object *(optional)*
-2. `path` *(string|number)*: Property
+1. `object` *(): Existing object &#42;(optional)*&#42;
+2. `path` *(number|string)*: Property
 3. `value` *(mixed)*: Value
 
 #### Example
@@ -493,14 +658,14 @@ _.objectWith('a.deep.path', 'value')
 _.objectWith({ a: 1 }, 'b', 2)
 // => { a: 1, b: 2 }
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="omitDeep"></a>`_.omitDeep(object, keys)`
-<a href="#omitDeep">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L732 "View in source") [&#x24C9;][1]
+<h3 id="omitDeep"><a href="#omitDeep">#</a>&nbsp;<code>_.omitDeep(object, keys)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L880 "View in source") [&#x24C9;][1]
 
 Run _.omit recursively down a collection.
 
@@ -508,14 +673,14 @@ Run _.omit recursively down a collection.
 1. `object` *(array|object)*: Collection
 2. `keys` *(array)*: Array of property/key names to omit
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="requestSetter"></a>`_.requestSetter(object, property)`
-<a href="#requestSetter">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L782 "View in source") [&#x24C9;][1]
+<h3 id="requestSetter"><a href="#requestSetter">#</a>&nbsp;<code>_.requestSetter(object, property)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L930 "View in source") [&#x24C9;][1]
 
 Gives a setter for `prop` only to the first requesting caller.
 <br>
@@ -531,14 +696,14 @@ Any caller may use the getter.
 1. `object` *(object)*: Target object.
 2. `property` *(string)*: Property name.
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="toObject"></a>`_.toObject(object)`
-<a href="#toObject">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L885 "View in source") [&#x24C9;][1]
+<h3 id="toObject"><a href="#toObject">#</a>&nbsp;<code>_.toObject(object)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1053 "View in source") [&#x24C9;][1]
 
 Recursively invokes "toObject" on objects which support the method.
 <br>
@@ -549,14 +714,14 @@ support to a toObject method for converting to plain objects.
 #### Arguments
 1. `object` *(object)*: Original object.
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="toQueryString"></a>`_.toQueryString(object)`
-<a href="#toQueryString">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L864 "View in source") [&#x24C9;][1]
+<h3 id="toQueryString"><a href="#toQueryString">#</a>&nbsp;<code>_.toQueryString(object)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1032 "View in source") [&#x24C9;][1]
 
 Converts an object's key/values to a query string.
 
@@ -568,14 +733,14 @@ Converts an object's key/values to a query string.
 _.toQueryString({ a: 1, b: 2 })
 // => a=1&b=2
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="validatedAssign"></a>`_.validatedAssign(models, source, strict)`
-<a href="#validatedAssign">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L937 "View in source") [&#x24C9;][1]
+<h3 id="validatedAssign"><a href="#validatedAssign">#</a>&nbsp;<code>_.validatedAssign(models, source, strict)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1105 "View in source") [&#x24C9;][1]
 
 This method is like _.defaultsDeep except it recursively assigns
 default properties if the provided values do not exist
@@ -618,7 +783,7 @@ var incoming = {
 _.validatedAssign(model, incoming);
 // => { name: false }
 ```
-* * *
+---
 
 <!-- /div -->
 
@@ -630,155 +795,211 @@ _.validatedAssign(model, incoming);
 
 <!-- div -->
 
-### <a id="check"></a>`_.check(value)`
-<a href="#check">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L76 "View in source") [&#x24C9;][1]
+<h3 id="check"><a href="#check">#</a>&nbsp;<code>_.check(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L76 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value doesn't match one of any provided validation methods.
 
 #### Arguments
 1. `value` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkArray"></a>`_.checkArray(array)`
-<a href="#checkArray">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L107 "View in source") [&#x24C9;][1]
+<h3 id="checkArray"><a href="#checkArray">#</a>&nbsp;<code>_.checkArray(array)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L107 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't an array.
 
 #### Arguments
 1. `array` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkBoolean"></a>`_.checkBoolean(boolean)`
-<a href="#checkBoolean">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L122 "View in source") [&#x24C9;][1]
+<h3 id="checkBoolean"><a href="#checkBoolean">#</a>&nbsp;<code>_.checkBoolean(boolean)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L122 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't a boolean.
 
 #### Arguments
 1. `boolean` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkCollection"></a>`_.checkCollection(collection)`
-<a href="#checkCollection">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L137 "View in source") [&#x24C9;][1]
+<h3 id="checkCollection"><a href="#checkCollection">#</a>&nbsp;<code>_.checkCollection(collection)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L137 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't an array or object.
 
 #### Arguments
 1. `collection` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkFunction"></a>`_.checkFunction(func)`
-<a href="#checkFunction">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L152 "View in source") [&#x24C9;][1]
+<h3 id="checkFunction"><a href="#checkFunction">#</a>&nbsp;<code>_.checkFunction(func)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L152 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't a function.
 
 #### Arguments
 1. `func` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkKey"></a>`_.checkKey(value)`
-<a href="#checkKey">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L167 "View in source") [&#x24C9;][1]
+<h3 id="checkKey"><a href="#checkKey">#</a>&nbsp;<code>_.checkKey(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L167 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't a number/string.
 
 #### Arguments
 1. `value` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkNonEmpty"></a>`_.checkNonEmpty(value)`
-<a href="#checkNonEmpty">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L182 "View in source") [&#x24C9;][1]
+<h3 id="checkMap"><a href="#checkMap">#</a>&nbsp;<code>_.checkMap(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L182 "View in source") [&#x24C9;][1]
+
+Throw a TypeError if value isn't a Map.
+
+#### Arguments
+1. `value` *(mixed)*: Value
+
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="checkNonEmpty"><a href="#checkNonEmpty">#</a>&nbsp;<code>_.checkNonEmpty(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L197 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value _.isEmpty
 
 #### Arguments
 1. `value` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkNumber"></a>`_.checkNumber(number)`
-<a href="#checkNumber">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L197 "View in source") [&#x24C9;][1]
+<h3 id="checkNumber"><a href="#checkNumber">#</a>&nbsp;<code>_.checkNumber(number)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L212 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't a number.
 
 #### Arguments
 1. `number` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkObject"></a>`_.checkObject(object)`
-<a href="#checkObject">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L212 "View in source") [&#x24C9;][1]
+<h3 id="checkObject"><a href="#checkObject">#</a>&nbsp;<code>_.checkObject(object)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L227 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't an object.
 
 #### Arguments
 1. `object` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkPlainObject"></a>`_.checkPlainObject(object)`
-<a href="#checkPlainObject">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L227 "View in source") [&#x24C9;][1]
+<h3 id="checkPlainObject"><a href="#checkPlainObject">#</a>&nbsp;<code>_.checkPlainObject(object)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L242 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't a plain object.
 
 #### Arguments
 1. `object` *(mixed)*: Value
 
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="checkString"></a>`_.checkString(string)`
-<a href="#checkString">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L242 "View in source") [&#x24C9;][1]
+<h3 id="checkSet"><a href="#checkSet">#</a>&nbsp;<code>_.checkSet(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L257 "View in source") [&#x24C9;][1]
+
+Throw a TypeError if value isn't a Set.
+
+#### Arguments
+1. `value` *(mixed)*: Value
+
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="checkString"><a href="#checkString">#</a>&nbsp;<code>_.checkString(string)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L272 "View in source") [&#x24C9;][1]
 
 Throw a TypeError if value isn't a string.
 
 #### Arguments
 1. `string` *(mixed)*: Value
 
-* * *
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="checkWeakMap"><a href="#checkWeakMap">#</a>&nbsp;<code>_.checkWeakMap(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L287 "View in source") [&#x24C9;][1]
+
+Throw a TypeError if value isn't a WeakMap.
+
+#### Arguments
+1. `value` *(mixed)*: Value
+
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="checkWeakSet"><a href="#checkWeakSet">#</a>&nbsp;<code>_.checkWeakSet(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L302 "View in source") [&#x24C9;][1]
+
+Throw a TypeError if value isn't a WeakSet.
+
+#### Arguments
+1. `value` *(mixed)*: Value
+
+---
 
 <!-- /div -->
 
@@ -790,8 +1011,8 @@ Throw a TypeError if value isn't a string.
 
 <!-- div -->
 
-### <a id="generateKey"></a>`_.generateKey(n)`
-<a href="#generateKey">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L316 "View in source") [&#x24C9;][1]
+<h3 id="generateKey"><a href="#generateKey">#</a>&nbsp;<code>_.generateKey(n)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L376 "View in source") [&#x24C9;][1]
 
 Generates a random alphanumeric string with length n.
 
@@ -803,14 +1024,14 @@ Generates a random alphanumeric string with length n.
 _.generateKey(5)
 // => 'L7IpD'
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="isNonEmptyString"></a>`_.isNonEmptyString(string)`
-<a href="#isNonEmptyString">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L627 "View in source") [&#x24C9;][1]
+<h3 id="isNonEmptyString"><a href="#isNonEmptyString">#</a>&nbsp;<code>_.isNonEmptyString(string)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L775 "View in source") [&#x24C9;][1]
 
 Checks if value is a non-empty string.
 
@@ -822,14 +1043,14 @@ Checks if value is a non-empty string.
 _.isNonEmptyString('')
 // => false
 ```
-* * *
+---
 
 <!-- /div -->
 
 <!-- div -->
 
-### <a id="slugify"></a>`_.slugify(string)`
-<a href="#slugify">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L830 "View in source") [&#x24C9;][1]
+<h3 id="slugify"><a href="#slugify">#</a>&nbsp;<code>_.slugify(string)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L998 "View in source") [&#x24C9;][1]
 
 Generates a url-safe "slug" form of a string.
 
@@ -841,7 +1062,7 @@ Generates a url-safe "slug" form of a string.
 _.slugify('A Test')
 // => a-test
 ```
-* * *
+---
 
 <!-- /div -->
 
@@ -853,8 +1074,8 @@ _.slugify('A Test')
 
 <!-- div -->
 
-### <a id="getPrototype"></a>`_.getPrototype(value)`
-<a href="#getPrototype">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L458 "View in source") [&#x24C9;][1]
+<h3 id="getPrototype"><a href="#getPrototype">#</a>&nbsp;<code>_.getPrototype(value)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L628 "View in source") [&#x24C9;][1]
 
 Gets the prototype for the given value.
 
@@ -866,30 +1087,7 @@ Gets the prototype for the given value.
 _.getPrototype(5)
 // => { toFixed: func(), ... }
 ```
-* * *
-
-<!-- /div -->
-
-<!-- div -->
-
-### <a id="hasPrototype"></a>`_.hasPrototype(value, property)`
-<a href="#hasPrototype">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L516 "View in source") [&#x24C9;][1]
-
-Checks if a prototype exists, or `property` exists on the prototype.
-
-#### Arguments
-1. `value` *(&#42;)*: Source value
-2. `property` *(string)*: Prototype property.
-
-#### Example
-```js
-_.hasPrototype(null)
-// => false
-
-_.hasPrototype(5)
-// => true
-```
-* * *
+---
 
 <!-- /div -->
 
@@ -901,15 +1099,15 @@ _.hasPrototype(5)
 
 <!-- div -->
 
-### <a id="isCollection"></a>`isCollection(collection)`
-<a href="#isCollection">#</a> [&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L610 "View in source") [&#x24C9;][1]
+<h3 id="isCollection"><a href="#isCollection">#</a>&nbsp;<code>isCollection(collection)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L753 "View in source") [&#x24C9;][1]
 
 Checks if a value is either an array or an object.
 
 #### Arguments
 1. `collection` *(mixed)*: Value to check
 
-* * *
+---
 
 <!-- /div -->
 

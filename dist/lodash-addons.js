@@ -171,6 +171,21 @@
     }
 
     /**
+     * Throw a TypeError if value isn't a Map.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkMap(value) {
+        if (!_.isMap(value)) {
+            throw new TypeError('Argument must be a Map.');
+        }
+    }
+
+    /**
      * Throw a TypeError if value _.isEmpty
      *
      * @static
@@ -231,6 +246,21 @@
     }
 
     /**
+     * Throw a TypeError if value isn't a Set.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkSet(value) {
+        if (!_.isSet(value)) {
+            throw new TypeError('Argument must be a Set.');
+        }
+    }
+
+    /**
      * Throw a TypeError if value isn't a string.
      *
      * @static
@@ -242,6 +272,36 @@
     function checkString(string) {
         if (!_.isString(string)) {
             throw new TypeError('Argument must be a string.');
+        }
+    }
+
+    /**
+     * Throw a TypeError if value isn't a WeakMap.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkWeakMap(value) {
+        if (!_.isWeakMap(value)) {
+            throw new TypeError('Argument must be a WeakMap.');
+        }
+    }
+
+    /**
+     * Throw a TypeError if value isn't a WeakSet.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkWeakSet(value) {
+        if (!_.isWeakSet(value)) {
+            throw new TypeError('Argument must be a WeakSet.');
         }
     }
 
@@ -368,6 +428,30 @@
     }
 
     /**
+     * Returns value if a finite number, otherwise a default number.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {number} replacement Custom default if value is invalid type.
+     * @return {number} Final number.
+     * @example
+     *
+     * _.getFinite('')
+     * // => 0
+     *
+     * _.getFinite('', 100)
+     * // => 100
+     *
+     * _.getFinite(NaN, 25)
+     * // => 25
+     */
+    function getFinite(value, replacement) {
+        return baseGetType(_.isFinite, 0, value, replacement);
+    }
+
+    /**
      * Returns value if a function, otherwise a default function.
      *
      * @static
@@ -386,7 +470,21 @@
     }
 
     /**
-     * Returns value if a object, otherwise a default object.
+     * Returns value if a Map, otherwise a default map.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {number} replacement Custom default if value is invalid type.
+     * @return {number} Final number.
+     */
+    function getMap(value, replacement) {
+        return baseGetType(_.isMap, new Map(), value, replacement);
+    }
+
+    /**
+     * Returns value if a plain object, otherwise a default object.
      *
      * @static
      * @memberOf _
@@ -396,11 +494,11 @@
      * @return {number} Final object.
      * @example
      *
-     * _.getObject('')
+     * _.getPlainObject('')
      * // => {}
      */
-    function getObject(value, replacement) {
-        return baseGetType(_.isObject, {}, value, replacement);
+    function getPlainObject(value, replacement) {
+        return baseGetType(_.isPlainObject, {}, value, replacement);
     }
 
     /**
@@ -425,6 +523,42 @@
     }
 
     /**
+     * Returns value if a object, otherwise a default object.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {number} replacement Custom default if value is invalid type.
+     * @return {number} Final object.
+     * @example
+     *
+     * _.getObject('')
+     * // => {}
+     */
+    function getObject(value, replacement) {
+        return baseGetType(_.isObject, {}, value, replacement);
+    }
+
+    /**
+     * Returns value if a Set, otherwise a default set.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {set} replacement Custom default if value is invalid type.
+     * @return {set} Final Set.
+     * @example
+     *
+     * _.getSet('')
+     * // => Set()
+     */
+    function getSet(value, replacement) {
+        return baseGetType(_.isSet, new Set(), value, replacement);
+    }
+
+    /**
      * Returns value if a string, otherwise a default string.
      *
      * @static
@@ -440,6 +574,42 @@
      */
     function getString(value, replacement) {
         return baseGetType(_.isString, '', value, replacement);
+    }
+
+    /**
+     * Returns value if a WeakMap, otherwise a default WeakMap.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {weakmap} replacement Custom default if value is invalid type.
+     * @return {weakmap} Final map.
+     * @example
+     *
+     * _.getWeakMap(false)
+     * // => ''
+     */
+    function getWeakMap(value, replacement) {
+        return baseGetType(_.isWeakMap, new WeakMap(), value, replacement);
+    }
+
+    /**
+     * Returns value if a WeakSet, otherwise a default WeakSet.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {weakset} replacement Custom default if value is invalid type.
+     * @return {weakset} Final set.
+     * @example
+     *
+     * _.getWeakSet(false)
+     * // => ''
+     */
+    function getWeakSet(value, replacement) {
+        return baseGetType(_.isWeakSet, new WeakSet(), value, replacement);
     }
 
     /**
@@ -494,33 +664,6 @@
         }
 
         return result;
-    }
-
-    /**
-     * Checks if a prototype exists, or `property` exists on the prototype.
-     *
-     * @static
-     * @memberOf _
-     * @category Util
-     * @param {*} value Source value
-     * @param {string} property Prototype property.
-     * @return {boolean} If prototype exists on the object.
-     * @example
-     *
-     * _.hasPrototype(null)
-     * // => false
-     *
-     * _.hasPrototype(5)
-     * // => true
-     */
-    function hasPrototype(value, property) {
-        var result = _.getPrototype(value);
-
-        if (result && _.isNonEmptyString(property)) {
-            result = result[property];
-        }
-
-        return _.toBool(result);
     }
 
     /**
@@ -608,7 +751,12 @@
      * @return {boolean} Whether value is an array or object
      */
     function isCollection(collection) {
-        return (_.isArray(collection) || _.isPlainObject(collection));
+        return (_.isArray(collection) ||
+                _.isPlainObject(collection) ||
+                _.isMap(collection) ||
+                _.isSet(collection) ||
+                _.isWeakMap(collection) ||
+                _.isWeakSet(collection));
     }
 
     /**
@@ -815,6 +963,26 @@
     }
 
     /**
+     * Indicates whether a numeric value is positive (returns 1) or negative (returns -1).
+     *
+     * @static
+     * @memberOf _
+     * @category Math
+     * @param {number} value Numeric value.
+     * @return {number} Signed number one.
+     * @example
+     *
+     * _.sign(40)
+     * // => 1
+     *
+     * _.sign(-40)
+     * // => -1
+     */
+    function sign(value) {
+        return value < 0 ? -1 : 1;
+    }
+
+    /**
      * Generates a url-safe "slug" form of a string.
      *
      * @static
@@ -884,7 +1052,7 @@
      */
     function toObject(object) {
         return _.recurse(object, function(item) {
-            if (_.hasOfType(item, 'toObject', _.isFunction) || _.hasPrototype(item, 'toObject', _.isFunction)) {
+            if (_.hasOfType(item, 'toObject', _.isFunction) || _.hasPrototypeOfType(item, 'toObject', _.isFunction)) {
                 item = item.toObject();
             }
 
@@ -986,23 +1154,32 @@
         checkCollection: checkCollection,
         checkFunction: checkFunction,
         checkKey: checkKey,
+        checkMap: checkMap,
         checkNonEmpty: checkNonEmpty,
         checkNumber: checkNumber,
         checkObject: checkObject,
         checkPlainObject: checkPlainObject,
+        checkSet: checkSet,
         checkString: checkString,
+        checkWeakMap: checkWeakMap,
+        checkWeakSet: checkWeakSet,
         exceptKeys: exceptKeys,
         fromQueryString: fromQueryString,
         generateKey: generateKey,
         getArray: getArray,
         getBoolean: getBoolean,
+        getFinite: getFinite,
         getFunction: getFunction,
+        getMap: getMap,
         getNumber: getNumber,
         getObject: getObject,
-        getString: getString,
+        getPlainObject: getPlainObject,
         getPrototype: getPrototype,
+        getSet: getSet,
+        getString: getString,
+        getWeakMap: getWeakMap,
+        getWeakSet: getWeakSet,
         hasOfType: hasOfType,
-        hasPrototype: hasPrototype,
         hasPrototypeOfType: hasPrototypeOfType,
         immutable: immutable,
         indexesOf: indexesOf,
@@ -1014,6 +1191,7 @@
         omitDeep: omitDeep,
         recurse: recurse,
         requestSetter: requestSetter,
+        sign: sign,
         slugify: slugify,
         toBool: toBool,
         toQueryString: toQueryString,
