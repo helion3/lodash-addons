@@ -141,6 +141,25 @@ module.exports = function(_) {
         });
     });
 
+    describe('getSet', function() {
+        it('exists', function() {
+            expect(_.getSet).to.be.a('function');
+        });
+
+        it('returns valid set', function() {
+            var set = new Set();
+            expect(_.getSet(set)).to.equal(set);
+        });
+
+        it('returns default for invalid set', function() {
+            expect(_.isSet(_.getSet(''))).to.be.true;
+            expect(_.isSet(_.getSet(false))).to.be.true;
+            expect(_.isSet(_.getSet(1))).to.be.true;
+            expect(_.isSet(_.getSet())).to.be.true;
+            expect(_.isSet(_.getSet(null))).to.be.true;
+        });
+    });
+
     describe('getString', function() {
         it('exists', function() {
             expect(_.getString).to.be.a('function');

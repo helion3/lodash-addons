@@ -246,6 +246,21 @@
     }
 
     /**
+     * Throw a TypeError if value isn't a Set.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkSet(value) {
+        if (!_.isSet(value)) {
+            throw new TypeError('Argument must be a Set.');
+        }
+    }
+
+    /**
      * Throw a TypeError if value isn't a string.
      *
      * @static
@@ -469,6 +484,24 @@
      */
     function getObject(value, replacement) {
         return baseGetType(_.isObject, {}, value, replacement);
+    }
+
+    /**
+     * Returns value if a Set, otherwise a default set.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {set} replacement Custom default if value is invalid type.
+     * @return {set} Final Set.
+     * @example
+     *
+     * _.getSet('')
+     * // => Set()
+     */
+    function getSet(value, replacement) {
+        return baseGetType(_.isSet, new Set(), value, replacement);
     }
 
     /**
@@ -1016,6 +1049,7 @@
         checkNumber: checkNumber,
         checkObject: checkObject,
         checkPlainObject: checkPlainObject,
+        checkSet: checkSet,
         checkString: checkString,
         exceptKeys: exceptKeys,
         fromQueryString: fromQueryString,
@@ -1027,8 +1061,9 @@
         getNumber: getNumber,
         getObject: getObject,
         getPlainObject: getPlainObject,
-        getString: getString,
         getPrototype: getPrototype,
+        getSet: getSet,
+        getString: getString,
         hasOfType: hasOfType,
         hasPrototypeOfType: hasPrototypeOfType,
         immutable: immutable,

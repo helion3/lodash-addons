@@ -264,6 +264,24 @@ module.exports = function(_) {
         });
     });
 
+    describe('checkSet', function() {
+        it('exists', function() {
+            expect(_.checkSet).to.be.a('function');
+        });
+
+        it('rejects invalid set', function() {
+            expect(_.checkSet).to.throw(TypeError);
+        });
+
+        it('accepts set', function() {
+            var wrapped = function() {
+                _.checkSet(new Set());
+            };
+
+            expect(wrapped).to.not.throw(TypeError);
+        });
+    });
+
     describe('checkString', function() {
         it('exists', function() {
             expect(_.checkString).to.be.a('function');
