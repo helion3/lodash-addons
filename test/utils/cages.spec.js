@@ -61,6 +61,24 @@ module.exports = function(_) {
         });
     });
 
+    describe('getMap', function() {
+        it('exists', function() {
+            expect(_.getMap).to.be.a('function');
+        });
+
+        it('returns valid map', function() {
+            var map = new Map();
+            expect(_.getMap(map)).to.equal(map);
+        });
+
+        it('returns default for invalid object', function() {
+            expect(_.isMap(_.getMap(''))).to.be.true;
+            expect(_.isMap(_.getMap(1))).to.be.true;
+            expect(_.isMap(_.getMap())).to.be.true;
+            expect(_.isMap(_.getMap(null))).to.be.true;
+        });
+    });
+
     describe('getNumber', function() {
         it('exists', function() {
             expect(_.getNumber).to.be.a('function');

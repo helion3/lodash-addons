@@ -154,6 +154,24 @@ module.exports = function(_) {
         });
     });
 
+    describe('checkMap', function() {
+        it('exists', function() {
+            expect(_.checkMap).to.be.a('function');
+        });
+
+        it('rejects invalid map', function() {
+            expect(_.checkMap).to.throw(TypeError);
+        });
+
+        it('accepts map', function() {
+            var wrapped = function() {
+                _.checkMap(new Map());
+            };
+
+            expect(wrapped).to.not.throw(TypeError);
+        });
+    });
+
     describe('checkNonEmpty', function() {
         it('exists', function() {
             expect(_.checkNonEmpty).to.be.a('function');

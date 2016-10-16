@@ -171,6 +171,21 @@
     }
 
     /**
+     * Throw a TypeError if value isn't a Map.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkMap(value) {
+        if (!_.isMap(value)) {
+            throw new TypeError('Argument must be a Map.');
+        }
+    }
+
+    /**
      * Throw a TypeError if value _.isEmpty
      *
      * @static
@@ -386,21 +401,17 @@
     }
 
     /**
-     * Returns value if a object, otherwise a default object.
+     * Returns value if a Map, otherwise a default map.
      *
      * @static
      * @memberOf _
      * @category Lang
      * @param {mixed} value Source value
      * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final object.
-     * @example
-     *
-     * _.getObject('')
-     * // => {}
+     * @return {number} Final number.
      */
-    function getObject(value, replacement) {
-        return baseGetType(_.isObject, {}, value, replacement);
+    function getMap(value, replacement) {
+        return baseGetType(_.isMap, new Map(), value, replacement);
     }
 
     /**
@@ -440,6 +451,24 @@
      */
     function getNumber(value, replacement) {
         return baseGetType(_.isNumber, 0, value, replacement);
+    }
+
+    /**
+     * Returns value if a object, otherwise a default object.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {number} replacement Custom default if value is invalid type.
+     * @return {number} Final object.
+     * @example
+     *
+     * _.getObject('')
+     * // => {}
+     */
+    function getObject(value, replacement) {
+        return baseGetType(_.isObject, {}, value, replacement);
     }
 
     /**
@@ -982,6 +1011,7 @@
         checkCollection: checkCollection,
         checkFunction: checkFunction,
         checkKey: checkKey,
+        checkMap: checkMap,
         checkNonEmpty: checkNonEmpty,
         checkNumber: checkNumber,
         checkObject: checkObject,
@@ -993,6 +1023,7 @@
         getArray: getArray,
         getBoolean: getBoolean,
         getFunction: getFunction,
+        getMap: getMap,
         getNumber: getNumber,
         getObject: getObject,
         getPlainObject: getPlainObject,
