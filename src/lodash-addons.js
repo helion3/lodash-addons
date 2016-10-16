@@ -939,6 +939,26 @@
     }
 
     /**
+     * Indicates whether a numeric value is positive (returns 1) or negative (returns -1).
+     *
+     * @static
+     * @memberOf _
+     * @category Math
+     * @param {number} value Numeric value.
+     * @return {number} Signed number one.
+     * @example
+     *
+     * _.sign(40)
+     * // => 1
+     *
+     * _.sign(-40)
+     * // => -1
+     */
+    function sign(value) {
+        return value < 0 ? -1 : 1;
+    }
+
+    /**
      * Generates a url-safe "slug" form of a string.
      *
      * @static
@@ -1146,6 +1166,7 @@
         omitDeep: omitDeep,
         recurse: recurse,
         requestSetter: requestSetter,
+        sign: sign,
         slugify: slugify,
         toBool: toBool,
         toQueryString: toQueryString,
