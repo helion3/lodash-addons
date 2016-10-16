@@ -16,6 +16,10 @@ module.exports = function(_) {
         it('accepts valid collections', function() {
             expect(_.isCollection([])).to.be.true;
             expect(_.isCollection({})).to.be.true;
+            expect(_.isCollection(new Map())).to.be.true;
+            expect(_.isCollection(new Set())).to.be.true;
+            expect(_.isCollection(new WeakMap())).to.be.true;
+            expect(_.isCollection(new WeakSet())).to.be.true;
         });
     });
 };

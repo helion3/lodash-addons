@@ -599,7 +599,12 @@
      * @return {boolean} Whether value is an array or object
      */
     function isCollection(collection) {
-        return (_.isArray(collection) || _.isPlainObject(collection));
+        return (_.isArray(collection) ||
+                _.isPlainObject(collection) ||
+                _.isMap(collection) ||
+                _.isSet(collection) ||
+                _.isWeakMap(collection) ||
+                _.isWeakSet(collection));
     }
 
     /**
