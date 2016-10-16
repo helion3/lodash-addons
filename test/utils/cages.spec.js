@@ -100,6 +100,29 @@ module.exports = function(_) {
         });
     });
 
+    describe('getPlainObject', function() {
+        it('exists', function() {
+            expect(_.getPlainObject).to.be.a('function');
+        });
+
+        it('returns valid object', function() {
+            var obj = { test: 1 };
+            expect(_.getPlainObject(obj)).to.equal(obj);
+        });
+
+        it('returns default for invalid object', function() {
+            expect(_.getPlainObject('')).to.be.an('object');
+            expect(_.getPlainObject(1)).to.be.an('object');
+            expect(_.getPlainObject()).to.be.an('object');
+            expect(_.getPlainObject(null)).to.be.an('object');
+
+            var obj = { test: 1 };
+            expect(_.getPlainObject(obj)).to.equal(obj);
+
+            expect(_.getPlainObject([])).to.not.equal(obj);
+        });
+    });
+
     describe('getString', function() {
         it('exists', function() {
             expect(_.getString).to.be.a('function');
