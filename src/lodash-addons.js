@@ -276,6 +276,21 @@
     }
 
     /**
+     * Throw a TypeError if value isn't a WeakMap.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkWeakMap(value) {
+        if (!_.isWeakMap(value)) {
+            throw new TypeError('Argument must be a WeakMap.');
+        }
+    }
+
+    /**
      * Throw a TypeError if value isn't a WeakSet.
      *
      * @static
@@ -535,6 +550,24 @@
      */
     function getString(value, replacement) {
         return baseGetType(_.isString, '', value, replacement);
+    }
+
+    /**
+     * Returns value if a WeakMap, otherwise a default WeakMap.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {weakmap} replacement Custom default if value is invalid type.
+     * @return {weakmap} Final map.
+     * @example
+     *
+     * _.getWeakMap(false)
+     * // => ''
+     */
+    function getWeakMap(value, replacement) {
+        return baseGetType(_.isWeakMap, new WeakMap(), value, replacement);
     }
 
     /**
@@ -1084,6 +1117,7 @@
         checkPlainObject: checkPlainObject,
         checkSet: checkSet,
         checkString: checkString,
+        checkWeakMap: checkWeakMap,
         checkWeakSet: checkWeakSet,
         exceptKeys: exceptKeys,
         fromQueryString: fromQueryString,
@@ -1098,6 +1132,7 @@
         getPrototype: getPrototype,
         getSet: getSet,
         getString: getString,
+        getWeakMap: getWeakMap,
         getWeakSet: getWeakSet,
         hasOfType: hasOfType,
         hasPrototypeOfType: hasPrototypeOfType,

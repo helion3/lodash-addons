@@ -300,6 +300,24 @@ module.exports = function(_) {
         });
     });
 
+    describe('checkWeakMap', function() {
+        it('exists', function() {
+            expect(_.checkWeakMap).to.be.a('function');
+        });
+
+        it('rejects invalid weakmap', function() {
+            expect(_.checkWeakMap).to.throw(TypeError);
+        });
+
+        it('accepts weakmap', function() {
+            var wrapped = function() {
+                _.checkWeakMap(new WeakMap());
+            };
+
+            expect(wrapped).to.not.throw(TypeError);
+        });
+    });
+
     describe('checkWeakSet', function() {
         it('exists', function() {
             expect(_.checkWeakSet).to.be.a('function');

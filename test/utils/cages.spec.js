@@ -181,6 +181,25 @@ module.exports = function(_) {
         });
     });
 
+    describe('getWeakMap', function() {
+        it('exists', function() {
+            expect(_.getWeakMap).to.be.a('function');
+        });
+
+        it('returns valid weakmap', function() {
+            var map = new WeakMap();
+            expect(_.getWeakMap(map)).to.equal(map);
+        });
+
+        it('returns default for invalid weakmap', function() {
+            expect(_.isWeakMap(_.getWeakMap(''))).to.be.true;
+            expect(_.isWeakMap(_.getWeakMap(false))).to.be.true;
+            expect(_.isWeakMap(_.getWeakMap(1))).to.be.true;
+            expect(_.isWeakMap(_.getWeakMap())).to.be.true;
+            expect(_.isWeakMap(_.getWeakMap(null))).to.be.true;
+        });
+    });
+
     describe('getWeakSet', function() {
         it('exists', function() {
             expect(_.getWeakSet).to.be.a('function');
