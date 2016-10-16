@@ -7,17 +7,17 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.3.0",
-    "docdown": "^0.5.0",
-    "eslint": "^2.5.3",
+    "docdown": "^0.7.1",
+    "eslint": "^3.7.1",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
+    "gulp-eslint": "^3.0.1",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.4.1",
+    "gulp-uglify": "^2.0.0",
     "istanbul": "^0.4.0",
-    "mocha": "^2.3.3"
+    "mocha": "^3.1.2"
   },
   "peerDependencies": {
-    "lodash": "^4.6.1"
+    "lodash": "^4.16.4"
   },
   "scripts": {
     "test": "mocha test",
