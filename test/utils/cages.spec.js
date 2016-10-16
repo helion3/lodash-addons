@@ -180,4 +180,23 @@ module.exports = function(_) {
             expect(_.getString(5, 'example')).to.equal('example');
         });
     });
+
+    describe('getWeakSet', function() {
+        it('exists', function() {
+            expect(_.getWeakSet).to.be.a('function');
+        });
+
+        it('returns valid weakset', function() {
+            var set = new WeakSet();
+            expect(_.getWeakSet(set)).to.equal(set);
+        });
+
+        it('returns default for invalid function', function() {
+            expect(_.isWeakSet(_.getWeakSet(''))).to.be.true;
+            expect(_.isWeakSet(_.getWeakSet(1))).to.be.true;
+            expect(_.isWeakSet(_.getWeakSet(false))).to.be.true;
+            expect(_.isWeakSet(_.getWeakSet())).to.be.true;
+            expect(_.isWeakSet(_.getWeakSet(null))).to.be.true;
+        });
+    });
 };

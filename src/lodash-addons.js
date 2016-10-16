@@ -276,6 +276,21 @@
     }
 
     /**
+     * Throw a TypeError if value isn't a WeakSet.
+     *
+     * @static
+     * @memberOf _
+     * @category Preconditions
+     * @param {mixed} value Value
+     * @return {void}
+     */
+    function checkWeakSet(value) {
+        if (!_.isWeakSet(value)) {
+            throw new TypeError('Argument must be a WeakSet.');
+        }
+    }
+
+    /**
      * Iterate array skipping given indices.
      *
      * @static
@@ -520,6 +535,24 @@
      */
     function getString(value, replacement) {
         return baseGetType(_.isString, '', value, replacement);
+    }
+
+    /**
+     * Returns value if a WeakSet, otherwise a default WeakSet.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {mixed} value Source value
+     * @param {weakset} replacement Custom default if value is invalid type.
+     * @return {weakset} Final set.
+     * @example
+     *
+     * _.getWeakSet(false)
+     * // => ''
+     */
+    function getWeakSet(value, replacement) {
+        return baseGetType(_.isWeakSet, new WeakSet(), value, replacement);
     }
 
     /**
@@ -1051,6 +1084,7 @@
         checkPlainObject: checkPlainObject,
         checkSet: checkSet,
         checkString: checkString,
+        checkWeakSet: checkWeakSet,
         exceptKeys: exceptKeys,
         fromQueryString: fromQueryString,
         generateKey: generateKey,
@@ -1064,6 +1098,7 @@
         getPrototype: getPrototype,
         getSet: getSet,
         getString: getString,
+        getWeakSet: getWeakSet,
         hasOfType: hasOfType,
         hasPrototypeOfType: hasPrototypeOfType,
         immutable: immutable,

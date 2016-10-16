@@ -299,4 +299,22 @@ module.exports = function(_) {
             expect(wrapped).to.not.throw(TypeError);
         });
     });
+
+    describe('checkWeakSet', function() {
+        it('exists', function() {
+            expect(_.checkWeakSet).to.be.a('function');
+        });
+
+        it('rejects invalid weakset', function() {
+            expect(_.checkWeakSet).to.throw(TypeError);
+        });
+
+        it('accepts weakset', function() {
+            var wrapped = function() {
+                _.checkWeakSet(new WeakSet());
+            };
+
+            expect(wrapped).to.not.throw(TypeError);
+        });
+    });
 };
