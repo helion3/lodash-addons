@@ -14,20 +14,20 @@ var jsPaths = [
 
 gulp.task('lint-js', function() {
     return gulp.src(jsPaths)
-    .pipe(eslint())
-    .pipe(eslint.format());
+        .pipe(eslint())
+        .pipe(eslint.format());
 });
 
 gulp.task('copy', function() {
     return gulp.src('src/lodash-addons.js')
-    .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('compress', function() {
     return gulp.src('src/lodash-addons.js')
-    .pipe(uglify())
-    .pipe(rename('lodash-addons.min.js'))
-    .pipe(gulp.dest('dist'));
+        .pipe(uglify())
+        .pipe(rename('lodash-addons.min.js'))
+        .pipe(gulp.dest('dist'));
 });
 
 // Copy git hooks
