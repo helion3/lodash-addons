@@ -642,6 +642,25 @@
     }
 
     /**
+     * If _.hasIn returns true, run a validator on value.
+     *
+     * @static
+     * @memberOf _
+     * @category Object
+     * @param {mixed} value Collection for _.hasIn
+     * @param {string|number} path Path.
+     * @param {function} validator Function to validate value.
+     * @return {boolean} Whether collection has the path and it passes validation
+     */
+    function hasInOfType(value, path, validator) {
+        if (_.hasIn(value, path)) {
+            return validator(_.get(value, path));
+        }
+
+        return false;
+    }
+
+    /**
      * If _.has returns true, run a validator on value.
      *
      * @static
@@ -1179,6 +1198,7 @@
         getString: getString,
         getWeakMap: getWeakMap,
         getWeakSet: getWeakSet,
+        hasInOfType: hasInOfType,
         hasOfType: hasOfType,
         hasPrototypeOfType: hasPrototypeOfType,
         immutable: immutable,
