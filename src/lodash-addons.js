@@ -907,6 +907,19 @@
     }
 
     /**
+     * Parses a value by passing it to new Date().
+     *
+     * @static
+     * @memberOf _
+     * @category Date
+     * @param {string} val Value to be parsed
+     * @return {Date} Resulting date
+     */
+    function parseDate(val) {
+        return new Date(val);
+    }
+
+    /**
      * Invoke a function recursively on every element in a collection.
      *
      * @static
@@ -1209,11 +1222,13 @@
         mixInto: mixInto,
         objectWith: objectWith,
         omitDeep: omitDeep,
+        parseDate: parseDate,
         recurse: recurse,
         requestSetter: requestSetter,
         sign: sign,
         slugify: slugify,
         toBool: toBool,
+        toDate: parseDate,
         toQueryString: toQueryString,
         toObject: toObject,
         validatedAssign: validatedAssign,
