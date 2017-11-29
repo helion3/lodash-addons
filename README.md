@@ -22,6 +22,7 @@ Bower `bower install --save lodash-addons`
 * <a href="#changes">`_.changes`</a>
 * <a href="#exceptKeys">`_.exceptKeys`</a>
 * <a href="#indexesOf">`_.indexesOf`</a>
+* <a href="#transformValueMap">`_.transformValueMap`</a>
 
 <!-- /div -->
 
@@ -30,6 +31,13 @@ Bower `bower install --save lodash-addons`
 ## `Collection`
 * <a href="#mapFiltered">`_.mapFiltered`</a>
 * <a href="#recurse">`_.recurse`</a>
+
+<!-- /div -->
+
+<!-- div -->
+
+## `Date`
+* <a href="#parseDate">`_.parseDate`</a>
 
 <!-- /div -->
 
@@ -194,6 +202,22 @@ _.indexesOf([3, false, 3], 3);
 
 <!-- /div -->
 
+<!-- div -->
+
+<h3 id="transformValueMap"><a href="#transformValueMap">#</a>&nbsp;<code>_.transformValueMap(collection, path, transformer)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1106 "View in source") [&#x24C9;][1]
+
+Transforms a value in each element of collection if the path is not undefined.
+
+#### Arguments
+1. `collection` *(Array)*: Array of objects
+2. `path` *(string)*: The path of the value to transform
+3. `transformer` *(function)*: Callback which returns the transformed value
+
+---
+
+<!-- /div -->
+
 <!-- /div -->
 
 <!-- div -->
@@ -219,13 +243,33 @@ Map a function to filtered array elements.
 <!-- div -->
 
 <h3 id="recurse"><a href="#recurse">#</a>&nbsp;<code>_.recurse(collection, iteratee)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L919 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L932 "View in source") [&#x24C9;][1]
 
 Invoke a function recursively on every element in a collection.
 
 #### Arguments
 1. `collection` *(array|object)*: Collection
 2. `iteratee` *(function)*: Function to invoke
+
+---
+
+<!-- /div -->
+
+<!-- /div -->
+
+<!-- div -->
+
+## `“Date” Methods`
+
+<!-- div -->
+
+<h3 id="parseDate"><a href="#parseDate">#</a>&nbsp;<code>_.parseDate(val)</code></h3>
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L918 "View in source") [&#x24C9;][1]
+
+Parses a value by passing it to new Date().
+
+#### Arguments
+1. `val` *(string)*: Value to be parsed
 
 ---
 
@@ -490,7 +534,7 @@ _.getWeakSet(false)
 <!-- div -->
 
 <h3 id="toBool"><a href="#toBool">#</a>&nbsp;<code>_.toBool(value)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1034 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1047 "View in source") [&#x24C9;][1]
 
 Converts a value to a boolean.
 
@@ -515,7 +559,7 @@ _.toBool(1)
 <!-- div -->
 
 <h3 id="sign"><a href="#sign">#</a>&nbsp;<code>_.sign(value)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1000 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1013 "View in source") [&#x24C9;][1]
 
 Indicates whether a numeric value is positive *(returns `1`) or negative (returns `-1`)*.
 
@@ -697,7 +741,7 @@ Run _.omit recursively down a collection.
 <!-- div -->
 
 <h3 id="requestSetter"><a href="#requestSetter">#</a>&nbsp;<code>_.requestSetter(object, property)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L949 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L962 "View in source") [&#x24C9;][1]
 
 Gives a setter for `prop` only to the first requesting caller.
 <br>
@@ -720,7 +764,7 @@ Any caller may use the getter.
 <!-- div -->
 
 <h3 id="toObject"><a href="#toObject">#</a>&nbsp;<code>_.toObject(object)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1072 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1085 "View in source") [&#x24C9;][1]
 
 Recursively invokes "toObject" on objects which support the method.
 <br>
@@ -738,7 +782,7 @@ support to a toObject method for converting to plain objects.
 <!-- div -->
 
 <h3 id="toQueryString"><a href="#toQueryString">#</a>&nbsp;<code>_.toQueryString(object)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1051 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1064 "View in source") [&#x24C9;][1]
 
 Converts an object's key/values to a query string.
 
@@ -757,7 +801,7 @@ _.toQueryString({ a: 1, b: 2 })
 <!-- div -->
 
 <h3 id="validatedAssign"><a href="#validatedAssign">#</a>&nbsp;<code>_.validatedAssign(models, source, strict)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1124 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1160 "View in source") [&#x24C9;][1]
 
 This method is like _.defaultsDeep except it recursively assigns
 default properties if the provided values do not exist
@@ -1067,7 +1111,7 @@ _.isNonEmptyString('')
 <!-- div -->
 
 <h3 id="slugify"><a href="#slugify">#</a>&nbsp;<code>_.slugify(string)</code></h3>
-[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1017 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L1030 "View in source") [&#x24C9;][1]
 
 Generates a url-safe "slug" form of a string.
 
