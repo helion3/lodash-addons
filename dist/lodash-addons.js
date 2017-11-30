@@ -907,6 +907,19 @@
     }
 
     /**
+     * Parses a value by passing it to new Date().
+     *
+     * @static
+     * @memberOf _
+     * @category Date
+     * @param {string} val Value to be parsed
+     * @return {Date} Resulting date
+     */
+    function parseDate(val) {
+        return new Date(val);
+    }
+
+    /**
      * Invoke a function recursively on every element in a collection.
      *
      * @static
@@ -1080,6 +1093,29 @@
     }
 
     /**
+     * Transforms a value in each element of collection if the path is not undefined.
+     *
+     * @static
+     * @memberOf _
+     * @category Array
+     * @param {Array} collection Array of objects
+     * @param {string} path The path of the value to transform
+     * @param {function} transformer Callback which returns the transformed value
+     * @return {Array} Returns the array of results.
+     */
+    function transformValueMap(collection, path, transformer) {
+        _.each(collection, function(element) {
+            var val = _.get(element, path);
+
+            if (val !== undefined) {
+                _.set(element, path, transformer(val));
+            }
+        });
+
+        return collection;
+    }
+
+    /**
      * This method is like _.defaultsDeep except it recursively assigns
      * default properties if the provided values do not exist
      * *OR* do not match a given type.
@@ -1209,13 +1245,16 @@
         mixInto: mixInto,
         objectWith: objectWith,
         omitDeep: omitDeep,
+        parseDate: parseDate,
         recurse: recurse,
         requestSetter: requestSetter,
         sign: sign,
         slugify: slugify,
         toBool: toBool,
+        toDate: parseDate,
         toQueryString: toQueryString,
         toObject: toObject,
+        transformValueMap: transformValueMap,
         validatedAssign: validatedAssign,
         validatedDefaultsDeep: validatedAssign,
         with: objectWith
