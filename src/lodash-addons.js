@@ -337,6 +337,25 @@
     }
 
     /**
+     * Iterates over keys of an object, returning an array of all keys predicate returns truthy for.
+     * The predicate is invoked with three arguments: (value, index|key, object).
+     *
+     * @static
+     * @memberOf _
+     * @category Object
+     * @param {object} object The object to iterate over.
+     * @param {function} iteratee The function invoked per iteration.
+     * @return {array} Resulting keys
+     */
+    function filterKeys(object, iteratee) {
+        return _.transform(object, function(results, val, key) {
+            if (iteratee(val, key, object)) {
+                results.push(key);
+            }
+        }, []);
+    }
+
+    /**
      * Parses query string into key/value object.
      *
      * @static
@@ -1219,6 +1238,7 @@
         checkWeakMap: checkWeakMap,
         checkWeakSet: checkWeakSet,
         exceptKeys: exceptKeys,
+        filterKeys: filterKeys,
         fromQueryString: fromQueryString,
         generateKey: generateKey,
         getArray: getArray,
