@@ -1,11 +1,16 @@
+
+sudo: required
+dist: trusty
 language: node_js
 node_js:
-    - 8.0.0
-    - 9.0.0
-before_script:
-    - npm install yarn
+  - "9"
+before_install:
+  - npm install -g rollup yarn
+  - yarn -V
 install:
-    - yarn install
+  - yarn install
+before_script:
+  - rollup -c
 script:
   - npm test
   - npm run lint

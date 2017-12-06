@@ -1,1264 +1,715 @@
-/**
- * @license
- * lodash-addons
- * Copyright 2015 Helion3 <http://helion3.com>
- * Available under MIT license
+/* Lodash Addons
+ * @version 2.0.0
+ * https://github.com/helion3/lodash-addons
+ * @copyright Copyright 2015 Helion3, and other contributors
+ * @license Licensed under MIT
+ *          see https://github.com/helion3/lodash-addons/blob/master/LICENSE
  */
-;(function(root, factory) {
-    /* istanbul ignore next */
-    if (typeof define === 'function' && define.amd) {
-        define(['lodash'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('lodash'));
-    } else {
-        root._ = factory(root._);
-    }
-}(this, function(_) {
-    'use strict';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('lodash')) :
+	typeof define === 'function' && define.amd ? define(['lodash'], factory) :
+	(global.LodashAddons = factory(global._));
+}(this, (function (_) { 'use strict';
 
-    /**
-     * Base function for returning a default when the given value fails validation.
-     *
-     * @private
-     * @param {function} validator Validation function.
-     * @param {*} baseDefault Base default value.
-     * @param {*} value Given value.
-     * @param {*} replacement Custom replacement.
-     * @return {*} Final value.
-     */
-    function baseGetType(validator, baseDefault, value, replacement) {
-        var result;
+/**
+ * Throw a TypeError if value doesn't match one of any provided validation methods.
+ *
+ * @static
+ * @memberOf _
+ * @category Preconditions
+ * @param {mixed} value Value
+ * @return {void}
+ */
+function check(value) {
+    var valid = false;
 
-        if (validator(value)) {
-            result = value;
-        } else if (validator(replacement)) {
-            result = replacement;
-        } else {
-            result = baseDefault;
-        }
-
-        return result;
+    for (var _len = arguments.length, validators = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        validators[_key - 1] = arguments[_key];
     }
 
-    /**
-     * Gets indices for which elements differ between two arrays.
-     *
-     * @static
-     * @memberOf _
-     * @category Array
-     * @param {array} first First array
-     * @param {array} second Second array
-     * @return {array} Array of indices of differing elements
-     * @example
-     *
-     * _.changes([false, true], [false, false]);
-     * // => [1]
-     */
-    function changes(first, second) {
-        if (!_.isArray(first) || !_.isArray(second)) {
-            return [];
-        }
-
-        return indexesOf(first, function(val, key) {
-            return val !== second[key];
-        });
-    }
-
-    /**
-     * Throw a TypeError if value doesn't match one of any provided validation methods.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function check(value) {
-        var validators = _(arguments).tail().filter(_.isFunction).value();
-        if (_.isEmpty(validators)) {
-            return;
-        }
-
-        var valid = false;
-
-        _.each(validators, function(validator) {
-            if (validator(value)) {
-                valid = true;
-
-                // Exit each
-                return false;
-            }
-        });
-
-        if (!valid) {
-            throw new TypeError('Argument is not any of the accepted types.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't an array.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} array Value
-     * @return {void}
-     */
-    function checkArray(array) {
-        if (!_.isArray(array)) {
-            throw new TypeError('Argument must be an array.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a boolean.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} boolean Value
-     * @return {void}
-     */
-    function checkBoolean(boolean) {
-        if (!_.isBoolean(boolean)) {
-            throw new TypeError('Argument must be a boolean.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't an array or object.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} collection Value
-     * @return {void}
-     */
-    function checkCollection(collection) {
-        if (!_.isCollection(collection)) {
-            throw new TypeError('Argument must be an array or object.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a function.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} func Value
-     * @return {void}
-     */
-    function checkFunction(func) {
-        if (!_.isFunction(func)) {
-            throw new TypeError('Argument must be a function.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a number/string.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function checkKey(value) {
-        if (!_.isNonEmptyString(value) && !_.isNumber(value)) {
-            throw new TypeError('Argument must be a string or number.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a Map.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function checkMap(value) {
-        if (!_.isMap(value)) {
-            throw new TypeError('Argument must be a Map.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value _.isEmpty
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function checkNonEmpty(value) {
-        if (_.isEmpty(value)) {
-            throw new TypeError('Argument may not be empty.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a number.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} number Value
-     * @return {void}
-     */
-    function checkNumber(number) {
-        if (!_.isNumber(number)) {
-            throw new TypeError('Argument must be a number.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't an object.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} object Value
-     * @return {void}
-     */
-    function checkObject(object) {
-        if (!_.isObject(object)) {
-            throw new TypeError('Argument must be an object.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a plain object.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} object Value
-     * @return {void}
-     */
-    function checkPlainObject(object) {
-        if (!_.isPlainObject(object)) {
-            throw new TypeError('Argument must be a plain object.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a Set.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function checkSet(value) {
-        if (!_.isSet(value)) {
-            throw new TypeError('Argument must be a Set.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a string.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} string Value
-     * @return {void}
-     */
-    function checkString(string) {
-        if (!_.isString(string)) {
-            throw new TypeError('Argument must be a string.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a WeakMap.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function checkWeakMap(value) {
-        if (!_.isWeakMap(value)) {
-            throw new TypeError('Argument must be a WeakMap.');
-        }
-    }
-
-    /**
-     * Throw a TypeError if value isn't a WeakSet.
-     *
-     * @static
-     * @memberOf _
-     * @category Preconditions
-     * @param {mixed} value Value
-     * @return {void}
-     */
-    function checkWeakSet(value) {
-        if (!_.isWeakSet(value)) {
-            throw new TypeError('Argument must be a WeakSet.');
-        }
-    }
-
-    /**
-     * Iterate array skipping given indices.
-     *
-     * @static
-     * @memberOf _
-     * @category Array
-     * @param {array} array Source array
-     * @param {array} indices Indices to skip
-     * @param {function} iteratee Iteratee
-     * @return {array} Source array.
-     * @example
-     *
-     * _.exceptKeys(['a', 'b', 'c', 'd'], [1, 3], function(val) {
-     *   // skips "b" and "d"
-     * });
-     */
-    function exceptKeys(array, indices, iteratee) {
-        array = _.getArray(array);
-
-        if (_.isFunction(iteratee)) {
-            indices = _.getArray(indices);
-            _.each(array, function(value, i) {
-                if (!_.includes(indices, i)) {
-                    iteratee(value, i);
-                }
-            });
-        }
-
-        return array;
-    }
-
-    /**
-     * Parses query string into key/value object.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {string} string Query string.
-     * @return {object} Key/value map.
-     * @example
-     *
-     * _.fromQueryString('key=value');
-     * // => { key: 'value' }
-     */
-    function fromQueryString(string) {
-        var obj = {};
-
-        _.each(_.getString(string).split('&'), function(segment) {
-            var split = segment.split('=');
-            obj[split[0]] = decodeURIComponent(split[1]);
-        });
-
-        return obj;
-    }
-
-    /**
-     * Generates a random alphanumeric string with length n.
-     *
-     * @static
-     * @memberOf _
-     * @category String
-     * @param {int} n Desired length.
-     * @return {string} String of random characters.
-     * @example
-     *
-     * _.generateKey(5)
-     * // => 'L7IpD'
-     */
-    function generateKey(n) {
-        var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-            l = possible.length - 1;
-
-        var text = '';
-        _.times(_.getNumber(n, 16), function() {
-            text += possible.charAt(_.random(l));
-        });
-
-        return text;
-    }
-
-    /**
-     * Returns value if an array, otherwise a default.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final array.
-     * @example
-     *
-     * _.getArray(null)
-     * // => []
-     *
-     * _.getArray(null, ['test'])
-     * // => ['test']
-     */
-    function getArray(value, replacement) {
-        return baseGetType(_.isArray, [], value, replacement);
-    }
-
-    /**
-     * Returns value if a boolean, otherwise a default boolean.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final boolean.
-     * @example
-     *
-     * _.getBoolean(null)
-     * // => false
-     *
-     * _.getBoolean(null, true)
-     * // => true
-     */
-    function getBoolean(value, replacement) {
-        return baseGetType(_.isBoolean, false, value, replacement);
-    }
-
-    /**
-     * Returns value if a finite number, otherwise a default number.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final number.
-     * @example
-     *
-     * _.getFinite('')
-     * // => 0
-     *
-     * _.getFinite('', 100)
-     * // => 100
-     *
-     * _.getFinite(NaN, 25)
-     * // => 25
-     */
-    function getFinite(value, replacement) {
-        return baseGetType(_.isFinite, 0, value, replacement);
-    }
-
-    /**
-     * Returns value if a function, otherwise a default function.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final function.
-     * @example
-     *
-     * _.getFunction(null)
-     * // => function () {}
-     */
-    function getFunction(value, replacement) {
-        return baseGetType(_.isFunction, function() {}, value, replacement);
-    }
-
-    /**
-     * Returns value if a Map, otherwise a default map.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final number.
-     */
-    function getMap(value, replacement) {
-        return baseGetType(_.isMap, new Map(), value, replacement);
-    }
-
-    /**
-     * Returns value if a plain object, otherwise a default object.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final object.
-     * @example
-     *
-     * _.getPlainObject('')
-     * // => {}
-     */
-    function getPlainObject(value, replacement) {
-        return baseGetType(_.isPlainObject, {}, value, replacement);
-    }
-
-    /**
-     * Returns value if a number, otherwise a default number.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final number.
-     * @example
-     *
-     * _.getNumber('')
-     * // => 0
-     *
-     * _.getNumber('', 100)
-     * // => 100
-     */
-    function getNumber(value, replacement) {
-        return baseGetType(_.isNumber, 0, value, replacement);
-    }
-
-    /**
-     * Returns value if a object, otherwise a default object.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final object.
-     * @example
-     *
-     * _.getObject('')
-     * // => {}
-     */
-    function getObject(value, replacement) {
-        return baseGetType(_.isObject, {}, value, replacement);
-    }
-
-    /**
-     * Returns value if a Set, otherwise a default set.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {set} replacement Custom default if value is invalid type.
-     * @return {set} Final Set.
-     * @example
-     *
-     * _.getSet('')
-     * // => Set()
-     */
-    function getSet(value, replacement) {
-        return baseGetType(_.isSet, new Set(), value, replacement);
-    }
-
-    /**
-     * Returns value if a string, otherwise a default string.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {number} replacement Custom default if value is invalid type.
-     * @return {number} Final string.
-     * @example
-     *
-     * _.getString(false)
-     * // => ''
-     */
-    function getString(value, replacement) {
-        return baseGetType(_.isString, '', value, replacement);
-    }
-
-    /**
-     * Returns value if a WeakMap, otherwise a default WeakMap.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {weakmap} replacement Custom default if value is invalid type.
-     * @return {weakmap} Final map.
-     * @example
-     *
-     * _.getWeakMap(false)
-     * // => ''
-     */
-    function getWeakMap(value, replacement) {
-        return baseGetType(_.isWeakMap, new WeakMap(), value, replacement);
-    }
-
-    /**
-     * Returns value if a WeakSet, otherwise a default WeakSet.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {mixed} value Source value
-     * @param {weakset} replacement Custom default if value is invalid type.
-     * @return {weakset} Final set.
-     * @example
-     *
-     * _.getWeakSet(false)
-     * // => ''
-     */
-    function getWeakSet(value, replacement) {
-        return baseGetType(_.isWeakSet, new WeakSet(), value, replacement);
-    }
-
-    /**
-     * Gets the prototype for the given value.
-     *
-     * @static
-     * @memberOf _
-     * @category Util
-     * @param {*} value Source value
-     * @return {object} Found prototype or undefined.
-     * @example
-     *
-     * _.getPrototype(5)
-     * // => { toFixed: func(), ... }
-     */
-    function getPrototype(value) {
-        var prototype;
-
-        if (!_.isUndefined(value) && !_.isNull(value)) {
-            if (!_.isObject(value)) {
-                prototype = value.constructor.prototype;
-            } else if (_.isFunction(value)) {
-                prototype = value.prototype;
-            } else {
-                prototype = Object.getPrototypeOf(value);
-            }
-        }
-
-        return prototype;
-    }
-
-    /**
-     * If _.hasIn returns true, run a validator on value.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {mixed} value Collection for _.hasIn
-     * @param {string|number} path Path.
-     * @param {function} validator Function to validate value.
-     * @return {boolean} Whether collection has the path and it passes validation
-     */
-    function hasInOfType(value, path, validator) {
-        if (_.hasIn(value, path)) {
-            return validator(_.get(value, path));
-        }
-
-        return false;
-    }
-
-    /**
-     * If _.has returns true, run a validator on value.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {mixed} value Collection for _.has
-     * @param {string|number} property Propert/key name.
-     * @param {function} validator Function to validate value.
-     * @return {boolean} Whether collection has prop, and it passes validation
-     * @example
-     *
-     * _.hasOfType({ test: '' }, 'test', _.isString)
-     * // => true
-     */
-    function hasOfType(value, property, validator) {
-        var result = false;
-
-        if (_.has(value, property)) {
-            result = validator(_.get(value, property));
-        }
-
-        return result;
-    }
-
-    /**
-     * Returns whether an object has a prototype property of the given type.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {*} value Source value.
-     * @param {string} property Prototype property.
-     * @param {function} predicate Validation function.
-     * @return {boolean} If prototype property exists and is the correct type.
-     */
-    function hasPrototypeOfType(value, property, predicate) {
-        var proto = _.getPrototype(value);
-        if (proto && _.isFunction(predicate)) {
-            return predicate(proto[property]);
-        }
-
-        return _.toBool(proto);
-    }
-
-    /**
-     * Creates an immutable property on an object.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {object} object Target object
-     * @param {string} key Property.
-     * @param {mixed} value Value.
-     * @return {object} Target object with immutable property.
-     */
-    function immutable(object, key, value) {
-        _.checkObject(object);
-        _.checkKey(key);
-
-        Object.defineProperty(object, key, {
-            value: value,
-            enumerable: true,
-            configurable: false,
-            writable: false
-        });
-
-        return object;
-    }
-
-    /**
-     * Gets indices for elements which predicate returns truthy for.
-     *
-     * @static
-     * @memberOf _
-     * @category Array
-     * @param {array} array Target array
-     * @param {function} predicate Predicate value or function.
-     * @return {array} Array of indices of matched elements.
-     * @example
-     *
-     * _.indexesOf([3, false, 3], _.isNumber);
-     * // => [0, 2]
-     *
-     * _.indexesOf([3, false, 3], 3);
-     * // => [0, 2]
-     */
-    function indexesOf(array, predicate) {
-        var keys = [];
-
-        var func = _.getFunction(predicate, function(value) {
-            return value === predicate;
-        });
-
-        _.each(array, function(value, key) {
-            if (func(value, key)) {
-                keys.push(key);
-            }
-        });
-
-        return keys;
-    }
-
-    /**
-     * Checks if a value is either an array or an object.
-     *
-     * @param {mixed} collection Value to check
-     * @return {boolean} Whether value is an array or object
-     */
-    function isCollection(collection) {
-        return (_.isArray(collection) ||
-                _.isPlainObject(collection) ||
-                _.isMap(collection) ||
-                _.isSet(collection) ||
-                _.isWeakMap(collection) ||
-                _.isWeakSet(collection));
-    }
-
-    /**
-     * Checks if value is a non-empty string.
-     *
-     * @static
-     * @memberOf _
-     * @category String
-     * @param {object} string String
-     * @return {boolean} True if a non-empty string.
-     * @example
-     *
-     * _.isNonEmptyString('')
-     * // => false
-     */
-    function isNonEmptyString(string) {
-        return _.isString(string) && string.trim() !== '';
-    }
-
-    /**
-     * Map a function to filtered array elements.
-     *
-     * @static
-     * @memberOf _
-     * @category Collection
-     * @param {array} array Array
-     * @param {function} predicate Validation method for each element.
-     * @param {function} iteratee Function to call on each valid element.
-     * @return {array} Modified array
-     */
-    function mapFiltered(array, predicate, iteratee) {
-        return _(array).filter(predicate).map(iteratee).value();
-    }
-
-    /**
-     * Merge prototype properties from source to target.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {object|function} target Target object.
-     * @param {object|function} source Object/function to mixin.
-     * @return {array} Modified array
-     */
-    function mixInto(target, source) {
-        source = _.getPrototype(source) || {};
-
-        if (!_.isPlainObject(target)) {
-            target = _.getPrototype(target);
-        }
-
-        return _.assign(target, source);
-    }
-
-    /**
-     * Shorthand object creation when sole property is a variable, or a path.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {[object]} object Existing object (optional)
-     * @param {string|number} path Property
-     * @param {mixed} value Value
-     * @return {object} Resulting object
-     * @example
-     *
-     * // To create a new object:
-     *
-     * _.objectWith('key', 'value')
-     * // => { key: 'value' }
-     *
-     * _.objectWith('a.deep.path', 'value')
-     * // => {
-     *   a: {
-     *     deep: {
-     *   	 path: 'value'
-     *     }
-     *   }
-     * }
-     *
-     * // Using existing:
-     * _.objectWith({ a: 1 }, 'b', 2)
-     * // => { a: 1, b: 2 }
-     */
-    function objectWith() {
-        var obj = {};
-        var path;
-        var value;
-
-        if (arguments.length === 3) {
-            obj = arguments[0];
-            path = arguments[1];
-            value = arguments[2];
-        } else {
-            path = arguments[0];
-            value = arguments[1];
-        }
-
-        var paths = _.getString(path).split('.');
-        var l = paths.length;
-
-        var pointer = obj;
-        _.each(paths, function(path, index) {
-            pointer[path] = (index === l - 1 ? value : {});
-            pointer = pointer[path];
-        });
-
-        return obj;
-    }
-
-    /**
-     * Run _.omit recursively down a collection.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {array|object} object Collection
-     * @param {array} keys Array of property/key names to omit
-     * @return {array|object} Modified collection.
-     */
-    function omitDeep(object, keys) {
-        return _.recurse(object, function(item) {
-            if (_.isPlainObject(item)) {
-                item = _.omit(item, keys);
-            }
-
-            return item;
-        });
-    }
-
-    /**
-     * Parses a value by passing it to new Date().
-     *
-     * @static
-     * @memberOf _
-     * @category Date
-     * @param {string} val Value to be parsed
-     * @return {Date} Resulting date
-     */
-    function parseDate(val) {
-        return new Date(val);
-    }
-
-    /**
-     * Invoke a function recursively on every element in a collection.
-     *
-     * @static
-     * @memberOf _
-     * @category Collection
-     * @param {object|array} collection Collection
-     * @param {function} iteratee Function to invoke
-     * @return {object|array} Modified collection
-     */
-    function recurse(collection, iteratee) {
-        collection = iteratee(collection);
-
-        _.each(collection, function(item, key) {
-            if (_.isObject(item)) {
-                collection[key] = _.recurse(item, iteratee);
-            } else {
-                collection[key] = iteratee(item);
-            }
-        });
-
-        return collection;
-    }
-
-    /**
-     * Gives a setter for `prop` only to the first requesting caller.
-     *
-     * Creates request[Prop]Setter and get[Prop] methods
-     * on the source object. The first caller to request[Prop]Setter
-     * gets it and therefore is the only one allowed to invoke it.
-     *
-     * Any caller may use the getter.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {object} object Target object.
-     * @param {string} property Property name.
-     * @return {obj} Modified object.
-     */
-    function requestSetter(object, property) {
-        _.checkObject(object);
-        _.checkString(property);
-
-        var capped = _.upperFirst(property);
-
-        return (function() {
-            var setter;
-            var value = object[property];
-            delete object[property];
-
-            object['request' + capped + 'Setter'] = function() {
-                if (setter) {
-                    throw new Error('Setter has already been given.');
-                }
-
-                setter = function(newValue) {
-                    value = newValue;
-                };
-
-                return setter;
-            };
-
-            object['relinquish' + capped + 'Setter'] = function() {
-                setter = null;
-            };
-
-            object['get' + capped] = function() {
-                return value;
-            };
-
-            return object;
-        }());
-    }
-
-    /**
-     * Indicates whether a numeric value is positive (returns 1) or negative (returns -1).
-     *
-     * @static
-     * @memberOf _
-     * @category Math
-     * @param {number} value Numeric value.
-     * @return {number} Signed number one.
-     * @example
-     *
-     * _.sign(40)
-     * // => 1
-     *
-     * _.sign(-40)
-     * // => -1
-     */
-    function sign(value) {
-        return value < 0 ? -1 : 1;
-    }
-
-    /**
-     * Generates a url-safe "slug" form of a string.
-     *
-     * @static
-     * @memberOf _
-     * @category String
-     * @param {string} string String value.
-     * @return {string} URL-safe form of a string.
-     * @example
-     *
-     * _.slugify('A Test')
-     * // => a-test
-     */
-    function slugify(string) {
-        return _(string).toString().trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
-    }
-
-    /**
-     * Converts a value to a boolean.
-     *
-     * @static
-     * @memberOf _
-     * @category Lang
-     * @param {*} value Source value
-     * @return {boolean} Resulting boolean
-     * @example
-     *
-     * _.toBool(1)
-     * // => true
-     */
-    function toBool(value) {
-        return Boolean(value);
-    }
-
-    /**
-     * Converts an object's key/values to a query string.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {object} object Source key/value collection
-     * @return {string} Query string
-     * @example
-     *
-     * _.toQueryString({ a: 1, b: 2 })
-     * // => a=1&b=2
-     */
-    function toQueryString(object) {
-        var segments = [];
-        _.each(object, function(value, key) {
-            segments.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-        });
-
-        return segments.join('&');
-    }
-
-    /**
-     * Recursively invokes "toObject" on objects which support the method.
-     *
-     * Many complex objects from libraries like Collections.js, Mongoose,
-     * support to a toObject method for converting to plain objects.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {object} object Original object.
-     * @return {object} Plain object.
-     */
-    function toObject(object) {
-        return _.recurse(object, function(item) {
-            if (_.hasOfType(item, 'toObject', _.isFunction) || _.hasPrototypeOfType(item, 'toObject', _.isFunction)) {
-                item = item.toObject();
-            }
-
-            return item;
-        });
-    }
-
-    /**
-     * Transforms a value in each element of collection if the path is not undefined.
-     *
-     * @static
-     * @memberOf _
-     * @category Array
-     * @param {Array} collection Array of objects
-     * @param {string} path The path of the value to transform
-     * @param {function} transformer Callback which returns the transformed value
-     * @return {Array} Returns the array of results.
-     */
-    function transformValueMap(collection, path, transformer) {
-        _.each(collection, function(element) {
-            var val = _.get(element, path);
-
-            if (val !== undefined) {
-                _.set(element, path, transformer(val));
-            }
-        });
-
-        return collection;
-    }
-
-    /**
-     * This method is like _.defaultsDeep except it recursively assigns
-     * default properties if the provided values do not exist
-     * *OR* do not match a given type.
-     *
-     * Property value types are inferred from the default value. A default
-     * of "1" is a number, so any incoming value not of type "Number" are
-     * rejected.
-     *
-     * To allow a default value which is a different type then the validation,
-     * you can define both a `validator` and `default` for each property.
-     *
-     * @static
-     * @memberOf _
-     * @category Object
-     * @param {object} models Object of default properties and/or a schema for validation.
-     * @param {object} source Object to be validated and merged.
-     * @param {boolean} strict Only properties defined in the model allowed through
-     * @return {object} Final object
-     * @example
-     *
-     * _.validatedAssign({ id: 0 }, {});
-     * // => { id: 0 }
-     *
-     * _.validatedAssign({ id: 0 }, { id: false });
-     * // => { id: 0 }
-     *
-     *
-     * var model = {
-     *   name: {
-     *     validator: _.isNonEmptyString,
-     *     default: false
-     *   }
-     * };
-     *
-     * var incoming = {
-     *   name: ''
-     * };
-     *
-     * _.validatedAssign(model, incoming);
-     * // => { name: false }
-     */
-    function validatedAssign(models, source, strict) {
-        models = _.getObject(models);
-        source = _.getObject(source);
-        strict = _.isBoolean(strict) ? strict : true;
-
-        var result = {};
-        _.each(models, function(model, key) {
-            // Determine final value
-            var takenValue = _.has(model, 'default') ? model.default : model;
-            if (_.has(source, key)) {
-                // Use the given validator
-                if (_.has(model, 'validator')) {
-                    // Ensure callable
-                    if (!_.isFunction(model.validator)) {
-                        throw new TypeError('Invalid validator function for ' + key + '.');
-                    }
-
-                    // Validate
-                    if (model.validator(source[key])) {
-                        takenValue = source[key];
-                    }
-                } else if (_.isPlainObject(model)) {
-                    // compare their types
-                    takenValue = _.validatedAssign(model, source[key]);
-                } else if (typeof model === typeof source[key]) {
-                    // Allow if they're the same type
-                    takenValue = source[key];
-                }
-            }
-            result[key] = takenValue;
-        });
-
-        if (strict !== true) {
-            _.each(source, function(value, key) {
-                if (!_.has(result, key)) {
-                    result[key] = value;
-                }
-            });
-        }
-
-        return result;
-    }
-
-    _.mixin({
-        changed: changes,
-        changes: changes,
-        check: check,
-        checkArray: checkArray,
-        checkBoolean: checkBoolean,
-        checkCollection: checkCollection,
-        checkFunction: checkFunction,
-        checkKey: checkKey,
-        checkMap: checkMap,
-        checkNonEmpty: checkNonEmpty,
-        checkNumber: checkNumber,
-        checkObject: checkObject,
-        checkPlainObject: checkPlainObject,
-        checkSet: checkSet,
-        checkString: checkString,
-        checkWeakMap: checkWeakMap,
-        checkWeakSet: checkWeakSet,
-        exceptKeys: exceptKeys,
-        fromQueryString: fromQueryString,
-        generateKey: generateKey,
-        getArray: getArray,
-        getBoolean: getBoolean,
-        getFinite: getFinite,
-        getFunction: getFunction,
-        getMap: getMap,
-        getNumber: getNumber,
-        getObject: getObject,
-        getPlainObject: getPlainObject,
-        getPrototype: getPrototype,
-        getSet: getSet,
-        getString: getString,
-        getWeakMap: getWeakMap,
-        getWeakSet: getWeakSet,
-        hasInOfType: hasInOfType,
-        hasOfType: hasOfType,
-        hasPrototypeOfType: hasPrototypeOfType,
-        immutable: immutable,
-        indexesOf: indexesOf,
-        isCollection: isCollection,
-        isNonEmptyString: isNonEmptyString,
-        mapFiltered: mapFiltered,
-        mixInto: mixInto,
-        objectWith: objectWith,
-        omitDeep: omitDeep,
-        parseDate: parseDate,
-        recurse: recurse,
-        requestSetter: requestSetter,
-        sign: sign,
-        slugify: slugify,
-        toBool: toBool,
-        toDate: parseDate,
-        toQueryString: toQueryString,
-        toObject: toObject,
-        transformValueMap: transformValueMap,
-        validatedAssign: validatedAssign,
-        validatedDefaultsDeep: validatedAssign,
-        with: objectWith
+    _.each(validators, function (validator) {
+        return !(valid = validator(value));
     });
 
-    return _;
-}));
+    if (!valid) {
+        throw new TypeError('Argument is not any of the accepted types.');
+    }
+}
+
+/**
+ * Iterates over keys of a collection, returning an array of all keys predicate returns truthy for.
+ * The predicate is invoked with three arguments: (value, index|key, collection).
+ *
+ * @static
+ * @memberOf _
+ * @category Collection
+ * @param {object} collection The object to iterate over.
+ * @param {function} iteratee The function invoked per iteration.
+ * @return {array} Resulting keys
+ */
+function filterKeys(collection, iteratee) {
+    return _.transform(collection, function (results, val, key) {
+        if (iteratee(val, key, collection)) {
+            results.push(key);
+        }
+    }, []);
+}
+
+/**
+ * Gets indices for which elements differ between two arrays.
+ *
+ * @static
+ * @memberOf _
+ * @category Collection
+ * @param {array} first First array
+ * @param {array} second Second array
+ * @return {array} Array of indices of differing elements
+ * @example
+ *
+ * _.differenceKeys([false, true], [false, false]);
+ * // => [1]
+ */
+function differenceKeys(first, second) {
+    return filterKeys(first, function (val, key) {
+        return val !== second[key];
+    });
+}
+
+/**
+ * Base function for returning a default when the given value fails validation.
+ *
+ * @private
+ * @param {function} validator Validation function.
+ * @param {*} baseDefault Base default value.
+ * @param {*} value Given value.
+ * @param {*} replacement Custom replacement.
+ * @return {*} Final value.
+ */
+function baseGetType(validator, baseDefault, value, replacement) {
+    var result = void 0;
+
+    if (validator(value)) {
+        result = value;
+    } else if (validator(replacement)) {
+        result = replacement;
+    } else {
+        result = baseDefault;
+    }
+
+    return result;
+}
+
+/**
+ * Returns value if a number, otherwise a default number.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final number.
+ * @example
+ *
+ * _.getNumber('')
+ * // => 0
+ *
+ * _.getNumber('', 100)
+ * // => 100
+ */
+function getNumber(value, replacement) {
+  return baseGetType(_.isNumber, 0, value, replacement);
+}
+
+/**
+ * Generates a random alphanumeric string with length n.
+ *
+ * @static
+ * @memberOf _
+ * @category String
+ * @param {int} length Desired length.
+ * @return {string} String of random characters.
+ * @example
+ *
+ * _.generateKey(5)
+ * // => 'L7IpD'
+ */
+function generateKey(length) {
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var possibleLength = possible.length - 1;
+
+    var text = '';
+    _.times(getNumber(length, 16), function () {
+        text += possible.charAt(_.random(possibleLength));
+    });
+
+    return text;
+}
+
+/**
+ * Returns value if an array, otherwise a default.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final array.
+ * @example
+ *
+ * _.getArray(null)
+ * // => []
+ *
+ * _.getArray(null, ['test'])
+ * // => ['test']
+ */
+function getArray(value, replacement) {
+  return baseGetType(_.isArray, [], value, replacement);
+}
+
+/**
+ * Returns value if a boolean, otherwise a default boolean.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final boolean.
+ * @example
+ *
+ * _.getBoolean(null)
+ * // => false
+ *
+ * _.getBoolean(null, true)
+ * // => true
+ */
+function getBoolean(value, replacement) {
+  return baseGetType(_.isBoolean, false, value, replacement);
+}
+
+/**
+ * Returns value if a finite number, otherwise a default number.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final number.
+ * @example
+ *
+ * _.getFinite('')
+ * // => 0
+ *
+ * _.getFinite('', 100)
+ * // => 100
+ *
+ * _.getFinite(NaN, 25)
+ * // => 25
+ */
+function getFinite(value, replacement) {
+  return baseGetType(_.isFinite, 0, value, replacement);
+}
+
+/**
+ * Returns value if a function, otherwise a default function.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final function.
+ * @example
+ *
+ * _.getFunction(null)
+ * // => function () {}
+ */
+function getFunction(value, replacement) {
+  return baseGetType(_.isFunction, _.noop, value, replacement);
+}
+
+/**
+ * Returns value if a Map, otherwise a default map.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final number.
+ */
+function getMap(value, replacement) {
+  return baseGetType(_.isMap, new Map(), value, replacement);
+}
+
+/**
+ * Returns value if a object, otherwise a default object.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final object.
+ * @example
+ *
+ * _.getObject('')
+ * // => {}
+ */
+function getObject(value, replacement) {
+  return baseGetType(_.isObject, {}, value, replacement);
+}
+
+/**
+ * Returns value if a plain object, otherwise a default object.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final object.
+ * @example
+ *
+ * _.getPlainObject('')
+ * // => {}
+ */
+function getPlainObject(value, replacement) {
+  return baseGetType(_.isPlainObject, {}, value, replacement);
+}
+
+/**
+ * Gets the prototype for the given value.
+ *
+ * @static
+ * @memberOf _
+ * @category Util
+ * @param {*} value Source value
+ * @return {object} Found prototype or undefined.
+ * @example
+ *
+ * _.getPrototype(5)
+ * // => { toFixed: func(), ... }
+ */
+function getPrototype(value) {
+    var prototype = void 0;
+
+    if (!_.isUndefined(value) && !_.isNull(value)) {
+        if (!_.isObject(value)) {
+            prototype = value.constructor.prototype;
+        } else if (_.isFunction(value)) {
+            prototype = value.prototype;
+        } else {
+            prototype = Object.getPrototypeOf(value);
+        }
+    }
+
+    return prototype;
+}
+
+/**
+ * Returns value if a Set, otherwise a default set.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {set} replacement Custom default if value is invalid type.
+ * @return {set} Final Set.
+ * @example
+ *
+ * _.getSet('')
+ * // => Set()
+ */
+function getSet(value, replacement) {
+  return baseGetType(_.isSet, new Set(), value, replacement);
+}
+
+/**
+ * Returns value if a string, otherwise a default string.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {number} replacement Custom default if value is invalid type.
+ * @return {number} Final string.
+ * @example
+ *
+ * _.getString(false)
+ * // => ''
+ */
+function getString(value, replacement) {
+  return baseGetType(_.isString, '', value, replacement);
+}
+
+/**
+ * Returns value if a WeakMap, otherwise a default WeakMap.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {weakmap} replacement Custom default if value is invalid type.
+ * @return {weakmap} Final map.
+ * @example
+ *
+ * _.getWeakMap(false)
+ * // => ''
+ */
+function getWeakMap(value, replacement) {
+  return baseGetType(_.isWeakMap, new WeakMap(), value, replacement);
+}
+
+/**
+ * Returns value if a WeakSet, otherwise a default WeakSet.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {mixed} value Source value
+ * @param {weakset} replacement Custom default if value is invalid type.
+ * @return {weakset} Final set.
+ * @example
+ *
+ * _.getWeakSet(false)
+ * // => ''
+ */
+function getWeakSet(value, replacement) {
+  return baseGetType(_.isWeakSet, new WeakSet(), value, replacement);
+}
+
+/**
+ * If _.hasIn returns true, run a validator on value.
+ *
+ * @static
+ * @memberOf _
+ * @category Object
+ * @param {mixed} value Collection for _.hasIn
+ * @param {string|number} path Path.
+ * @param {function} validator Function to validate value.
+ * @return {boolean} Whether collection has the path and it passes validation
+ */
+function hasInOfType(value, path, validator) {
+  return _.hasIn(value, path) ? validator(_.get(value, path)) : false;
+}
+
+/**
+ * If _.has returns true, run a validator on value.
+ *
+ * @static
+ * @memberOf _
+ * @category Object
+ * @param {mixed} value Collection for _.has
+ * @param {string} path Path
+ * @param {function} validator Function to validate value.
+ * @return {boolean} Whether collection has prop, and it passes validation
+ * @example
+ *
+ * _.hasOfType({ test: '' }, 'test', _.isString)
+ * // => true
+ */
+function hasOfType(value, path, validator) {
+  return _.has(value, path) ? validator(_.get(value, path)) : false;
+}
+
+/**
+ * Converts a value to a boolean.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {*} value Source value
+ * @return {boolean} Resulting boolean
+ * @example
+ *
+ * _.toBool(1)
+ * // => true
+ */
+function toBool(value) {
+  return Boolean(value);
+}
+
+/**
+ * Checks if value is iterable.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {object} object An object
+ * @return {boolean} True if iterable
+ * @example
+ *
+ * _.isIterable([])
+ * // => true
+ */
+function isIterable(object) {
+  return toBool(object) && _.isFunction(object[Symbol.iterator]);
+}
+
+/**
+ * Checks if value is a non-empty string.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {object} string String
+ * @return {boolean} True if a non-empty string.
+ * @example
+ *
+ * _.isNonEmptyString('')
+ * // => false
+ */
+function isNonEmptyString(string) {
+  return _.isString(string) && string.trim() !== '';
+}
+
+var slicedToArray = function () {
+  function sliceIterator(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"]) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  return function (arr, i) {
+    if (Array.isArray(arr)) {
+      return arr;
+    } else if (Symbol.iterator in Object(arr)) {
+      return sliceIterator(arr, i);
+    } else {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+  };
+}();
+
+/**
+ * Shorthand object creation when sole property is a variable, or a path.
+ *
+ * @static
+ * @memberOf _
+ * @category Object
+ * @param {[object]} object Existing object (optional)
+ * @param {string|number} path Property
+ * @param {mixed} value Value
+ * @return {object} Resulting object
+ * @example
+ *
+ * // To create a new object:
+ *
+ * _.objectWith('key', 'value')
+ * // => { key: 'value' }
+ *
+ * _.objectWith('a.deep.path', 'value')
+ * // => {
+ *   a: {
+ *     deep: {
+ *   	 path: 'value'
+ *     }
+ *   }
+ * }
+ *
+ * // Using existing:
+ * _.objectWith({ a: 1 }, 'b', 2)
+ * // => { a: 1, b: 2 }
+ */
+function objectWith() {
+  var args = _.reverse(arguments);
+
+  var _$take = _.take(args, 2),
+      _$take2 = slicedToArray(_$take, 2),
+      value = _$take2[0],
+      path = _$take2[1];
+
+  var object = _.nth(args, 2) || {};
+
+  return _.set(object, path, value);
+}
+
+/**
+ * Parses query string into key/value object.
+ *
+ * @static
+ * @memberOf _
+ * @category Object
+ * @param {string} string Query string.
+ * @return {object} Key/value map.
+ * @example
+ *
+ * _.parseQueryString('key=value');
+ * // => { key: 'value' }
+ */
+function parseQueryString(string) {
+    return _.transform(_.toString(string).split('&'), function (result, segment) {
+        var split = segment.split('=');
+        result[decodeURIComponent(split[0])] = decodeURIComponent(split[1]);
+    }, {});
+}
+
+/**
+ * Returns a number representing the sign of `value`.
+ *
+ * If `value` is a positive number, negative number, positive zero or negative zero,
+ * the function will return 1, -1, 0 or -0 respectively. Otherwise, NaN is returned.
+ *
+ * @static
+ * @memberOf _
+ * @category Math
+ * @param {number} value A number
+ * @returns {number} A number representing the sign
+ * @example
+ *
+ * sign(10)
+ * // => 1
+ *
+ * sign(-10)
+ * // => -1
+ */
+function sign(value) {
+    var sign = NaN;
+
+    if (_.isNumber(value)) {
+        if (value === 0) {
+            sign = value;
+        } else if (value >= 1) {
+            sign = 1;
+        } else if (value <= -1) {
+            sign = -1;
+        }
+    }
+
+    return sign;
+}
+
+/**
+ * Generates a url-safe "slug" form of a string.
+ *
+ * @static
+ * @memberOf _
+ * @category String
+ * @param {string} string String value.
+ * @return {string} URL-safe form of a string.
+ * @example
+ *
+ * _.slugify('A Test')
+ * // => a-test
+ */
+function slugify(string) {
+  return _.toString(string).trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
+}
+
+/**
+ * Parses a value by passing it to new Date().
+ *
+ * @static
+ * @memberOf _
+ * @category Date
+ * @param {string} val Value to be parsed
+ * @return {Date} Resulting date
+ */
+function parseDate(val) {
+  return new Date(val);
+}
+
+/**
+ * Converts an object's key/values to a query string.
+ *
+ * @static
+ * @memberOf _
+ * @category Object
+ * @param {object} object Source key/value collection
+ * @return {string} Query string
+ * @example
+ *
+ * _.toQueryString({ a: 1, b: 2 })
+ * // => a=1&b=2
+ */
+function toQueryString(object) {
+    return _.transform(object, function (results, value, key) {
+        results.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    }, []).join('&');
+}
+
+/**
+ * Transforms a value in each element of collection if the path is not undefined.
+ *
+ * @static
+ * @memberOf _
+ * @category Array
+ * @param {Array} collection Array of objects
+ * @param {string} path The path of the value to transform
+ * @param {function} transformer Callback which returns the transformed value
+ * @return {Array} Returns the array of results.
+ */
+function transformValueMap(collection, path, transformer) {
+    _.each(collection, function (element) {
+        var val = _.get(element, path);
+
+        if (!_.isUndefined(val)) {
+            _.set(element, path, transformer(val));
+        }
+    });
+
+    return collection;
+}
+
+_.mixin({
+    check: check,
+    differenceKeys: differenceKeys,
+    filterKeys: filterKeys,
+    generateKey: generateKey,
+    getArray: getArray,
+    getBoolean: getBoolean,
+    getFinite: getFinite,
+    getFunction: getFunction,
+    getMap: getMap,
+    getNumber: getNumber,
+    getObject: getObject,
+    getPlainObject: getPlainObject,
+    getPrototype: getPrototype,
+    getSet: getSet,
+    getString: getString,
+    getWeakMap: getWeakMap,
+    getWeakSet: getWeakSet,
+    hasInOfType: hasInOfType,
+    hasOfType: hasOfType,
+    isIterable: isIterable,
+    isNonEmptyString: isNonEmptyString,
+    objectWith: objectWith,
+    parseQueryString: parseQueryString,
+    sign: sign,
+    slugify: slugify,
+    toBool: toBool,
+    toDate: parseDate,
+    toQueryString: toQueryString,
+    transformValueMap: transformValueMap,
+
+    // Aliases
+    fromQueryString: parseQueryString,
+    parseDate: parseDate,
+    with: objectWith
+});
+
+return _;
+
+})));
