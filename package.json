@@ -1,28 +1,31 @@
 {
   "name": "lodash-addons",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "license": "MIT",
   "description": "Community mixins for lodash",
   "repository": "https://github.com/helion3/lodash-addons",
   "dependencies": {},
   "devDependencies": {
-    "chai": "3.5.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "chai": "^4.1.2",
     "docdown": "^0.7.1",
-    "eslint": "^4.4.1",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^3.0.0",
-    "istanbul": "^0.4.0",
-    "mocha": "^3.1.2"
+    "eslint": "^4.12.1",
+    "lodash": "^4.17.4",
+    "mocha": "^4.0.1",
+    "rollup": "^0.52.1",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-uglify": "^2.0.1"
   },
   "peerDependencies": {
     "lodash": "^4.17.4"
   },
   "scripts": {
-    "test": "mocha test",
-    "coverage": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha",
-    "docs": "./lib/docs.js"
+    "lint": "eslint src test *.js",
+    "test": "mocha test --recursive",
+    "docs": "./scripts/docs.js",
+    "deploy": "PROD=1 rollup -c && rollup -c && npm run docs",
+    "setup": "cp hooks/pre-commit .git/hooks/pre-commit"
   },
   "main": "dist/lodash-addons.js"
 }
