@@ -14,7 +14,7 @@ import * as _ from 'lodash';
  * // => a-test
  */
 function slugify(string) {
-    return _.toString(string).trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
+    return _.deburr(_.toString(string).trim().toLowerCase()).replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
 }
 
 export default slugify;
