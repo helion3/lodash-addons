@@ -10,7 +10,7 @@ import * as _ from 'lodash';
  * @return {object} Found prototype or undefined.
  * @example
  *
- * _.getPrototype(5)
+ * _.getPrototype(5);
  * // => { toFixed: func(), ... }
  */
 function getPrototype(value) {

@@ -12,7 +12,7 @@ import baseGetType from './internal/baseGetType';
  * @return {set} Final Set.
  * @example
  *
- * _.getSet('')
+ * _.getSet('');
  * // => Set()
  */
 function getSet(value, replacement) {

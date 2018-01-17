@@ -12,7 +12,7 @@ import baseGetType from './internal/baseGetType';
  * @return {weakset} Final set.
  * @example
  *
- * _.getWeakSet(false)
+ * _.getWeakSet(false);
  * // => ''
  */
 function getWeakSet(value, replacement) {

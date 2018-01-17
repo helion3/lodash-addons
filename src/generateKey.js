@@ -11,7 +11,7 @@ import getNumber from './getNumber';
  * @return {string} String of random characters.
  * @example
  *
- * _.generateKey(5)
+ * _.generateKey(5);
  * // => 'L7IpD'
  */
 function generateKey(length) {

@@ -12,7 +12,7 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final function.
  * @example
  *
- * _.getFunction(null)
+ * _.getFunction(null);
  * // => function () {}
  */
 function getFunction(value, replacement) {

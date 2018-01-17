@@ -12,7 +12,7 @@ import baseGetType from './internal/baseGetType';
  * @return {weakmap} Final map.
  * @example
  *
- * _.getWeakMap(false)
+ * _.getWeakMap(false);
  * // => ''
  */
 function getWeakMap(value, replacement) {

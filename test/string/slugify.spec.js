@@ -23,4 +23,16 @@ describe('slugify', function() {
     it('replaces whitespace', function() {
         expect(_.slugify('test ing')).to.equal('test-ing');
     });
+
+    it('replaces diacritical marks', function() {
+        expect(_.slugify('estado de comunicación')).to.equal('estado-de-comunicacion');
+    });
+
+    it('replaces consecutive diacritical marks', function() {
+        expect(_.slugify('estado de comunicaciòón')).to.equal('estado-de-comunicacioon');
+    });
+
+    it('replaces diacritical marks and illegal characters', function() {
+        expect(_.slugify('estado de comuni?cación')).to.equal('estado-de-comunicacion');
+    });
 });

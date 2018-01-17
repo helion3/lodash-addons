@@ -12,10 +12,10 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final number.
  * @example
  *
- * _.getNumber('')
+ * _.getNumber('');
  * // => 0
  *
- * _.getNumber('', 100)
+ * _.getNumber('', 100);
  * // => 100
  */
 function getNumber(value, replacement) {

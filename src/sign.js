@@ -13,10 +13,10 @@ import * as _ from 'lodash';
  * @returns {number} A number representing the sign
  * @example
  *
- * sign(10)
+ * _.sign(10);
  * // => 1
  *
- * sign(-10)
+ * _.sign(-10);
  * // => -1
  */
 function sign(value) {

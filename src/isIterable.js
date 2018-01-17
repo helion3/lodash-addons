@@ -11,7 +11,7 @@ import toBool from './toBool';
  * @return {boolean} True if iterable
  * @example
  *
- * _.isIterable([])
+ * _.isIterable([]);
  * // => true
  */
 function isIterable(object) {
