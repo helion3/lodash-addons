@@ -10,7 +10,7 @@ import * as _ from 'lodash';
  * @return {string} Query string
  * @example
  *
- * _.toQueryString({ a: 1, b: 2 })
+ * _.toQueryString({ a: 1, b: 2 });
  * // => a=1&b=2
  */
 function toQueryString(object) {

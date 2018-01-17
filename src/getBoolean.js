@@ -12,10 +12,10 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final boolean.
  * @example
  *
- * _.getBoolean(null)
+ * _.getBoolean(null);
  * // => false
  *
- * _.getBoolean(null, true)
+ * _.getBoolean(null, true);
  * // => true
  */
 function getBoolean(value, replacement) {

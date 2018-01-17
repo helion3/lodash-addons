@@ -14,10 +14,10 @@ import * as _ from 'lodash';
  *
  * // To create a new object:
  *
- * _.objectWith('key', 'value')
+ * _.objectWith('key', 'value');
  * // => { key: 'value' }
  *
- * _.objectWith('a.deep.path', 'value')
+ * _.objectWith('a.deep.path', 'value');
  * // => {
  *   a: {
  *     deep: {
@@ -27,7 +27,7 @@ import * as _ from 'lodash';
  * }
  *
  * // Using existing:
- * _.objectWith({ a: 1 }, 'b', 2)
+ * _.objectWith({ a: 1 }, 'b', 2);
  * // => { a: 1, b: 2 }
  */
 function objectWith() {

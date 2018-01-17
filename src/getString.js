@@ -12,7 +12,7 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final string.
  * @example
  *
- * _.getString(false)
+ * _.getString(false);
  * // => ''
  */
 function getString(value, replacement) {

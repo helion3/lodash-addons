@@ -12,13 +12,13 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final number.
  * @example
  *
- * _.getFinite('')
+ * _.getFinite('');
  * // => 0
  *
- * _.getFinite('', 100)
+ * _.getFinite('', 100);
  * // => 100
  *
- * _.getFinite(NaN, 25)
+ * _.getFinite(NaN, 25);
  * // => 25
  */
 function getFinite(value, replacement) {

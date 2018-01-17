@@ -12,7 +12,7 @@ import * as _ from 'lodash';
  * @return {boolean} Whether collection has prop, and it passes validation
  * @example
  *
- * _.hasOfType({ test: '' }, 'test', _.isString)
+ * _.hasOfType({ test: '' }, 'test', _.isString);
  * // => true
  */
 function hasOfType(value, path, validator) {

@@ -10,7 +10,7 @@ import * as _ from 'lodash';
  * @return {boolean} True if a non-empty string.
  * @example
  *
- * _.isNonEmptyString('')
+ * _.isNonEmptyString('');
  * // => false
  */
 function isNonEmptyString(string) {

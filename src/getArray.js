@@ -12,10 +12,10 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final array.
  * @example
  *
- * _.getArray(null)
+ * _.getArray(null);
  * // => []
  *
- * _.getArray(null, ['test'])
+ * _.getArray(null, ['test']);
  * // => ['test']
  */
 function getArray(value, replacement) {

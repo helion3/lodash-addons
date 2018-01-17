@@ -8,7 +8,7 @@
  * @return {boolean} Resulting boolean
  * @example
  *
- * _.toBool(1)
+ * _.toBool(1);
  * // => true
  */
 function toBool(value) {

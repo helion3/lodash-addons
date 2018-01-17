@@ -12,7 +12,7 @@ import baseGetType from './internal/baseGetType';
  * @return {number} Final object.
  * @example
  *
- * _.getObject('')
+ * _.getObject('');
  * // => {}
  */
 function getObject(value, replacement) {
