@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.0.1
+
+- Fixed `slugify` failing to handle diacritics.
+
 # 2.0.0
 
 - Added `filterKeys`.

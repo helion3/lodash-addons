@@ -1,5 +1,5 @@
 /* Lodash Addons
- * @version 2.0.0
+ * @version 2.0.1
  * https://github.com/helion3/lodash-addons
  * @copyright Copyright 2015 Helion3, and other contributors
  * @license Licensed under MIT
@@ -110,10 +110,10 @@ function baseGetType(validator, baseDefault, value, replacement) {
  * @return {number} Final number.
  * @example
  *
- * _.getNumber('')
+ * _.getNumber('');
  * // => 0
  *
- * _.getNumber('', 100)
+ * _.getNumber('', 100);
  * // => 100
  */
 function getNumber(value, replacement) {
@@ -130,7 +130,7 @@ function getNumber(value, replacement) {
  * @return {string} String of random characters.
  * @example
  *
- * _.generateKey(5)
+ * _.generateKey(5);
  * // => 'L7IpD'
  */
 function generateKey(length) {
@@ -156,10 +156,10 @@ function generateKey(length) {
  * @return {number} Final array.
  * @example
  *
- * _.getArray(null)
+ * _.getArray(null);
  * // => []
  *
- * _.getArray(null, ['test'])
+ * _.getArray(null, ['test']);
  * // => ['test']
  */
 function getArray(value, replacement) {
@@ -177,10 +177,10 @@ function getArray(value, replacement) {
  * @return {number} Final boolean.
  * @example
  *
- * _.getBoolean(null)
+ * _.getBoolean(null);
  * // => false
  *
- * _.getBoolean(null, true)
+ * _.getBoolean(null, true);
  * // => true
  */
 function getBoolean(value, replacement) {
@@ -198,13 +198,13 @@ function getBoolean(value, replacement) {
  * @return {number} Final number.
  * @example
  *
- * _.getFinite('')
+ * _.getFinite('');
  * // => 0
  *
- * _.getFinite('', 100)
+ * _.getFinite('', 100);
  * // => 100
  *
- * _.getFinite(NaN, 25)
+ * _.getFinite(NaN, 25);
  * // => 25
  */
 function getFinite(value, replacement) {
@@ -222,7 +222,7 @@ function getFinite(value, replacement) {
  * @return {number} Final function.
  * @example
  *
- * _.getFunction(null)
+ * _.getFunction(null);
  * // => function () {}
  */
 function getFunction(value, replacement) {
@@ -254,7 +254,7 @@ function getMap(value, replacement) {
  * @return {number} Final object.
  * @example
  *
- * _.getObject('')
+ * _.getObject('');
  * // => {}
  */
 function getObject(value, replacement) {
@@ -272,7 +272,7 @@ function getObject(value, replacement) {
  * @return {number} Final object.
  * @example
  *
- * _.getPlainObject('')
+ * _.getPlainObject('');
  * // => {}
  */
 function getPlainObject(value, replacement) {
@@ -289,7 +289,7 @@ function getPlainObject(value, replacement) {
  * @return {object} Found prototype or undefined.
  * @example
  *
- * _.getPrototype(5)
+ * _.getPrototype(5);
  * // => { toFixed: func(), ... }
  */
 function getPrototype(value) {
@@ -319,7 +319,7 @@ function getPrototype(value) {
  * @return {set} Final Set.
  * @example
  *
- * _.getSet('')
+ * _.getSet('');
  * // => Set()
  */
 function getSet(value, replacement) {
@@ -337,7 +337,7 @@ function getSet(value, replacement) {
  * @return {number} Final string.
  * @example
  *
- * _.getString(false)
+ * _.getString(false);
  * // => ''
  */
 function getString(value, replacement) {
@@ -355,7 +355,7 @@ function getString(value, replacement) {
  * @return {weakmap} Final map.
  * @example
  *
- * _.getWeakMap(false)
+ * _.getWeakMap(false);
  * // => ''
  */
 function getWeakMap(value, replacement) {
@@ -373,7 +373,7 @@ function getWeakMap(value, replacement) {
  * @return {weakset} Final set.
  * @example
  *
- * _.getWeakSet(false)
+ * _.getWeakSet(false);
  * // => ''
  */
 function getWeakSet(value, replacement) {
@@ -407,7 +407,7 @@ function hasInOfType(value, path, validator) {
  * @return {boolean} Whether collection has prop, and it passes validation
  * @example
  *
- * _.hasOfType({ test: '' }, 'test', _.isString)
+ * _.hasOfType({ test: '' }, 'test', _.isString);
  * // => true
  */
 function hasOfType(value, path, validator) {
@@ -424,7 +424,7 @@ function hasOfType(value, path, validator) {
  * @return {boolean} Resulting boolean
  * @example
  *
- * _.toBool(1)
+ * _.toBool(1);
  * // => true
  */
 function toBool(value) {
@@ -441,7 +441,7 @@ function toBool(value) {
  * @return {boolean} True if iterable
  * @example
  *
- * _.isIterable([])
+ * _.isIterable([]);
  * // => true
  */
 function isIterable(object) {
@@ -458,7 +458,7 @@ function isIterable(object) {
  * @return {boolean} True if a non-empty string.
  * @example
  *
- * _.isNonEmptyString('')
+ * _.isNonEmptyString('');
  * // => false
  */
 function isNonEmptyString(string) {
@@ -517,10 +517,10 @@ var slicedToArray = function () {
  *
  * // To create a new object:
  *
- * _.objectWith('key', 'value')
+ * _.objectWith('key', 'value');
  * // => { key: 'value' }
  *
- * _.objectWith('a.deep.path', 'value')
+ * _.objectWith('a.deep.path', 'value');
  * // => {
  *   a: {
  *     deep: {
@@ -530,7 +530,7 @@ var slicedToArray = function () {
  * }
  *
  * // Using existing:
- * _.objectWith({ a: 1 }, 'b', 2)
+ * _.objectWith({ a: 1 }, 'b', 2);
  * // => { a: 1, b: 2 }
  */
 function objectWith() {
@@ -579,10 +579,10 @@ function parseQueryString(string) {
  * @returns {number} A number representing the sign
  * @example
  *
- * sign(10)
+ * _.sign(10);
  * // => 1
  *
- * sign(-10)
+ * _.sign(-10);
  * // => -1
  */
 function sign(value) {
@@ -611,11 +611,11 @@ function sign(value) {
  * @return {string} URL-safe form of a string.
  * @example
  *
- * _.slugify('A Test')
+ * _.slugify('A Test');
  * // => a-test
  */
 function slugify(string) {
-  return _.toString(string).trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
+  return _.deburr(string).trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
 }
 
 /**
@@ -641,7 +641,7 @@ function parseDate(val) {
  * @return {string} Query string
  * @example
  *
- * _.toQueryString({ a: 1, b: 2 })
+ * _.toQueryString({ a: 1, b: 2 });
  * // => a=1&b=2
  */
 function toQueryString(object) {

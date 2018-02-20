@@ -11,7 +11,7 @@ A collection of utility mixins for lodash. Supports both CommonJS and AMD module
 - Yarn: `yarn add --dev lodash-addons`
 - NPM: `npm install --save-dev lodash-addons`
 
-#
+# 
 
 <!-- div class="toc-container" -->
 
@@ -203,10 +203,10 @@ Returns value if an array, otherwise a default.
 
 #### Example
 ```js
-_.getArray(null)
+_.getArray(null);
 // => []
 
-_.getArray(null, ['test'])
+_.getArray(null, ['test']);
 // => ['test']
 ```
 ---
@@ -226,10 +226,10 @@ Returns value if a boolean, otherwise a default boolean.
 
 #### Example
 ```js
-_.getBoolean(null)
+_.getBoolean(null);
 // => false
 
-_.getBoolean(null, true)
+_.getBoolean(null, true);
 // => true
 ```
 ---
@@ -249,13 +249,13 @@ Returns value if a finite number, otherwise a default number.
 
 #### Example
 ```js
-_.getFinite('')
+_.getFinite('');
 // => 0
 
-_.getFinite('', 100)
+_.getFinite('', 100);
 // => 100
 
-_.getFinite(NaN, 25)
+_.getFinite(NaN, 25);
 // => 25
 ```
 ---
@@ -275,7 +275,7 @@ Returns value if a function, otherwise a default function.
 
 #### Example
 ```js
-_.getFunction(null)
+_.getFunction(null);
 // => function () {}
 ```
 ---
@@ -310,10 +310,10 @@ Returns value if a number, otherwise a default number.
 
 #### Example
 ```js
-_.getNumber('')
+_.getNumber('');
 // => 0
 
-_.getNumber('', 100)
+_.getNumber('', 100);
 // => 100
 ```
 ---
@@ -333,7 +333,7 @@ Returns value if a object, otherwise a default object.
 
 #### Example
 ```js
-_.getObject('')
+_.getObject('');
 // => {}
 ```
 ---
@@ -353,7 +353,7 @@ Returns value if a plain object, otherwise a default object.
 
 #### Example
 ```js
-_.getPlainObject('')
+_.getPlainObject('');
 // => {}
 ```
 ---
@@ -373,7 +373,7 @@ Returns value if a Set, otherwise a default set.
 
 #### Example
 ```js
-_.getSet('')
+_.getSet('');
 // => Set()
 ```
 ---
@@ -393,7 +393,7 @@ Returns value if a string, otherwise a default string.
 
 #### Example
 ```js
-_.getString(false)
+_.getString(false);
 // => ''
 ```
 ---
@@ -413,7 +413,7 @@ Returns value if a WeakMap, otherwise a default WeakMap.
 
 #### Example
 ```js
-_.getWeakMap(false)
+_.getWeakMap(false);
 // => ''
 ```
 ---
@@ -433,7 +433,7 @@ Returns value if a WeakSet, otherwise a default WeakSet.
 
 #### Example
 ```js
-_.getWeakSet(false)
+_.getWeakSet(false);
 // => ''
 ```
 ---
@@ -452,7 +452,7 @@ Checks if value is iterable.
 
 #### Example
 ```js
-_.isIterable([])
+_.isIterable([]);
 // => true
 ```
 ---
@@ -471,7 +471,7 @@ Checks if value is a non-empty string.
 
 #### Example
 ```js
-_.isNonEmptyString('')
+_.isNonEmptyString('');
 // => false
 ```
 ---
@@ -490,7 +490,7 @@ Converts a value to a boolean.
 
 #### Example
 ```js
-_.toBool(1)
+_.toBool(1);
 // => true
 ```
 ---
@@ -522,10 +522,10 @@ the function will return `1`, `-1`, `0` or `-0` respectively. Otherwise, NaN is 
 
 #### Example
 ```js
-sign(10)
+_.sign(10);
 // => 1
 
-sign(-10)
+_.sign(-10);
 // => -1
 ```
 ---
@@ -568,7 +568,7 @@ If _.has returns true, run a validator on value.
 
 #### Example
 ```js
-_.hasOfType({ test: '' }, 'test', _.isString)
+_.hasOfType({ test: '' }, 'test', _.isString);
 // => true
 ```
 ---
@@ -591,10 +591,10 @@ Shorthand object creation when sole property is a variable, or a path.
 ```js
 // To create a new object:
 
-_.objectWith('key', 'value')
+_.objectWith('key', 'value');
 // => { key: 'value' }
 
-_.objectWith('a.deep.path', 'value')
+_.objectWith('a.deep.path', 'value');
 // => {
   a: {
     deep: {
@@ -604,7 +604,7 @@ _.objectWith('a.deep.path', 'value')
 }
 
 // Using existing:
-_.objectWith({ a: 1 }, 'b', 2)
+_.objectWith({ a: 1 }, 'b', 2);
 // => { a: 1, b: 2 }
 ```
 ---
@@ -642,7 +642,7 @@ Converts an object's key/values to a query string.
 
 #### Example
 ```js
-_.toQueryString({ a: 1, b: 2 })
+_.toQueryString({ a: 1, b: 2 });
 // => a=1&b=2
 ```
 ---
@@ -687,7 +687,7 @@ Generates a random alphanumeric string with length n.
 
 #### Example
 ```js
-_.generateKey(5)
+_.generateKey(5);
 // => 'L7IpD'
 ```
 ---
@@ -706,7 +706,7 @@ Generates a url-safe "slug" form of a string.
 
 #### Example
 ```js
-_.slugify('A Test')
+_.slugify('A Test');
 // => a-test
 ```
 ---
@@ -731,7 +731,7 @@ Gets the prototype for the given value.
 
 #### Example
 ```js
-_.getPrototype(5)
+_.getPrototype(5);
 // => { toFixed: func(), ... }
 ```
 ---
